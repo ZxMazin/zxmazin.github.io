@@ -7,7 +7,94 @@
   --accent: #0284c7;
   --btn-rgb: 2, 132, 199; /* pour boutons Lightbox semi-transparents */
 }
+/* === First Login Screen === */
+#first-login {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #0b1a33, #020617);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  overflow: hidden;
+}
 
+/* Logo */
+#first-login .logo {
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 700;
+  color: #4da3ff;
+  text-shadow: 0 0 20px rgba(77,163,255,0.4);
+  animation: introLogo 2.5s ease forwards;
+}
+
+/* Animation logo */
+@keyframes introLogo {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+    text-shadow: 0 0 0 rgba(77,163,255,0);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    text-shadow: 0 0 40px rgba(77,163,255,0.8);
+  }
+}
+
+/* Questionnaire */
+#first-login .questionnaire {
+  margin-top: 3rem;
+  text-align: center;
+  color: #e0e7ff;
+  animation: fadeUp 1s ease forwards;
+}
+
+#first-login .questionnaire p {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+}
+
+#first-login .choices {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+#first-login button {
+  background: rgba(77,163,255,0.15);
+  border: 1px solid rgba(77,163,255,0.4);
+  color: #e0e7ff;
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+#first-login button:hover {
+  background: rgba(77,163,255,0.35);
+  transform: scale(1.05);
+}
+
+/* Apparition */
+.hidden {
+  display: none;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 /* === Reset et base === */
 * {
   box-sizing: border-box;
@@ -188,3 +275,4 @@ p {
   line-height: 1.8;
   margin-bottom: 1em;
 }
+
