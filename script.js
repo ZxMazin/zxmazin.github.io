@@ -210,7 +210,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
     currentIndex = (currentIndex + 1) % galleryImages.length;
   }
+// =========================
+// 4️⃣ First Login Animation + Questionnaire
+// =========================
+document.addEventListener("DOMContentLoaded", () => {
+  const firstLogin = document.getElementById("first-login");
+  if (!firstLogin) return;
 
+  // Si déjà vu → ne rien afficher
+  if (localStorage.getItem("irtifaFirstLogin")) {
+    firstLogin.remove();
+    return;
+  }
+
+  const questionnaire = firstLogin.querySelector(".questionnaire");
+  const buttons = firstLogin.querySelectorAll("button");
+
+  // Afficher le questionnaire après l’animation du logo
+  setTimeout(() => {
+    questionnaire.classList.remove("hidden");
+  }, 2600);
+
+  // Réponse utilisateur
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      localStorage.setItem("irtifaFirstLogin", btn.dataset.answer);
+
+      firstLogin.style.transition = "opacity 0.8s ease";
+      firstLogin.style.opacity = "0";
+
+      setTimeout(() => {
+        firstLogin.remove();
+      }, 800);
+    });
+  });
+});
   // Reset du timer d'inactivité
   function resetInactivityTimer() {
     clearTimeout(inactivityTimer);
@@ -236,3 +270,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // Lancer le timer au départ
   resetInactivityTimer();
 });
+
