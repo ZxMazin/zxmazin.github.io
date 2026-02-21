@@ -20,14 +20,14 @@ const questions = {
   discover: {
     text: "Comment veux-tu découvrir ce projet ?",
     answers: [
-      { label: "Par les photos", redirect: "index.html" },
-      { label: "Par le texte", redirect: "index.html#texte" }
+      { label: "Par les photos", redirect: "index3.html" },
+      { label: "Par le texte", redirect: "index3.html#texte" }
     ]
   },
   direct: {
     text: "Où veux-tu aller directement ?",
     answers: [
-      { label: "Accueil", redirect: "index.html" },
+      { label: "Accueil", redirect: "index3.html" },
       { label: "Helsinki", redirect: "destinations/helsinki.html" }
     ]
   }
@@ -89,4 +89,5 @@ document.addEventListener("click", () => {
     }
     fullscreenActivated = true;
   }
+
 }, { once: true });
