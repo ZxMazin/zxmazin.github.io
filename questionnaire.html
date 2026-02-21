@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Irtifa.ch – Questionnaire</title>
+  <link rel="stylesheet" href="questionnaire.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Logo -->
+    <div class="logo">Irtifa.ch</div>
+
+    <!-- Texte Initializing -->
+    <div class="initializing">Initializing...</div>
+
+    <!-- Cercle de rectangles -->
+    <div id="loading-circle">
+      <!-- 12 rectangles disposés en cercle -->
+      <div class="rect" style="--i:0;"></div>
+      <div class="rect" style="--i:1;"></div>
+      <div class="rect" style="--i:2;"></div>
+      <div class="rect" style="--i:3;"></div>
+      <div class="rect" style="--i:4;"></div>
+      <div class="rect" style="--i:5;"></div>
+      <div class="rect" style="--i:6;"></div>
+      <div class="rect" style="--i:7;"></div>
+      <div class="rect" style="--i:8;"></div>
+      <div class="rect" style="--i:9;"></div>
+      <div class="rect" style="--i:10;"></div>
+      <div class="rect" style="--i:11;"></div>
+    </div>
+
+    <!-- Card question -->
+    <div class="card hidden" id="card">
+      <p id="question"></p>
+      <div class="buttons" id="answers"></div>
+    </div>
+  </div>
+
+  <!-- Sons -->
+  <audio id="intro-sound" src="sounds/boot.mp3" preload="auto"></audio>
+  <audio id="click-sound" src="sounds/click.mp3" preload="auto"></audio>
+
+  <script src="questionnaire.js"></script>
+</body>
+</html>

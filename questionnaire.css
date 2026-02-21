@@ -1,0 +1,167 @@
+/* === Base / Plein écran === */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #001f33; /* Bleu sombre mais clair pour effet cathodique */
+  color: #00ffff; /* Texte bleu néon */
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+/* === Logo néon === */
+.logo {
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: bold;
+  color: #00ffff;
+  text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+  animation: logoIn 2.4s ease forwards;
+  margin-bottom: 1.5rem;
+}
+
+@keyframes logoIn {
+  0% { opacity: 0; transform: scale(0.6); filter: blur(4px);}
+  50% { opacity: 1; transform: scale(1.1); text-shadow: 0 0 60px #00ffff; }
+  100% { opacity: 1; transform: scale(1); text-shadow: 0 0 25px #00ffff; }
+}
+
+/* === Texte Initializing... === */
+.initializing {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  letter-spacing: 2px;
+  opacity: 0.8;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* === Cercle de rectangles === */
+#loading-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 150px;
+  height: 150px;
+  position: relative;
+}
+
+.rect {
+  width: 15px;
+  height: 15px;
+  background: #001f33;
+  border: 2px solid #00ffff;
+  position: absolute;
+  animation: fillBlock 0.7s infinite;
+  transform-origin: center;
+}
+
+#loading-circle .rect {
+  /* Positionner chaque rectangle en cercle */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(calc(var(--i) * 30deg)) translate(60px);
+}
+
+/* Animation des blocs */
+@keyframes fillBlock {
+  0%, 100% { background: #001f33; }
+  50% { background: #00ffff; }
+}
+
+/* === Card questions === */
+.card {
+  max-width: 600px;
+  width: 90%;
+  padding: 2rem;
+  border-radius: 12px;
+  background: rgba(0,5,20,0.7);
+  box-shadow: 0 0 20px rgba(0,255,255,0.2);
+  backdrop-filter: blur(5px);
+  transition: all 0.5s ease;
+}
+
+.card.hidden {
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  pointer-events: none;
+}
+
+#question {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px #00ffff;
+}
+
+/* === Boutons néon === */
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+button {
+  background: #001122;
+  color: #00ffff;
+  border: 1px solid #00ffff;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 1rem;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 10px #00ffff50;
+}
+
+button:hover {
+  background: #002244;
+  transform: scale(1.05);
+}
+
+button:active {
+  background: #004466;
+  box-shadow: 0 0 15px #00ffffaa inset;
+  transform: scale(0.95);
+}
+
+/* === Responsive === */
+@media screen and (max-width: 600px) {
+  .logo {
+    font-size: 6vw;
+    margin-bottom: 1rem;
+  }
+  .initializing {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  #loading-circle {
+    width: 100px;
+    height: 100px;
+  }
+  .card {
+    padding: 1.5rem;
+  }
+  button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
