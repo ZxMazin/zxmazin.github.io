@@ -355,25 +355,33 @@ document.addEventListener('click', function() {
     }
 }, { once: true }); // Ne se déclenche qu'au premier clic
 // Déplacement des fenêtres
-document.querySelectorAll('.win-title').forEach(titleBar => {
-    titleBar.addEventListener('mousedown', function(e) {
-        let win = this.closest('.win98-window');
-        let shiftX = e.clientX - win.getBoundingClientRect().left;
-        let shiftY = e.clientY - win.getBoundingClientRect().top;
+document.addEventListener('mousedown', function(e) {
+    const titleBar = e.target.closest('.win-title');
+    if (!titleBar || e.target.closest('button')) return;
 
-        function moveAt(pageX, pageY) {
-            win.style.left = pageX - shiftX + 'px';
-            win.style.top = pageY - shiftY + 'px';
-        }
+    const win = titleBar.closest('.win98-window');
+    // Mettre la fenêtre au premier plan
+    document.querySelectorAll('.win98-window').forEach(w => w.style.zIndex = 100);
+    win.style.zIndex = 1000;
 
-        function onMouseMove(e) { moveAt(e.pageX, e.pageY); }
-        document.addEventListener('mousemove', onMouseMove);
+    let shiftX = e.clientX - win.getBoundingClientRect().left;
+    let shiftY = e.clientY - win.getBoundingClientRect().top;
 
-        document.onmouseup = function() {
-            document.removeEventListener('mousemove', onMouseMove);
-            document.onmouseup = null;
-        };
-    });
+    function moveAt(pageX, pageY) {
+        win.style.left = pageX - shiftX + 'px';
+        win.style.top = pageY - shiftY + 'px';
+    }
+
+    function onMouseMove(e) {
+        moveAt(e.clientX, e.clientY);
+    }
+
+    document.addEventListener('mousemove', onMouseMove);
+
+    document.addEventListener('mouseup', function onMouseUp() {
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+    }, { once: true });
 });
 function openVideo(youtubeId) {
     const frame = document.getElementById('youtube-frame');

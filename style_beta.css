@@ -85,15 +85,17 @@ body { margin: 0; background: #000; font-family: "Tahoma", "Verdana", sans-serif
 }
 .win-title {
     background: var(--win-blue);
-    color: white; padding: 3px 6px;
+    color: white; padding: 4px 8px;
     display: flex; justify-content: space-between;
-    align-items: center; font-weight: bold; font-size: 12px;
+    align-items: center; font-weight: bold; font-size: 13px;
+    cursor: default;
 }
 .win-title button {
     background: var(--win-grey);
     border: 1px solid; border-color: #fff #000 #000 #fff;
     font-weight: bold; font-size: 10px; cursor: pointer;
-    width: 16px; height: 14px; line-height: 10px;
+    width: 18px; height: 16px; line-height: 12px;
+    display: flex; align-items: center; justify-content: center;
 }
 
 .win-content { background: white; margin: 2px; padding: 10px; color: #000; border: 2px inset #fff; }

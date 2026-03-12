@@ -1,0 +1,149 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #001f3f;
+    color: white;
+    font-family: 'Georgia', serif;
+}
+
+#loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease;
+}
+
+.loader-bar {
+    width: 200px;
+    height: 4px;
+    background: #333;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.loader-fill {
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    background: #0074D9;
+    animation: load 3s forwards;
+}
+
+@keyframes load {
+    to { width: 100%; }
+}
+
+#adventure-map {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: radial-gradient(circle, #003366 0%, #001f3f 100%);
+}
+
+.ocean {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+    opacity: 0.3;
+}
+
+.wave {
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    animation: waveMove 20s linear infinite;
+}
+
+@keyframes waveMove {
+    from { transform: translate(-50%, -10%) rotate(0deg); }
+    to { transform: translate(-50%, -10%) rotate(360deg); }
+}
+
+.map-node {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.5s ease;
+    z-index: 10;
+}
+
+.map-node img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 15px rgba(255,255,255,0.5);
+    transition: all 0.3s ease;
+}
+
+.map-node:hover img {
+    transform: scale(1.2);
+    box-shadow: 0 0 25px rgba(255,255,255,0.8);
+}
+
+.map-node span {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.9rem;
+    text-shadow: 1px 1px 5px black;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.map-node:hover span {
+    opacity: 1;
+}
+
+.map-link {
+    position: absolute;
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+    transform-origin: left center;
+    z-index: 1;
+}
+
+#map-info {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    max-width: 400px;
+    pointer-events: none;
+}
+
+#map-info h1 {
+    font-size: 3rem;
+    margin: 0;
+    letter-spacing: 5px;
+}
+
+#map-info p {
+    font-style: italic;
+    opacity: 0.6;
+}
+
+.retro-link {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    color: white;
+    text-decoration: none;
+    border: 1px solid white;
+    padding: 5px 15px;
+    font-size: 0.8rem;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.retro-link:hover {
+    opacity: 1;
+}

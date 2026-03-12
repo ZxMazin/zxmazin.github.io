@@ -1,0 +1,156 @@
+/* Morocco Theme */
+.theme-morocco {
+    --bg: #8b4513;
+    --card: #fff;
+    --text: #2d1a0a;
+    --accent: #006b3c;
+    background-color: #f4e4bc;
+    background-image:
+        radial-gradient(circle at 0% 50%, rgba(200, 150, 50, 0.1) 9%, transparent 10%),
+        radial-gradient(circle at 100% 50%, rgba(200, 150, 50, 0.1) 9%, transparent 10%),
+        radial-gradient(circle at 50% 0%, rgba(200, 150, 50, 0.1) 9%, transparent 10%),
+        radial-gradient(circle at 50% 100%, rgba(200, 150, 50, 0.1) 9%, transparent 10%),
+        linear-gradient(45deg, #d2b48c 25%, transparent 25%, transparent 75%, #d2b48c 75%, #d2b48c),
+        linear-gradient(-45deg, #d2b48c 25%, transparent 25%, transparent 75%, #d2b48c 75%, #d2b48c);
+    background-size: 100px 100px;
+    background-attachment: fixed;
+}
+
+.theme-morocco h1 {
+    font-family: 'serif';
+    color: #c1272d;
+    text-shadow: 2px 2px #fff;
+    text-align: center;
+}
+
+.theme-morocco .hero {
+    background: rgba(255, 255, 255, 0.8);
+    border: 10px double #006b3c;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+/* Paris Theme */
+.theme-paris::after {
+    content: "« Même après la mort, on n'est pas égal. »";
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-style: italic;
+    opacity: 0.3;
+    font-size: 0.8rem;
+    pointer-events: none;
+}
+
+.theme-paris {
+    --bg: #f5f5f0;
+    --card: #fff;
+    --text: #333;
+    --accent: #002395;
+    background: #e6e6e6;
+    background-image: linear-gradient(rgba(255,255,255,0.5) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255,255,255,0.5) 2px, transparent 2px);
+    background-size: 50px 50px;
+}
+
+.theme-paris .hero {
+    border-left: 5px solid #002395;
+    border-right: 5px solid #ed2939;
+    padding: 2rem;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Scandinavia Theme (Stockholm & Helsinki) */
+.theme-scandinavia::after {
+    content: "« Un sentiment qu'au fond, je ne serai jamais vraiment accepté. »";
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-style: italic;
+    opacity: 0.3;
+    font-size: 0.8rem;
+    pointer-events: none;
+}
+
+.theme-scandinavia {
+    --bg: #e3f2fd;
+    --card: #fff;
+    --text: #263238;
+    --accent: #0277bd;
+    background: #f0f4f8;
+}
+
+.theme-scandinavia .hero {
+    background: white;
+    border-radius: 0;
+    border: 1px solid #cfd8dc;
+    padding: 3rem;
+    font-weight: 300;
+}
+
+/* Eastern Europe Theme (Riga, Tallinn, Varsovie, Prague) */
+.theme-eastern::after {
+    content: "« Pourquoi est-ce froid ici et pas là ? »";
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-style: italic;
+    opacity: 0.3;
+    font-size: 0.8rem;
+    pointer-events: none;
+}
+
+.theme-eastern {
+    --bg: #eceff1;
+    --card: #fff;
+    --text: #37474f;
+    --accent: #546e7a;
+    background: #cfd8dc;
+}
+
+.theme-eastern .hero {
+    background: #fff;
+    border: 1px solid #90a4ae;
+    position: relative;
+}
+
+.theme-eastern .hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border: 1px solid #90a4ae;
+    margin: 5px;
+    pointer-events: none;
+}
+
+/* Common Animations */
+.card, button, a {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+
+.card:hover, button:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+nav a:hover {
+    transform: scale(1.1);
+    display: inline-block;
+}
+
+/* Zellige Pattern for Morocco */
+.zellige-decoration {
+    width: 100%;
+    height: 100px;
+    background-color: #006b3c;
+    background-image:
+        linear-gradient(30deg, #c1272d 12%, transparent 12.5%, transparent 87%, #c1272d 87.5%, #c1272d),
+        linear-gradient(150deg, #c1272d 12%, transparent 12.5%, transparent 87%, #c1272d 87.5%, #c1272d),
+        linear-gradient(30deg, #c1272d 12%, transparent 12.5%, transparent 87%, #c1272d 87.5%, #c1272d),
+        linear-gradient(150deg, #c1272d 12%, transparent 12.5%, transparent 87%, #c1272d 87.5%, #c1272d),
+        linear-gradient(60deg, #d2b48c 25%, transparent 25.5%, transparent 75%, #d2b48c 75%, #d2b48c),
+        linear-gradient(60deg, #d2b48c 25%, transparent 25.5%, transparent 75%, #d2b48c 75%, #d2b48c);
+    background-size: 80px 140px;
+    margin: 2rem 0;
+}
