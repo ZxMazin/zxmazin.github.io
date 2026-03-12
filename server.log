@@ -1,0 +1,15 @@
+127.0.0.1 - - [12/Mar/2026 13:48:36] code 404, message File not found
+127.0.0.1 - - [12/Mar/2026 13:48:36] "GET /robots.txt HTTP/1.1" 404 -
+127.0.0.1 - - [12/Mar/2026 13:48:37] "GET /index.html HTTP/1.0" 200 -
+127.0.0.1 - - [12/Mar/2026 13:49:31] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [12/Mar/2026 13:49:31] "GET /map.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Mar/2026 13:49:31] "GET /map.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Mar/2026 13:49:32] "GET /images/meknes/000118380040.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Mar/2026 13:49:32] "GET /images/paris/IMG_0380.JPG HTTP/1.1" 200 -
+127.0.0.1 - - [12/Mar/2026 13:49:32] "GET /images/rabat/000118380038.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Mar/2026 13:49:32] "GET /images/stockholm/IMG_0828.JPG HTTP/1.1" 200 -
+127.0.0.1 - - [12/Mar/2026 13:49:32] "GET /images/helsinki/000118380034.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Mar/2026 13:49:32] "GET /images/tallinn/000118380033.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Mar/2026 13:49:36] "GET /images/varsovie/000118380025.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Mar/2026 13:49:36] "GET /images/riga/IMG_1731.JPG HTTP/1.1" 200 -
+127.0.0.1 - - [12/Mar/2026 13:49:36] "GET /images/prague/000118380002.jpg HTTP/1.1" 200 -

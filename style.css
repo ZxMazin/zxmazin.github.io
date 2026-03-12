@@ -109,6 +109,21 @@ footer {
   color: var(--muted);
 }
 
+/* === Entry Animation === */
+#entry-overlay {
+  position: fixed;
+  inset: 0;
+  background: white;
+  z-index: 10000;
+  pointer-events: none;
+  animation: fadeOut 1s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
 /* === Lightbox === */
 .lightbox {
   position: fixed;
