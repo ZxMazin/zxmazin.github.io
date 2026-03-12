@@ -183,7 +183,7 @@ const database = {
 
     }
 
-}; 
+};
 
 // 1. BOOT SEQUENCE
 const logBox = document.getElementById('boot-log');
@@ -211,7 +211,7 @@ window.addEventListener("keydown", (e) => {
 
         if (!errorBox.classList.contains('hidden')) {
             closeError(); // Ferme l'erreur si elle est ouverte
-        } 
+        }
         else if (!loginScreen.classList.contains('hidden')) {
             checkPassword(); // Valide le mot de passe sinon
         }
@@ -238,7 +238,7 @@ function closeError() {
 function showLoadingTransition() {
     const loader = document.getElementById('loading-screen');
     loader.classList.remove('hidden');
-    
+
     setTimeout(() => {
         loader.classList.add('hidden');
         document.getElementById('desktop').classList.remove('hidden');
@@ -251,7 +251,7 @@ function showLoadingTransition() {
 function initExplorer() {
     const grid = document.getElementById('main-explorer');
     grid.innerHTML = "";
-    
+
     // Ajout des dossiers pays
     for(let key in database) {
         grid.innerHTML += `
@@ -260,7 +260,7 @@ function initExplorer() {
                 <span>${database[key].name}</span>
             </div>`;
     }
-    
+
     // Dossier Vidéo unique dans le même explorateur
     grid.innerHTML += `
         <div class="icon" style="color:black" onclick="alert('Ouverture du dossier Vidéos...')">
@@ -272,21 +272,21 @@ function initExplorer() {
 function openCountry(key) {
     const data = database[key];
     const win = document.getElementById('win-country');
-    win.style.width = ""; 
+    win.style.width = "";
     win.style.height = "";
     // 1. Réinitialiser la classe pour le thème
     win.className = "win98-window theme-" + key.split('-')[0];
-    
+
     // 2. Préparer le contenu
     document.getElementById('country-title').innerText = data.name + ".txt - Notepad";
-    
+
     let imgHTML = `<div class="gallery">`;
-    data.images.forEach(imgUrl => {  imgHTML += `<img src="${data.path}/${imgUrl}" onerror="this.src='https://win98icons.alexmeub.com/icons/png/image_file-0.png'">`; 
+    data.images.forEach(imgUrl => {  imgHTML += `<img src="${data.path}/${imgUrl}" onerror="this.src='https://win98icons.alexmeub.com/icons/png/image_file-0.png'">`;
     });
     imgHTML += `</div>`;
-    
+
     document.getElementById('country-body').innerHTML = `<div class="country-text">${data.text}</div>` + imgHTML;
-    
+
     // 3. Ajouter le resizer si absent
     if (!win.querySelector('.resizer')) {
         const resizer = document.createElement('div');
@@ -294,7 +294,7 @@ function openCountry(key) {
         win.appendChild(resizer);
         initResizing(win, resizer);
     }
-    
+
     openWindow('win-country');
 }
 
@@ -314,9 +314,9 @@ document.addEventListener('click', (e) => {
 const calcScreen = document.getElementById('calc-screen');
 function calcIn(v) { calcScreen.value += v; }
 function calcClear() { calcScreen.value = ""; }
-function calcRes() { 
-    try { calcScreen.value = eval(calcScreen.value); } 
-    catch { calcScreen.value = "Erreur"; } 
+function calcRes() {
+    try { calcScreen.value = eval(calcScreen.value); }
+    catch { calcScreen.value = "Erreur"; }
 }
 
 // Horloge
@@ -336,7 +336,7 @@ function initResizing(win, resizer) {
         const rect = win.getBoundingClientRect();
         const newWidth = e.clientX - rect.left;
         const newHeight = e.clientY - rect.top;
-        
+
         // Applique uniquement si supérieur aux minimums
         if (newWidth > 200) win.style.width = newWidth + 'px';
         if (newHeight > 150) win.style.height = newHeight + 'px';
@@ -368,7 +368,7 @@ document.querySelectorAll('.win-title').forEach(titleBar => {
 
         function onMouseMove(e) { moveAt(e.pageX, e.pageY); }
         document.addEventListener('mousemove', onMouseMove);
-        
+
         document.onmouseup = function() {
             document.removeEventListener('mousemove', onMouseMove);
             document.onmouseup = null;

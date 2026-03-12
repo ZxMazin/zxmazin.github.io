@@ -1,118 +1,48 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>IRTIFA OS - Voyage</title>
-    <link rel="stylesheet" href="style_beta.css">
-    <script type="module" src="scrip_beta.js"></script>
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KNSNTWJB');</script>
+<!-- End Google Tag Manager -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TM – Portfolio</title>
+<link rel="stylesheet" href="style.css" />
+<script type="module" src="script.js"></script>
 
 </head>
-<body class="crt">
-    <audio id="snd-startup" src="https://win98icons.alexmeub.com/sounds/startup.mp3"></audio>
-    <audio id="snd-error" src="https://win98icons.alexmeub.com/sounds/chord.mp3"></audio>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KNSNTWJB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
-    <div id="boot-screen">
-        <div id="boot-log"></div>
-    </div>
-
-    <div id="login-screen" class="hidden">
-        <div class="xp-dialog shadow">
-            <div class="xp-title">Ouverture de session Windows</div>
-            <div class="xp-body">
-                <img src="https://win98icons.alexmeub.com/icons/png/key_padlock-0.png" width="48">
-                <div style="display: flex; align-items: flex-end; gap: 10px; width: 100%;">
-                    <div style="flex-grow: 1;">
-                        <p style="margin: 0 0 5px 0; font-size: 12px; color: #000;">Tapez votre mot de passe (octobre) :</p>
-                        <input type="password" id="pass-input" style="width: 100%; padding: 3px;" autofocus>
-                    </div>
-                    <button class="xp-ok-btn" onclick="checkPassword()">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="loading-screen" class="hidden">
-        <div class="xp-load-container">
-            <img src="https://win98icons.alexmeub.com/icons/png/msagent-0.png" width="64">
-            <p>Chargement de vos paramètres personnels...</p>
-            <div class="xp-progress-bar"><div class="xp-progress-fill"></div></div>
-        </div>
-    </div>
-
-    <div id="error-box" class="hidden">
-        <div class="xp-dialog error-border shadow">
-            <div class="xp-title error-bg">Erreur</div>
-            <div class="xp-body">
-                <img src="https://win98icons.alexmeub.com/icons/png/msg_error-0.png" width="32">
-                <p style="color: #000;">Mot de passe incorrect.</p>
-                <button onclick="closeError()" style="margin-left: auto; padding: 2px 10px;">OK</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="desktop" class="hidden">
-        <div class="desktop-icons">
-            <div class="icon" onclick="openWindow('win-explorer')">
-                <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png">
-                <span>Archives Voyage</span>
-            </div>
-        </div>
-
-        <div id="win-explorer" class="win98-window hidden">
-            <div class="win-title"><span>C:\Voyage</span><button onclick="closeWindow('win-explorer')">X</button></div>
-            <div class="win-content folder-grid" id="main-explorer"></div>
-        </div>
-
-        <div id="win-country" class="win98-window hidden">
-            <div class="win-title"><span id="country-title">Notepad</span><button onclick="closeWindow('win-country')">X</button></div>
-            <div class="win-content scrollable" id="country-body"></div>
-        </div>
-        <div id="win-video" class="win98-window hidden">
-    <div class="win-title">
-        <span>Lecteur Vidéo</span>
-        <button onclick="closeWindow('win-video')">X</button>
-    </div>
-    <div class="win-content" style="padding: 0; background: #000;">
-        <iframe id="youtube-frame" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
-    </div>
-
-        <div id="win-calc" class="win98-window hidden" style="width: 220px;">
-            <div class="win-title"><span>Calculatrice</span><button onclick="closeWindow('win-calc')">X</button></div>
-            <div class="win-content">
-                <input type="text" id="calc-screen" readonly style="width:100%; text-align:right; margin-bottom:10px; padding: 5px; background:#fff; border:2px inset #eee;">
-                <div class="calc-buttons">
-                    <button onclick="calcIn('7')">7</button><button onclick="calcIn('8')">8</button><button onclick="calcIn('9')">9</button><button onclick="calcIn('/')">/</button>
-                    <button onclick="calcIn('4')">4</button><button onclick="calcIn('5')">5</button><button onclick="calcIn('6')">6</button><button onclick="calcIn('*')">*</button>
-                    <button onclick="calcIn('1')">1</button><button onclick="calcIn('2')">2</button><button onclick="calcIn('3')">3</button><button onclick="calcIn('-')">-</button>
-                    <button onclick="calcIn('0')">0</button><button onclick="calcClear()">C</button><button onclick="calcRes()">=</button><button onclick="calcIn('+')">+</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="taskbar">
-            <button class="start-btn" onclick="toggleMenu()">
-                <img src="https://win98icons.alexmeub.com/icons/png/windows-0.png" width="16"> 
-                <strong>Démarrer</strong>
-            </button>
-            
-            <div id="start-menu" class="hidden shadow">
-                <div class="start-sidebar"><span>IRTIFA OS</span></div>
-                <div class="start-list">
-                    <div onclick="openWindow('win-calc'); toggleMenu();">🧮 Calculatrice</div>
-                    <div onclick="window.open('https://irtifa.ch/index_beta.html')">🌐 Irtifa.ch</div>
-                    <hr>
-                    <div onclick="location.reload()">🔒 Déconnexion</div>
-                </div>
-            </div>
-            
-            <div class="taskbar-divider"></div>
-            <div class="clock" id="clock">12:00</div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+<header>
+<h1>TM – Portfolio</h1>
+<nav>
+<a href="index.html">Accueil</a>
+<a href="index_beta.html">Version Rétro</a>
+</nav>
+</header>
+<section class="hero">
+<h2>Voyage photographique</h2>
+<p>Portfolio réalisé dans le cadre de mon Travail de Maturité. Chaque destination correspond à une étape du voyage.</p>
+</section>
+<section class="grid">
+<a class="card" href="destinations/meknes.html"><img src="images/meknes/000118380040.jpg"><div><h3>Meknès</h3></div></a>
+<a class="card" href="destinations/rabat.html"><img src="images/rabat/000118380038.jpg"><div><h3>Rabat</h3></div></a>
+<a class="card" href="destinations/paris.html"><img src="images/paris/IMG_0380.JPG"><div><h3>Paris</h3></div></a>
+<a class="card" href="destinations/stockholm.html"><img src="images/stockholm/IMG_0828.JPG"><div><h3>Stockholm</h3></div></a>
+<a class="card" href="destinations/helsinki.html"><img src="images/helsinki/000118380034.jpg"><div><h3>Helsinki</h3></div></a>
+<a class="card" href="destinations/tallinn.html"><img src="images/tallinn/000118380033.jpg"><div><h3>Tallinn</h3></div></a>
+<a class="card" href="destinations/riga.html"><img src="images/riga/IMG_1731.JPG"><div><h3>Riga</h3></div></a>
+<a class="card" href="destinations/varsovie.html"><img src="images/varsovie/000118380025.jpg"><div><h3>Varsovie</h3></div></a>
+<a class="card" href="destinations/prague.html"><img src="images/prague/000118380002.jpg"><div><h3>Prague</h3></div></a>
+</section>
+<footer>© 2026 – TM Portfolio · Mazin</footer>
 </body>
-
 </html>
-
-

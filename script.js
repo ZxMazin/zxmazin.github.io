@@ -137,71 +137,21 @@ document.addEventListener("DOMContentLoaded", () => {
 // =========================
 document.addEventListener("DOMContentLoaded", () => {
 
-  const galleryContainer = document.querySelector(".grid");
+  const galleryContainer = document.querySelector(".grid") || document.querySelector(".gallery");
+  if (!galleryContainer) return;
+
   const galleryImages = galleryContainer.querySelectorAll("img"); // toutes les images déjà présentes
+  if (galleryImages.length === 0) return;
+
   let inactivityTimer;
   let autoSlideInterval;
   let currentIndex = 0;
 
-  const slideDelay = 5000; // 20 secondes avant démarrage
+  const slideDelay = 5000; // 5 secondes avant démarrage
   const slideSpeed = 3000;  // 3 secondes entre chaque image
 
   // Fonction pour faire défiler les images
   function autoSlide() {
-    if (galleryImages.length === 0) return;
-
-    // Met en avant la photo courante et atténue les autres
-    galleryImages.forEach((img, index) => {
-      img.style.opacity = index === currentIndex ? "1" : "0.2";
-      img.style.transition = "opacity 0.5s"; // légère animation d'apparition
-    });
-
-    currentIndex = (currentIndex + 1) % galleryImages.length;
-  }
-
-  // Reset du timer d'inactivité
-  function resetInactivityTimer() {
-    clearTimeout(inactivityTimer);
-    clearInterval(autoSlideInterval);
-
-    // Remise à l’état normal
-    galleryImages.forEach(img => {
-      img.style.opacity = "1";
-      img.style.transition = "opacity 0.3s";
-    });
-
-    inactivityTimer = setTimeout(() => {
-      autoSlide(); // afficher la première image
-      autoSlideInterval = setInterval(autoSlide, slideSpeed);
-    }, slideDelay);
-  }
-
-  // Détecter l’activité de l’utilisateur
-  ["mousemove", "keydown", "scroll", "touchstart"].forEach(evt => {
-    document.addEventListener(evt, resetInactivityTimer);
-  });
-
-  // Lancer le timer au départ
-  resetInactivityTimer();
-});
-// =========================
-// 3️⃣ Screen Saver automatique après inactivité
-// =========================
-document.addEventListener("DOMContentLoaded", () => {
-
-  const galleryContainer = document.querySelector(".gallery");
-  const galleryImages = galleryContainer.querySelectorAll("img"); // toutes les images déjà présentes
-  let inactivityTimer;
-  let autoSlideInterval;
-  let currentIndex = 0;
-
-  const slideDelay = 5000; // 20 secondes avant démarrage
-  const slideSpeed = 3000;  // 3 secondes entre chaque image
-
-  // Fonction pour faire défiler les images
-  function autoSlide() {
-    if (galleryImages.length === 0) return;
-
     // Met en avant la photo courante et atténue les autres
     galleryImages.forEach((img, index) => {
       img.style.opacity = index === currentIndex ? "1" : "0.2";
