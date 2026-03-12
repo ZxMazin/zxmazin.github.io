@@ -38,17 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function drawLink(n1, n2, layer) {
-        const dx = n2.x - n1.x;
-        const dy = n2.y - n1.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
-
-        const line = document.createElement('div');
-        line.className = 'map-link';
-        line.style.width = dist + '%';
-        line.style.left = n1.x + 5 + '%';
-        line.style.top = n1.y + 5 + '%';
-        line.style.transform = `rotate(${angle}deg)`;
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", n1.x);
+        line.setAttribute("y1", n1.y);
+        line.setAttribute("x2", n2.x);
+        line.setAttribute("y2", n2.y);
+        line.setAttribute("class", "map-link");
         layer.appendChild(line);
     }
 

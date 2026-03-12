@@ -9,13 +9,22 @@ body {
 #loading-overlay {
     position: fixed;
     inset: 0;
-    background: #000;
+    background: #000 url('images/meknes/IMG_0137.JPG') no-repeat center center;
+    background-size: cover;
     z-index: 10000;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     transition: opacity 1s ease;
+}
+
+#loading-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
 }
 
 .loader-bar {
@@ -44,6 +53,32 @@ body {
     height: 100vh;
     position: relative;
     background: radial-gradient(circle, #003366 0%, #001f3f 100%);
+}
+
+#decorations-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.land-outline {
+    fill: rgba(255, 255, 255, 0.05);
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 0.3;
+    stroke-dasharray: 2;
+}
+
+.region-label {
+    font-family: 'Georgia', serif;
+    font-size: 3px;
+    fill: rgba(255, 255, 255, 0.3);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .ocean {
@@ -75,6 +110,7 @@ body {
     text-align: center;
     transition: all 0.5s ease;
     z-index: 10;
+    transform: translate(-50%, -50%);
 }
 
 .map-node img {
@@ -105,11 +141,10 @@ body {
 }
 
 .map-link {
-    position: absolute;
-    height: 2px;
-    background: rgba(255,255,255,0.1);
-    transform-origin: left center;
-    z-index: 1;
+    stroke: rgba(255,255,255,0.1);
+    stroke-width: 0.5;
+    stroke-dasharray: 1;
+    fill: none;
 }
 
 #map-info {
