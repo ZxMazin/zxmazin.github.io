@@ -1,192 +1,227 @@
-/* === Variables CSS === */
-:root {
-  --bg: #f8fafc;
-  --card: #ffffff;
-  --text: #111827;
-  --muted: #4b5563;
-  --accent: #0284c7;
-  --btn-rgb: 2, 132, 199; /* pour boutons Lightbox semi-transparents */
+:root { 
+    --win-bg: #008080; 
+    --win-grey: #c0c0c0; 
+    --win-blue: #000080; 
+    --xp-blue: #0054e3;
 }
 
-/* === Reset et base === */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: system-ui, sans-serif;
+body { margin: 0; background: #000; font-family: "Tahoma", "Verdana", sans-serif; overflow: hidden; user-select: none; }
+.hidden { display: none !important; }
+
+/* --- BOOT & LOGIN --- */
+#boot-screen { padding: 20px; color: #0f0; font-family: monospace; height: 100vh; font-size: 14px; }
+
+.xp-dialog { 
+    background: #ece9d8; 
+    border: 2px solid var(--xp-blue); 
+    width: 380px; 
+    position: absolute; 
+    top: 50%; left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: #000; 
+    z-index: 3000; 
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
 }
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  
+.xp-title { 
+    background: linear-gradient(#0058e6, #248cf1); 
+    color: white; padding: 5px 10px; 
+    font-weight: bold; font-size: 13px; 
 }
 
-/* === Header / Navigation === */
-header {
-  max-width: 1100px;
-  margin: auto;
-  padding: 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.xp-body { padding: 20px; display: flex; gap: 15px; align-items: center; }
+
+/* Bouton OK style XP */
+.xp-ok-btn {
+    background: #ece9d8;
+    border: 1px solid var(--xp-blue);
+    border-radius: 3px;
+    padding: 4px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: inset -1px -1px 1px #808080;
+}
+.xp-ok-btn:active { box-shadow: inset 1px 1px 1px #808080; }
+
+.error-border { border-color: #e33000 !important; }
+.error-bg { background: linear-gradient(#e33000, #f16c24) !important; }
+
+/* --- LOADING SCREEN --- */
+#loading-screen { background: #5a7edc; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2500; color: white; }
+.xp-progress-bar { width: 150px; height: 12px; border: 1px solid #fff; background: #fff; margin-top: 15px; padding: 1px; }
+.xp-progress-fill { height: 100%; background: #31ce31; width: 0%; animation: load 2.5s forwards; }
+@keyframes load { to { width: 100%; } }
+
+/* --- BUREAU --- */
+#desktop { background: var(--win-bg); height: 100vh; position: relative; padding: 20px; }
+.icon { width: 85px; text-align: center; color: white; font-size: 11px; cursor: pointer; margin-bottom: 25px; text-shadow: 1px 1px 1px #000; }
+.icon img { display: block; margin: 0 auto 5px; width: 32px; height: 32px; }
+
+/* --- FENETRES --- */
+/* Style unique pour toutes les fenêtres */
+.win98-window { 
+    background: var(--win-grey); 
+    border: 2px solid; 
+    border-color: #fff #808080 #808080 #fff; 
+    position: absolute; 
+    top: 50px; left: 150px; 
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    z-index: 100; 
+    min-width: 250px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    resize: none; /* On gère le redimensionnement manuellement avec le resizer */
+}
+.win-content { 
+    background: white; 
+    margin: 2px; 
+    padding: 10px; 
+    flex: 1; /* Le contenu s'étire */
+    overflow-y: auto; /* Scroll uniquement si nécessaire */
+    border: 2px inset #fff;
+    display: flex;
+    flex-direction: column;
+}
+.win-title { 
+    background: var(--win-blue); 
+    color: white; padding: 3px 6px; 
+    display: flex; justify-content: space-between; 
+    align-items: center; font-weight: bold; font-size: 12px;
+}
+.win-title button { 
+    background: var(--win-grey); 
+    border: 1px solid; border-color: #fff #000 #000 #fff; 
+    font-weight: bold; font-size: 10px; cursor: pointer;
+    width: 16px; height: 14px; line-height: 10px;
 }
 
-nav a {
-  margin-left: 1.5rem;
-  text-decoration: none;
-  color: var(--muted);
-  transition: color 0.3s;
+.win-content { background: white; margin: 2px; padding: 10px; color: #000; border: 2px inset #fff; }
+
+/* --- EXPLORATEUR --- */
+.folder-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); 
+    gap: 15px; 
+    max-height: 400px; 
+    overflow-y: auto; 
+}
+.folder-grid .icon { color: #000; text-shadow: none; width: 100%; }
+
+.scrollable { max-height: 550px; overflow-y: auto; width: 750px; }
+
+/* --- CALCULATRICE --- */
+#win-calc .win-content { background: var(--win-grey); }
+#calc-screen { 
+    width: 100%; box-sizing: border-box; 
+    height: 35px; font-size: 18px; 
+    font-family: monospace; padding: 5px; 
+    background: #fff; border: 2px inset #fff;
+}
+.calc-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding-top: 10px; }
+.calc-buttons button { 
+    padding: 10px; font-weight: bold; cursor: pointer;
+    background: var(--win-grey); border: 2px solid; 
+    border-color: #fff #808080 #808080 #fff; 
+}
+.calc-buttons button:active { border-color: #808080 #fff #fff #808080; }
+
+/* --- TASKBAR --- */
+.taskbar { 
+    position: fixed; bottom: 0; width: 100%; height: 30px; 
+    background: var(--win-grey); border-top: 2px solid #fff; 
+    display: flex; align-items: center; padding: 0 5px; z-index: 5000;
+}
+.start-btn { 
+    font-weight: bold; height: 22px; padding: 0 8px;
+    border: 2px solid; border-color: #fff #808080 #808080 #fff; 
+    display: flex; align-items: center; gap: 4px; cursor: pointer;
+}
+.start-btn:active { border-color: #808080 #fff #fff #808080; }
+
+#start-menu { 
+    position: absolute; bottom: 28px; left: 2px; 
+    width: 200px; background: var(--win-grey); 
+    border: 2px solid; border-color: #fff #808080 #808080 #fff; 
+    display: flex; z-index: 5001; 
+}
+.start-sidebar { 
+    background: linear-gradient(to top, #000080, #1084d0); 
+    width: 25px; color: white; writing-mode: vertical-rl; 
+    transform: rotate(180deg); text-align: center; 
+    font-size: 14px; font-weight: bold; padding: 10px 0;
+}
+.start-list { flex-grow: 1; padding: 2px; }
+.start-list div { padding: 8px 10px; cursor: pointer; color: #000; font-size: 12px; }
+.start-list div:hover { background: var(--win-blue); color: #fff; }
+
+.clock { 
+    margin-left: auto; 
+    border-left: 2px solid #808080; 
+    border-right: 2px solid #fff; /* Effet enfoncé complet */
+    padding: 0 10px; 
+    font-size: 12px; 
+    color: #000;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    background: #c0c0c0;
+    margin-right: 30px; /* Décolle un peu du bord droit */
 }
 
-nav a:hover {
-  color: var(--accent);
+/* --- GALLERY --- */
+.gallery { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); 
+    gap: 10px;
+    width: 100%; /* Important : ne pas dépasser le parent */
+}
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 20px; }
+.gallery img { width: 100%; border: 2px inset #eee; transition: transform 0.2s; }
+.gallery img:hover { transform: scale(1.05); }
+/* THEMES PAYS */
+/* Application des couleurs de thème dynamique */
+.theme-maroc { border-color: #c1272d !important; } 
+.theme-maroc .win-title { background: #c1272d !important; }
+
+.theme-france { border-color: #002395 !important; } 
+.theme-france .win-title { background: #002395 !important; }
+
+.theme-republique { border-color: #d7141a !important; } /* Adaptation pour ton thème */
+.theme-republique .win-title { background: #d7141a !important; }
+/* Zone de redimensionnement */
+.resizer {
+    width: 10px;
+    height: 10px;
+    background: transparent;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    cursor: nwse-resize;
+}
+/* --- AMÉLIORATION GALLERY --- */
+.gallery { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); 
+    gap: 10px;
+    width: 100%; /* S'adapte à la largeur du .win-content */
+    box-sizing: border-box;
+}
+.gallery img { 
+    width: 100%; 
+    height: 150px; /* Force une hauteur fixe pour éviter le désordre */
+    object-fit: cover; /* Recadre sans déformer */
+    border: 2px inset #fff;
 }
 
-/* === Hero / Section principale === */
-.hero {
-  max-width: 900px;
-  margin: auto;
-  padding: 3rem 2rem;
+/* --- DRAPEAU EN FOND --- */
+.win-content.has-flag {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.9;
 }
-
-/* === Grille / Cards === */
-.grid {
-  max-width: 1100px;
-  margin: auto;
-  padding: 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
+.country-text {
+    max-width: 800px;
+    margin: 0 auto; /* Centre le texte */
 }
-
-.card {
-  background: var(--card);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  text-decoration: none;
-  color: var(--text);
-  transition: background 0.3s, color 0.3s;
-}
-
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.card div {
-  padding: 1rem;
-}
-
-/* Hover automatique pour cards */
-.card:hover {
-  filter: brightness(1.1); /* léger éclaircissement automatique */
-}
-
-/* === Galerie mosaïque === */
-.gallery {
-  max-width: 1100px;
-  margin: auto;
-  padding: 2rem;
-  column-count: 3;
-  column-gap: 1rem;
-}
-
-.gallery img {
-  width: 100%;
-  height: auto;
-  margin-bottom: 1rem;
-  border-radius: 12px;
-  display: block;
-}
-
-/* === Footer === */
-footer {
-  text-align: center;
-  padding: 2rem;
-  color: var(--muted);
-}
-
-/* === Lightbox === */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  background: rgba(var(--bg-rgb, 15,15,26), 0.7); /* fond adaptatif à la palette */
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  transition: background 0.5s;
-}
-
-.lightbox.active {
-  display: flex;
-}
-
-.lightbox img {
-  max-width: 80vw;
-  max-height: 80vh;
-  border-radius: 12px;
-  object-fit: contain;
-  animation: zoomIn 0.3s ease;
-  background: var(--card); /* fond image = couleur card */
-  transition: background 0.5s;
-}
-
-/* === Boutons Lightbox (modernes et dynamiques) === */
-.lightbox button {
-  position: absolute;
-  background: rgba(var(--btn-rgb), 0.2);
-  border: none;
-  font-size: 2rem;
-  padding: 0.6rem 0.8rem;
-  cursor: pointer;
-  border-radius: 50%;
-  color: #fff;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-
-.lightbox button:hover {
-  background: rgba(var(--btn-rgb), 0.4);
-  transform: scale(1.1);
-}
-
-/* Fermeture */
-.lightbox .close {
-  top: 20px;
-  right: 20px;
-  font-size: 2.2rem;
-}
-
-/* Boutons latéraux */
-.lightbox .prev,
-.lightbox .next {
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3rem;
-  height: 3rem;
-  font-size: 1.8rem;
-}
-
-.lightbox .prev { left: 20px; }
-.lightbox .next { right: 20px; }
-
-/* === Animations === */
-@keyframes zoomIn {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-/* Paragraphes */
-p {
-  line-height: 1.8;
-  margin-bottom: 1em;
-}
-
-
