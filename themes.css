@@ -1,4 +1,33 @@
-/* Morocco Theme */
+/* ===============================
+   NEW THEMES (Group 1)
+   =============================== */
+
+/* Switzerland Theme */
+.theme-switzerland {
+    --bg: #e0eaf5;
+    --card: #ffffff;
+    --text: #333333;
+    --accent: #d32f2f;
+    background: linear-gradient(135deg, #e0eaf5 0%, #ffffff 100%);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.theme-switzerland h1 {
+    color: #d32f2f;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.theme-switzerland button {
+    border-radius: 4px;
+    background: #d32f2f;
+    color: white;
+}
+.theme-switzerland button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(211, 47, 47, 0.3);
+    background: #b71c1c;
+}
+
+/* Morocco Theme (Meknes/Rabat base) */
 .theme-morocco {
     --bg: #8b4513;
     --card: #fff;
@@ -31,6 +60,61 @@
     margin-top: 2rem;
 }
 
+.theme-meknes {
+    --bg: #f4e4bc;
+    --card: #ffffff;
+    --text: #2d1a0a;
+    --accent: #006b3c;
+    background-color: #f4e4bc;
+    background-image:
+        radial-gradient(circle at 0% 50%, rgba(200, 150, 50, 0.1) 9%, transparent 10%),
+        radial-gradient(circle at 100% 50%, rgba(200, 150, 50, 0.1) 9%, transparent 10%),
+        radial-gradient(circle at 50% 0%, rgba(200, 150, 50, 0.1) 9%, transparent 10%),
+        radial-gradient(circle at 50% 100%, rgba(200, 150, 50, 0.1) 9%, transparent 10%),
+        linear-gradient(45deg, #d2b48c 25%, transparent 25%, transparent 75%, #d2b48c 75%, #d2b48c),
+        linear-gradient(-45deg, #d2b48c 25%, transparent 25%, transparent 75%, #d2b48c 75%, #d2b48c);
+    background-size: 100px 100px;
+    background-attachment: fixed;
+}
+.theme-meknes button {
+    border-radius: 8px;
+    background: #006b3c;
+    color: white;
+}
+.theme-meknes button:hover {
+    border-radius: 0;
+    box-shadow: 0 0 10px #006b3c;
+    background: #004d2a;
+}
+.theme-meknes h1 {
+    font-family: 'Georgia', serif;
+    color: #c1272d;
+    text-shadow: 2px 2px #fff;
+}
+
+.theme-rabat {
+    --bg: #e0f2f1;
+    --card: #ffffff;
+    --text: #004d40;
+    --accent: #00897b;
+    background: repeating-linear-gradient(45deg, #e0f2f1, #e0f2f1 10px, #b2dfdb 10px, #b2dfdb 20px);
+}
+.theme-rabat button {
+    border-radius: 50%;
+    background: #00897b;
+    color: white;
+}
+.theme-rabat button:hover {
+    transform: scale(1.1);
+    background: #00695c;
+}
+.theme-rabat h1 {
+    color: #004d40;
+    font-family: 'Trebuchet MS', sans-serif;
+    border-bottom: 3px solid #00897b;
+    display: inline-block;
+}
+
 /* Paris Theme */
 .theme-paris::after {
     content: "« Même après la mort, on n'est pas égal. »";
@@ -44,14 +128,12 @@
 }
 
 .theme-paris {
-    --bg: #f5f5f0;
-    --card: #fff;
-    --text: #333;
-    --accent: #002395;
-    background: #e6e6e6;
-    background-image: linear-gradient(rgba(255,255,255,0.5) 2px, transparent 2px),
-    linear-gradient(90deg, rgba(255,255,255,0.5) 2px, transparent 2px);
-    background-size: 50px 50px;
+    --bg: #f5f5dc;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --accent: #d4af37;
+    background: radial-gradient(circle at center, #fdfbf7, #eae6d5);
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .theme-paris .hero {
@@ -62,67 +144,210 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* Scandinavia Theme (Stockholm & Helsinki) */
-.theme-scandinavia::after {
-    content: "« Un sentiment qu'au fond, je ne serai jamais vraiment accepté. »";
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-style: italic;
-    opacity: 0.3;
-    font-size: 0.8rem;
-    pointer-events: none;
+.theme-paris button {
+    border-radius: 20px;
+    background: #1a1a1a;
+    color: #d4af37;
+    border: 1px solid #d4af37;
 }
 
-.theme-scandinavia {
-    --bg: #e3f2fd;
-    --card: #fff;
-    --text: #263238;
-    --accent: #0277bd;
-    background: #f0f4f8;
+.theme-paris button:hover {
+    border: 2px solid #d4af37;
+    background: transparent;
+    color: #1a1a1a;
+    transform: rotate(5deg) scale(1.1);
 }
 
-.theme-scandinavia .hero {
-    background: white;
-    border-radius: 0;
-    border: 1px solid #cfd8dc;
-    padding: 3rem;
+
+/* Stockholm Theme */
+.theme-stockholm {
+    --bg: #f9f9f9;
+    --card: #ffffff;
+    --text: #4a4a4a;
+    --accent: #ffb6c1;
+    background: #f9f9f9;
+    font-family: 'Century Gothic', sans-serif;
+}
+.theme-stockholm button {
+    border-radius: 2px;
+    background: #ffb6c1;
+    color: white;
+    box-shadow: none;
+}
+.theme-stockholm button:hover {
+    opacity: 0.8;
+    transform: translateY(-1px);
+}
+.theme-stockholm h1 {
     font-weight: 300;
+    color: #a9a9a9;
+    letter-spacing: 5px;
 }
 
-/* Eastern Europe Theme (Riga, Tallinn, Varsovie, Prague) */
-.theme-eastern::after {
-    content: "« Pourquoi est-ce froid ici et pas là ? »";
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+
+/* Helsinki Theme */
+.theme-helsinki {
+    --bg: #121212;
+    --card: #1e1e1e;
+    --text: #e0e0e0;
+    --accent: #bb86fc;
+    background: linear-gradient(to bottom, #000000, #121212);
+    color: #e0e0e0;
+}
+.theme-helsinki .hero {
+    background: #1e1e1e;
+    border: 1px solid #bb86fc;
+    box-shadow: 0 0 10px rgba(187, 134, 252, 0.2);
+}
+.theme-helsinki h1 {
+    color: #bb86fc;
+    text-shadow: 0 0 5px #bb86fc;
+}
+.theme-helsinki button {
+    border-radius: 5px;
+    background: #bb86fc;
+    color: #121212;
+}
+.theme-helsinki button:hover {
+    box-shadow: 0 0 15px #bb86fc;
+    transform: scale(1.05);
+}
+
+/* Tallinn Theme */
+.theme-tallinn {
+    --bg: #fff8e7;
+    --card: #fdf5e6;
+    --text: #4a3b2c;
+    --accent: #8b4513;
+    background: url('https://www.transparenttextures.com/patterns/aged-paper.png'), #fff8e7;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+}
+.theme-tallinn .hero {
+    border: 2px solid #8b4513;
+    border-radius: 10px;
+}
+.theme-tallinn h1 {
+    color: #8b4513;
+    text-align: center;
+    border-bottom: 2px dashed #8b4513;
+    padding-bottom: 5px;
+}
+.theme-tallinn button {
+    border-radius: 5px;
+    background: #8b4513;
+    color: #fff8e7;
+    border: 2px solid #5a2e0c;
+}
+.theme-tallinn button:hover {
+    transform: rotate(-2deg) scale(1.05);
+    background: #5a2e0c;
+}
+
+/* Riga Theme */
+.theme-riga {
+    --bg: #e6e6fa;
+    --card: #ffffff;
+    --text: #5c4033;
+    --accent: #9370db;
+    background: radial-gradient(circle at 10% 20%, rgb(226, 240, 254) 0%, rgb(255, 247, 228) 90%);
+    font-family: 'Lucida Handwriting', cursive;
+}
+.theme-riga .hero {
+    border-radius: 30px;
+    box-shadow: 0 10px 20px rgba(147, 112, 219, 0.2);
+}
+.theme-riga h1 {
+    color: #9370db;
     font-style: italic;
-    opacity: 0.3;
-    font-size: 0.8rem;
+}
+.theme-riga button {
+    border-radius: 20px;
+    background: #9370db;
+    color: white;
+}
+.theme-riga button:hover {
+    border-radius: 50%;
+    transform: scale(1.1);
+}
+
+/* Varsovie Theme */
+.theme-varsovie {
+    --bg: #808080;
+    --card: #a9a9a9;
+    --text: #1a1a1a;
+    --accent: #ff4500;
+    background: repeating-linear-gradient(45deg, #696969, #696969 10px, #808080 10px, #808080 20px);
+    font-family: 'Courier New', Courier, monospace;
+}
+.theme-varsovie .hero {
+    background: #a9a9a9;
+    border-radius: 0;
+    border: 5px solid #1a1a1a;
+}
+.theme-varsovie h1 {
+    color: #ff4500;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px #1a1a1a;
+}
+.theme-varsovie button {
+    border-radius: 0;
+    background: #1a1a1a;
+    color: #ff4500;
+    border: 2px solid #ff4500;
+}
+.theme-varsovie button:hover {
+    background: #ff4500;
+    color: #1a1a1a;
+    transform: skewX(-10deg);
+}
+
+/* Prague Theme */
+.theme-prague {
+    --bg: #fff0f5;
+    --card: #ffffff;
+    --text: #4b0082;
+    --accent: #c71585;
+    background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    font-family: 'Garamond', serif;
+}
+.theme-prague .hero {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #c71585;
+    box-shadow: inset 0 0 15px rgba(199, 21, 133, 0.1);
+}
+.theme-prague h1 {
+    color: #c71585;
+    text-align: center;
+}
+.theme-prague button {
+    border-radius: 50%;
+    background: #c71585;
+    color: white;
+}
+.theme-prague button:hover {
+    transform: scale(1.05) rotate(15deg);
+    background: #8b008b;
+}
+
+/* Loading Animation */
+.page-loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0,0,0,0.1);
+    border-top: 5px solid var(--accent);
+    border-radius: 50%;
+    animation: spinner 1s linear infinite;
+    z-index: 10001;
     pointer-events: none;
 }
 
-.theme-eastern {
-    --bg: #eceff1;
-    --card: #fff;
-    --text: #37474f;
-    --accent: #546e7a;
-    background: #cfd8dc;
-}
-
-.theme-eastern .hero {
-    background: #fff;
-    border: 1px solid #90a4ae;
-    position: relative;
-}
-
-.theme-eastern .hero::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    border: 1px solid #90a4ae;
-    margin: 5px;
-    pointer-events: none;
+@keyframes spinner {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* Common Animations */

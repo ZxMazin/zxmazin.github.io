@@ -1,4 +1,22 @@
 // =========================
+// Entry Overlay
+// =========================
+document.addEventListener("DOMContentLoaded", () => {
+  const overlay = document.createElement('div');
+  overlay.id = 'entry-overlay';
+  document.body.appendChild(overlay);
+
+  const loader = document.createElement('div');
+  loader.className = 'page-loader';
+  document.body.appendChild(loader);
+
+  setTimeout(() => {
+    overlay.remove();
+    loader.remove();
+  }, 1000);
+});
+
+// =========================
 // 1️⃣ Lightbox
 // =========================
 document.addEventListener("DOMContentLoaded", () => {
