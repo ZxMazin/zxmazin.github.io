@@ -23,18 +23,40 @@
         <div class="loader-bar"><div class="loader-fill"></div></div>
     </div>
 
+    <div id="login-overlay">
+        <div class="login-card">
+            <h1>AUTHENTIFICATION</h1>
+            <p>Veuillez entrer le mot de passe pour accéder au voyage.</p>
+            <input type="password" id="site-password" placeholder="Mot de passe">
+            <button id="login-button">ENTRER</button>
+            <p id="login-error" style="color: #ff4136; display: none;">Mot de passe incorrect.</p>
+        </div>
+    </div>
+
     <div id="adventure-map">
         <div class="ocean"></div>
         <svg id="decorations-layer" viewBox="0 0 100 100" preserveAspectRatio="none">
             <!-- Simplified Landmass Outlines -->
-            <!-- Morocco -->
-            <path d="M5,75 Q15,70 25,80 Q20,95 5,90 Z" class="land-outline" />
-            <!-- France / Iberia -->
-            <path d="M25,50 Q35,45 45,55 Q40,70 25,70 Z" class="land-outline" />
-            <!-- Scandinavia -->
-            <path d="M65,5 Q85,10 90,30 Q70,40 60,20 Z" class="land-outline" />
-            <!-- Eastern Europe -->
-            <path d="M70,45 Q90,40 95,65 Q80,80 65,70 Z" class="land-outline" />
+            <!-- Morocco / North Africa -->
+            <path d="M2,65 L15,65 L25,75 L20,98 L2,98 Z" class="land-outline" />
+            <!-- Iberia / Spain -->
+            <path d="M15,65 L25,65 L30,55 L15,55 Z" class="land-outline country-border" />
+            <!-- France -->
+            <path d="M25,40 L40,40 L45,55 L30,55 Z" class="land-outline country-border" />
+            <!-- UK / Ireland -->
+            <path d="M20,25 L35,25 L30,35 L15,35 Z" class="land-outline country-border" />
+            <!-- Scandinavia (Sweden/Finland) -->
+            <path d="M55,5 L80,5 L85,35 L60,35 Z" class="land-outline country-border" />
+            <!-- Norway -->
+            <path d="M50,10 L60,10 L60,35 L50,35 Z" class="land-outline country-border" />
+            <!-- Baltic States -->
+            <path d="M60,35 L75,35 L75,45 L60,45 Z" class="land-outline country-border" />
+            <!-- Central Europe (Poland/Czech/Germany) -->
+            <path d="M40,40 L65,40 L70,60 L45,60 Z" class="land-outline country-border" />
+            <!-- Eastern Europe / Russia -->
+            <path d="M75,10 L98,10 L98,70 L75,70 Z" class="land-outline" />
+            <!-- Italy / Balkans -->
+            <path d="M45,60 L60,60 L65,85 L50,85 Z" class="land-outline country-border" />
 
             <!-- Compass Rose -->
             <g id="compass" transform="translate(90, 10)">
@@ -44,10 +66,14 @@
             </g>
 
             <!-- Region Labels -->
-            <text x="15" y="82" class="region-label">Maroc</text>
-            <text x="35" y="60" class="region-label">France</text>
-            <text x="75" y="25" class="region-label">Scandinavie</text>
-            <text x="80" y="65" class="region-label">Europe de l'Est</text>
+            <text x="10" y="85" class="region-label">Maroc</text>
+            <text x="20" y="60" class="region-label">Espagne</text>
+            <text x="35" y="48" class="region-label">France</text>
+            <text x="25" y="30" class="region-label">UK</text>
+            <text x="65" y="15" class="region-label">Suède</text>
+            <text x="80" y="10" class="region-label">Finlande</text>
+            <text x="60" y="55" class="region-label">Pologne</text>
+            <text x="85" y="40" class="region-label">Russie</text>
         </svg>
         <div class="wave"></div>
         <svg id="links-layer" viewBox="0 0 100 100" preserveAspectRatio="none" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: 1;"></svg>

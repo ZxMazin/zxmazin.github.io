@@ -56,6 +56,14 @@
                 <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png">
                 <span>Archives Voyage</span>
             </div>
+            <div class="icon" onclick="openWindow('win-music')">
+                <img src="https://win98icons.alexmeub.com/icons/png/cd_audio_cd_a-0.png">
+                <span>Lecteur Audio</span>
+            </div>
+            <div class="icon" onclick="openWindow('win-mines')">
+                <img src="https://win98icons.alexmeub.com/icons/png/minesweeper-0.png">
+                <span>Démineur</span>
+            </div>
         </div>
 
         <div id="win-explorer" class="win98-window hidden">
@@ -68,13 +76,38 @@
             <div class="win-content scrollable" id="country-body"></div>
         </div>
         <div id="win-video" class="win98-window hidden">
-    <div class="win-title">
-        <span>Lecteur Vidéo</span>
-        <button onclick="closeWindow('win-video')">X</button>
-    </div>
-    <div class="win-content" style="padding: 0; background: #000;">
-        <iframe id="youtube-frame" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
-    </div>
+            <div class="win-title">
+                <span>Lecteur Vidéo</span>
+                <button onclick="closeWindow('win-video')">X</button>
+            </div>
+            <div class="win-content" style="padding: 0; background: #000;">
+                <iframe id="youtube-frame" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="win-music" class="win98-window hidden">
+            <div class="win-title"><span>Media Player</span><button onclick="closeWindow('win-music')">X</button></div>
+            <div class="win-content" style="background: #c0c0c0;">
+                <div style="background: #000; height: 100px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                    <div id="visualizer" style="display: flex; gap: 2px; align-items: flex-end; height: 100%;">
+                        <!-- Bars added by JS -->
+                    </div>
+                </div>
+                <div style="display: flex; gap: 5px; justify-content: center;">
+                    <button onclick="playMusic()">▶</button>
+                    <button onclick="pauseMusic()">⏸</button>
+                    <button onclick="stopMusic()">⏹</button>
+                </div>
+                <div id="track-info" style="margin-top: 10px; font-size: 10px; text-align: center; color: #000;">Prêt</div>
+            </div>
+        </div>
+
+        <div id="win-mines" class="win98-window hidden" style="min-width: 0; min-height: 0;">
+            <div class="win-title"><span>Démineur</span><button onclick="closeWindow('win-mines')">X</button></div>
+            <div class="win-content" style="background: #c0c0c0; padding: 5px; overflow: hidden;">
+                <div id="minefield" style="display: grid; grid-template-columns: repeat(10, 20px); gap: 1px; border: 2px inset #fff; padding: 2px; background: #808080;"></div>
+                <div style="text-align: center; margin-top: 5px;"><button class="xp-ok-btn" onclick="initMines()">Reset</button></div>
+            </div>
         </div>
 
         <div id="win-calc" class="win98-window hidden" style="width: 220px;">
@@ -100,6 +133,8 @@
                 <div class="start-sidebar"><span>IRTIFA OS</span></div>
                 <div class="start-list">
                     <div onclick="openWindow('win-calc'); toggleMenu();">🧮 Calculatrice</div>
+                    <div onclick="openWindow('win-music'); toggleMenu();">🎵 Media Player</div>
+                    <div onclick="openWindow('win-mines'); toggleMenu();">💣 Démineur</div>
                     <div onclick="window.location.href='index.html'">🌐 Retour au site</div>
                     <hr>
                     <div onclick="location.reload()">🔒 Déconnexion</div>

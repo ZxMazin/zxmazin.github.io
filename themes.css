@@ -1,156 +1,157 @@
-/* Morocco Theme */
+/* Global Refinements */
+:root {
+    --transition-speed: 0.3s;
+}
+
+body.theme-destination {
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+.card, button, a, .map-node img {
+    transition: all var(--transition-speed) cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+button:hover, a.btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Morocco Theme - Souk Aesthetic */
 .theme-morocco {
-    --bg: #8b4513;
-    --card: #fff;
-    --text: #2d1a0a;
-    --accent: #006b3c;
+    --bg: #d35400;
+    --card: #fdf2e9;
+    --text: #5d4037;
+    --accent: #c0392b;
     background-color: #f4e4bc;
     background-image:
-        radial-gradient(circle at 0% 50%, rgba(200, 150, 50, 0.1) 9%, transparent 10%),
-        radial-gradient(circle at 100% 50%, rgba(200, 150, 50, 0.1) 9%, transparent 10%),
-        radial-gradient(circle at 50% 0%, rgba(200, 150, 50, 0.1) 9%, transparent 10%),
-        radial-gradient(circle at 50% 100%, rgba(200, 150, 50, 0.1) 9%, transparent 10%),
-        linear-gradient(45deg, #d2b48c 25%, transparent 25%, transparent 75%, #d2b48c 75%, #d2b48c),
-        linear-gradient(-45deg, #d2b48c 25%, transparent 25%, transparent 75%, #d2b48c 75%, #d2b48c);
-    background-size: 100px 100px;
-    background-attachment: fixed;
+        radial-gradient(circle at 50% 50%, rgba(211, 84, 0, 0.05) 20%, transparent 20%),
+        url('https://www.transparenttextures.com/patterns/p6.png');
+    background-size: 50px 50px, auto;
 }
 
 .theme-morocco h1 {
-    font-family: 'serif';
-    color: #c1272d;
-    text-shadow: 2px 2px #fff;
-    text-align: center;
-}
-
-.theme-morocco .hero {
-    background: rgba(255, 255, 255, 0.8);
-    border: 10px double #006b3c;
-    border-radius: 20px;
-    padding: 2rem;
-    margin-top: 2rem;
-}
-
-/* Paris Theme */
-.theme-paris::after {
-    content: "« Même après la mort, on n'est pas égal. »";
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-style: italic;
-    opacity: 0.3;
-    font-size: 0.8rem;
-    pointer-events: none;
-}
-
-.theme-paris {
-    --bg: #f5f5f0;
-    --card: #fff;
-    --text: #333;
-    --accent: #002395;
-    background: #e6e6e6;
-    background-image: linear-gradient(rgba(255,255,255,0.5) 2px, transparent 2px),
-    linear-gradient(90deg, rgba(255,255,255,0.5) 2px, transparent 2px);
-    background-size: 50px 50px;
-}
-
-.theme-paris .hero {
-    border-left: 5px solid #002395;
-    border-right: 5px solid #ed2939;
-    padding: 2rem;
-    background: white;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-/* Scandinavia Theme (Stockholm & Helsinki) */
-.theme-scandinavia::after {
-    content: "« Un sentiment qu'au fond, je ne serai jamais vraiment accepté. »";
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-style: italic;
-    opacity: 0.3;
-    font-size: 0.8rem;
-    pointer-events: none;
-}
-
-.theme-scandinavia {
-    --bg: #e3f2fd;
-    --card: #fff;
-    --text: #263238;
-    --accent: #0277bd;
-    background: #f0f4f8;
-}
-
-.theme-scandinavia .hero {
-    background: white;
-    border-radius: 0;
-    border: 1px solid #cfd8dc;
-    padding: 3rem;
-    font-weight: 300;
-}
-
-/* Eastern Europe Theme (Riga, Tallinn, Varsovie, Prague) */
-.theme-eastern::after {
-    content: "« Pourquoi est-ce froid ici et pas là ? »";
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-style: italic;
-    opacity: 0.3;
-    font-size: 0.8rem;
-    pointer-events: none;
-}
-
-.theme-eastern {
-    --bg: #eceff1;
-    --card: #fff;
-    --text: #37474f;
-    --accent: #546e7a;
-    background: #cfd8dc;
-}
-
-.theme-eastern .hero {
-    background: #fff;
-    border: 1px solid #90a4ae;
-    position: relative;
-}
-
-.theme-eastern .hero::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    border: 1px solid #90a4ae;
-    margin: 5px;
-    pointer-events: none;
-}
-
-/* Common Animations */
-.card, button, a {
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
-}
-
-.card:hover, button:hover {
-    transform: translateY(-5px) scale(1.02);
-}
-
-nav a:hover {
-    transform: scale(1.1);
+    font-family: 'Playfair Display', serif;
+    color: #a04000;
+    border-bottom: 4px double #a04000;
     display: inline-block;
 }
 
-/* Zellige Pattern for Morocco */
-.zellige-decoration {
-    width: 100%;
-    height: 100px;
-    background-color: #006b3c;
-    background-image:
-        linear-gradient(30deg, #c1272d 12%, transparent 12.5%, transparent 87%, #c1272d 87.5%, #c1272d),
-        linear-gradient(150deg, #c1272d 12%, transparent 12.5%, transparent 87%, #c1272d 87.5%, #c1272d),
-        linear-gradient(30deg, #c1272d 12%, transparent 12.5%, transparent 87%, #c1272d 87.5%, #c1272d),
-        linear-gradient(150deg, #c1272d 12%, transparent 12.5%, transparent 87%, #c1272d 87.5%, #c1272d),
-        linear-gradient(60deg, #d2b48c 25%, transparent 25.5%, transparent 75%, #d2b48c 75%, #d2b48c),
-        linear-gradient(60deg, #d2b48c 25%, transparent 25.5%, transparent 75%, #d2b48c 75%, #d2b48c);
-    background-size: 80px 140px;
-    margin: 2rem 0;
+.theme-morocco .hero {
+    border: 15px solid transparent;
+    border-image: url('https://www.transparenttextures.com/patterns/arabesque.png') 30 stretch;
+    background: rgba(253, 242, 233, 0.9);
+    border-radius: 0;
+    padding: 3rem;
+    box-shadow: 20px 20px 0px rgba(160, 64, 0, 0.1);
+}
+
+/* Paris Theme - Minimalist Chic */
+.theme-paris {
+    --bg: #ffffff;
+    --card: #fafafa;
+    --text: #1a1a1a;
+    --accent: #000;
+    background: #f0f0f0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.theme-paris h1 {
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 15px;
+    margin-bottom: 3rem;
+}
+
+.theme-paris .hero {
+    border: none;
+    border-left: 1px solid #000;
+    padding-left: 4rem;
+    background: transparent;
+}
+
+.theme-paris .gallery img {
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+}
+
+.theme-paris .gallery img:hover {
+    filter: grayscale(0%);
+}
+
+/* Scandinavia Theme - IKEA / Nordic Design */
+.theme-scandinavia {
+    --bg: #0058ab; /* IKEA Blue */
+    --card: #ffffff;
+    --text: #333333;
+    --accent: #ffcc00; /* IKEA Yellow */
+    background: #f4f4f4;
+    font-family: 'Verdana', sans-serif;
+}
+
+.theme-scandinavia h1 {
+    color: #0058ab;
+    font-weight: bold;
+}
+
+.theme-scandinavia .hero {
+    border-radius: 0;
+    border: 2px solid #0058ab;
+    padding: 2rem;
+    background: #fff;
+}
+
+.theme-scandinavia button {
+    background: #0058ab;
+    color: #ffcc00;
+    border-radius: 50px;
+    padding: 10px 25px;
+    font-weight: bold;
+}
+
+/* Eastern Europe - Classified Archive */
+.theme-eastern {
+    --bg: #2c3e50;
+    --card: #ecf0f1;
+    --text: #2c3e50;
+    --accent: #7f8c8d;
+    background-color: #b2bec3;
+    background-image: url('https://www.transparenttextures.com/patterns/pinstripe.png');
+}
+
+.theme-eastern h1 {
+    font-family: 'Courier New', Courier, monospace;
+    background: #000;
+    color: #fff;
+    padding: 5px 20px;
+    transform: rotate(-1deg);
+}
+
+.theme-eastern .hero {
+    background: #dfe6e9;
+    border: 1px solid #636e72;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.theme-eastern .hero::after {
+    content: "TOP SECRET";
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: rgba(255,0,0,0.2);
+    border: 3px solid rgba(255,0,0,0.2);
+    padding: 5px;
+    font-weight: bold;
+    transform: rotate(15deg);
+}
+
+/* Common Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero, .gallery img {
+    animation: fadeIn 1s ease forwards;
 }

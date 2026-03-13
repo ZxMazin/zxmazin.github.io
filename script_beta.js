@@ -354,38 +354,169 @@ document.addEventListener('click', function() {
         startSound.play().catch(e => console.log("Audio bloqué par le navigateur"));
     }
 }, { once: true }); // Ne se déclenche qu'au premier clic
-// Déplacement des fenêtres
+// Déplacement des fenêtres (Optimisé pour éviter les saccades)
 document.addEventListener('mousedown', function(e) {
     const titleBar = e.target.closest('.win-title');
     if (!titleBar || e.target.closest('button')) return;
 
     const win = titleBar.closest('.win98-window');
-    // Mettre la fenêtre au premier plan
     document.querySelectorAll('.win98-window').forEach(w => w.style.zIndex = 100);
     win.style.zIndex = 1000;
 
-    let shiftX = e.clientX - win.getBoundingClientRect().left;
-    let shiftY = e.clientY - win.getBoundingClientRect().top;
-
-    function moveAt(pageX, pageY) {
-        win.style.left = pageX - shiftX + 'px';
-        win.style.top = pageY - shiftY + 'px';
-    }
+    let startX = e.clientX;
+    let startY = e.clientY;
+    let initialLeft = win.offsetLeft;
+    let initialTop = win.offsetTop;
 
     function onMouseMove(e) {
-        moveAt(e.clientX, e.clientY);
+        let deltaX = e.clientX - startX;
+        let deltaY = e.clientY - startY;
+        win.style.left = initialLeft + deltaX + 'px';
+        win.style.top = initialTop + deltaY + 'px';
+    }
+
+    function onMouseUp() {
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
     }
 
     document.addEventListener('mousemove', onMouseMove);
-
-    document.addEventListener('mouseup', function onMouseUp() {
-        document.removeEventListener('mousemove', onMouseMove);
-        document.removeEventListener('mouseup', onMouseUp);
-    }, { once: true });
+    document.addEventListener('mouseup', onMouseUp);
 });
 function openVideo(youtubeId) {
     const frame = document.getElementById('youtube-frame');
     // On transforme l'ID en lien embed sécurisé
-    frame.src = `https://youtu.be/sfxcOGkpGag?si=pCmyqu2znGpzzzHH`;
+    if (youtubeId) {
+        frame.src = `https://www.youtube.com/embed/${youtubeId}`;
+    } else {
+        frame.src = `https://www.youtube.com/embed/sfxcOGkpGag`;
+    }
     openWindow('win-video');
 }
+
+// Media Player Logic
+let audioPlayer = new Audio();
+function playMusic() {
+    audioPlayer.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+    audioPlayer.play();
+    document.getElementById('track-info').innerText = "Lecture en cours...";
+    startVisualizer();
+}
+function pauseMusic() { audioPlayer.pause(); document.getElementById('track-info').innerText = "Pause"; }
+function stopMusic() { audioPlayer.pause(); audioPlayer.currentTime = 0; document.getElementById('track-info').innerText = "Arrêté"; stopVisualizer(); }
+
+function startVisualizer() {
+    const vis = document.getElementById('visualizer');
+    vis.innerHTML = "";
+    for(let i=0; i<20; i++) {
+        let bar = document.createElement('div');
+        bar.style.width = "4px";
+        bar.style.background = "#0f0";
+        bar.style.height = Math.random() * 100 + "%";
+        bar.className = "vis-bar";
+        vis.appendChild(bar);
+    }
+    window.visInterval = setInterval(() => {
+        document.querySelectorAll('.vis-bar').forEach(b => b.style.height = Math.random() * 100 + "%");
+    }, 100);
+}
+function stopVisualizer() { clearInterval(window.visInterval); }
+
+// Minesweeper Logic (Real logic)
+function initMines() {
+    const field = document.getElementById('minefield');
+    const size = 10;
+    const minesCount = 15;
+    field.innerHTML = "";
+    field.style.display = "grid";
+    field.style.gridTemplateColumns = `repeat(${size}, 20px)`;
+
+    let mines = [];
+    let revealedCount = 0;
+    let gameOver = false;
+
+    // Create grid array
+    let grid = Array(size * size).fill(0);
+
+    // Place mines
+    let placed = 0;
+    while(placed < minesCount) {
+        let r = Math.floor(Math.random() * size * size);
+        if(grid[r] !== 'M') {
+            grid[r] = 'M';
+            placed++;
+        }
+    }
+
+    // Calculate numbers
+    for(let i=0; i<size*size; i++) {
+        if(grid[i] === 'M') continue;
+        let count = 0;
+        let r = Math.floor(i / size);
+        let c = i % size;
+        for(let dr=-1; dr<=1; dr++) {
+            for(let dc=-1; dc<=1; dc++) {
+                let nr = r + dr, nc = c + dc;
+                if(nr>=0 && nr<size && nc>=0 && nc<size) {
+                    if(grid[nr*size + nc] === 'M') count++;
+                }
+            }
+        }
+        grid[i] = count;
+    }
+
+    // Create DOM
+    for(let i=0; i<size*size; i++) {
+        let cell = document.createElement('div');
+        cell.style.width = "20px";
+        cell.style.height = "20px";
+        cell.style.background = "#c0c0c0";
+        cell.style.border = "1px solid #808080";
+        cell.style.fontSize = "12px";
+        cell.style.textAlign = "center";
+        cell.style.cursor = "pointer";
+
+        cell.onclick = () => {
+            if(gameOver) return;
+            reveal(i);
+        };
+
+        field.appendChild(cell);
+    }
+
+    function reveal(i) {
+        let cell = field.children[i];
+        if(cell.style.background === "rgb(238, 238, 238)") return;
+
+        if(grid[i] === 'M') {
+            cell.innerHTML = "💣";
+            cell.style.background = "red";
+            gameOver = true;
+            alert("Boom! Game Over.");
+            setTimeout(initMines, 1000);
+        } else {
+            cell.style.background = "#eee";
+            cell.innerHTML = grid[i] === 0 ? "" : grid[i];
+            revealedCount++;
+            if(grid[i] === 0) {
+                // Auto reveal neighbors
+                let r = Math.floor(i / size);
+                let c = i % size;
+                for(let dr=-1; dr<=1; dr++) {
+                    for(let dc=-1; dc<=1; dc++) {
+                        let nr = r+dr, nc = c+dc;
+                        if(nr>=0 && nr<size && nc>=0 && nc<size) {
+                            reveal(nr*size + nc);
+                        }
+                    }
+                }
+            }
+            if(revealedCount === size*size - minesCount) {
+                alert("Félicitations ! Vous avez gagné.");
+                gameOver = true;
+                setTimeout(initMines, 1000);
+            }
+        }
+    }
+}
+initMines();
