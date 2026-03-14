@@ -46,10 +46,18 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
     cursor: pointer;
     font-weight: bold;
     position: relative;
-    transition: transform 0.1s;
 }
 
 .login-box button:active { border-style: inset; }
+
+.falling-btn {
+    animation: fallDown 0.5s forwards ease-in;
+}
+
+@keyframes fallDown {
+    0% { transform: translate(var(--last-x, 0), var(--last-y, 0)) rotate(0); }
+    100% { transform: translate(var(--last-x, 0), 100vh) rotate(90deg); opacity: 0; }
+}
 
 /* BOOT SCREEN */
 #boot-screen {
@@ -76,14 +84,15 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 
 #square-loader {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: flex-start;
-    gap: 4px;
+    gap: 2px;
     margin: 20px 0;
     background: #fff;
     padding: 5px;
     min-height: 40px;
     border: 2px solid #000;
+    overflow: hidden;
 }
 
 .loader-square {
@@ -122,17 +131,22 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
     position: relative;
     overflow-y: auto;
     background: #ddd;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-flow: dense;
     align-content: flex-start;
     padding: 20px;
+    gap: 10px;
 }
 
 .image-wrapper {
-    width: 200px;
-    margin: 10px;
     border: 5px solid white;
     background: white;
+    width: 100%;
+}
+
+.image-wrapper.landscape {
+    grid-column: span 2;
 }
 
 .image-wrapper img {
@@ -153,13 +167,29 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 #next-city-btn:hover { background: #444; }
 
 /* THEMES */
-.theme-morocco-meknes { background: #f4a460 !important; }
-.theme-morocco-meknes #visual-container { background: url('https://www.transparenttextures.com/patterns/zellige.png'), #d2691e; }
-.theme-morocco-meknes #visual-container img { border: 8px solid #fff; box-shadow: 5px 5px 15px rgba(0,0,0,0.3); }
+.theme-morocco-meknes {
+    background: #f4a460 !important;
+}
+.theme-morocco-meknes #visual-container {
+    background: url('https://www.transparenttextures.com/patterns/az-subtle.png'), #d2691e;
+    background-blend-mode: overlay;
+}
+.theme-morocco-meknes .dialogue-box {
+    border: 15px solid #d2691e;
+    border-image: url('https://www.transparenttextures.com/patterns/zellige.png') 30 round;
+    background: #fff8dc;
+}
 
 .theme-morocco-rabat { background: #add8e6 !important; }
-.theme-morocco-rabat #visual-container { background: #008cff; border: 15px solid #fff; }
-.theme-morocco-rabat .dialogue-box { color: #004a8b; }
+.theme-morocco-rabat #visual-container {
+    background: url('https://www.transparenttextures.com/patterns/p6.png'), #008cff;
+    border: 15px solid #fff;
+}
+.theme-morocco-rabat .dialogue-box {
+    color: #004a8b;
+    border: 10px solid #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
 
 .theme-paris { background: #fff !important; }
 .theme-paris #visual-container { background: #f0f0f0; border-left: 5px solid #000; }
@@ -173,69 +203,114 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 
 .theme-sweden { background: #0058a3 !important; color: #ffcc00 !important; }
 .theme-sweden #visual-container {
-    background: #ffcc00;
-    border: 10px solid #0058a3;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 40px;
+    background: #fff;
+    border: 20px solid #0058a3;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 50px;
+    background-image: linear-gradient(rgba(0,0,0,0.1) 2px, transparent 2px);
+    background-size: 100% 200px; /* "Shelves" look */
 }
 .theme-sweden .image-wrapper {
-    border: 2px solid #0058a3 !important;
+    border: 1px solid #ccc !important;
     background: white;
-    padding: 5px;
+    padding: 10px;
     position: relative;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
 .theme-sweden .image-wrapper::after {
-    content: "9.99€";
+    content: "KULLE - 19.99€";
     display: block;
-    text-align: right;
-    color: #0058a3;
+    text-align: center;
+    color: white;
     font-weight: bold;
-    font-family: Arial, sans-serif;
-    background: #ffcc00;
-    padding: 2px;
+    font-family: 'Verdana', sans-serif;
+    background: #e00707;
+    padding: 5px;
+    margin-top: 5px;
 }
 .theme-sweden .dialogue-box {
     background: #0058a3;
     color: #ffcc00;
-    padding: 20px;
-    border: 5px solid #ffcc00;
-    overflow: hidden;
+    padding: 40px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
 }
-.theme-sweden #dialogue-text {
-    animation: marquee 20s linear infinite;
-}
-@keyframes marquee {
-    0% { transform: translateY(100%); }
-    100% { transform: translateY(-100%); }
+.theme-sweden .dialogue-box::after {
+    content: "🛒";
+    font-size: 4rem;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    animation: trolleyMove 5s infinite alternate ease-in-out;
 }
 
-.theme-finland { background: #f0f8ff !important; }
+@keyframes trolleyMove {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100px); }
+}
+
+.theme-finland { background: #fff !important; }
 .theme-finland #visual-container {
-    background: #add8e6;
-    border-radius: 50% 50% 10% 10%;
-    box-shadow: 0 0 100px white inset;
-    border: 10px solid #fff;
+    background: #eef9ff;
+    border-radius: 80px;
+    margin: 20px;
+    border: 8px solid #4682b4;
+    padding: 30px;
+}
+.theme-finland .image-wrapper {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 4px solid #4682b4;
 }
 .theme-finland .dialogue-box {
     font-family: 'Comic Sans MS', cursive;
     color: #4682b4;
-    background: rgba(255,255,255,0.9);
-    border-radius: 30px;
-    padding: 30px;
+    background: #fff;
+    border: 8px solid #add8e6;
+    border-radius: 50px;
+    padding: 40px;
+    margin: 20px;
 }
 
-.theme-estonia, .theme-latvia {
+.theme-estonia {
     background: #1a1a1a !important;
-    color: #0f0 !important;
 }
-.theme-estonia #visual-container, .theme-latvia #visual-container {
-    background: #000;
-    border: 5px solid #0f0;
-    font-family: 'Courier', monospace;
+.theme-estonia #visual-container {
+    background: #222;
+    border: 10px solid #002344;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
 }
-.theme-estonia #visual-container::before { content: "TERMINAL BALTIQUE >_"; color: #0f0; position: absolute; top: 5px; left: 5px; }
+.theme-estonia .dialogue-box {
+    background: #002344;
+    color: #fff;
+    border-left: 10px solid #fff;
+}
+
+.theme-latvia {
+    background: #8b0000 !important;
+}
+.theme-latvia #visual-container {
+    background: #fff;
+    border: 10px solid #8b0000;
+}
+.theme-latvia .dialogue-box {
+    background: #fff;
+    color: #8b0000;
+    border: 2px solid #8b0000;
+}
+.theme-estonia #visual-container::before {
+    content: "TERMINAL BALTIQUE >_";
+    color: #0f0;
+    position: absolute;
+    top: 5px; left: 5px;
+    font-family: 'Courier New', monospace;
+}
 
 .theme-poland {
     background: #fff !important;
@@ -281,13 +356,29 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 .transport-icon {
     font-size: 8rem;
     margin-bottom: 30px;
-    animation: moveIcon 2.5s infinite linear;
+    position: relative;
 }
 
-@keyframes moveIcon {
-    0% { transform: translateX(-200px); opacity: 0; }
+.move-right { animation: moveRight 2.5s infinite linear; }
+.move-left { animation: moveLeft 2.5s infinite linear; }
+.move-up { animation: moveUp 2.5s infinite linear; }
+
+@keyframes moveRight {
+    0% { transform: translateX(-100vw) scaleX(1); opacity: 0; }
     50% { opacity: 1; }
-    100% { transform: translateX(200px); opacity: 0; }
+    100% { transform: translateX(100vw) scaleX(1); opacity: 0; }
+}
+
+@keyframes moveLeft {
+    0% { transform: translateX(100vw) scaleX(-1); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateX(-100vw) scaleX(-1); opacity: 0; }
+}
+
+@keyframes moveUp {
+    0% { transform: translateY(100vh); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
 }
 
 /* FINAL SCREEN */
@@ -317,9 +408,18 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
     width: 80px; height: 80px;
     cursor: pointer;
     filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.3));
-    transition: all 0.3s;
+    transition: transform 0.3s;
 }
 .floating-icon:hover { transform: scale(1.3) rotate(10deg); filter: brightness(1.2); }
+
+.dance {
+    animation: dance 0.5s infinite alternate ease-in-out;
+}
+
+@keyframes dance {
+    0% { transform: scale(1) translateY(0) rotate(0); }
+    100% { transform: scale(1.2) translateY(-20px) rotate(15deg); }
+}
 
 #final-title {
     position: absolute;
@@ -330,4 +430,65 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
     color: white;
     text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     pointer-events: none;
+}
+
+/* CUSTOM MODAL */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: #c0c0c0;
+    border: 3px outset #fff;
+    width: 80%;
+    max-width: 500px;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    background: #000080;
+    color: #fff;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.modal-close-btn {
+    background: #c0c0c0;
+    border: 2px outset #fff;
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.modal-footer {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid #888;
+}
+
+#modal-ok-btn {
+    padding: 5px 20px;
+    background: #c0c0c0;
+    border: 2px outset #fff;
+    cursor: pointer;
 }

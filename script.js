@@ -1,5 +1,6 @@
 // STATE
 let currentStep = 0;
+let currentPage = 0;
 let loginFails = 0;
 
 // DOM ELEMENTS
@@ -15,18 +16,60 @@ const bootLog = document.getElementById('boot-log');
 const squareLoader = document.getElementById('square-loader');
 const loadingStatus = document.getElementById('loading-status');
 
+// Modal Elements
+const customModal = document.getElementById('custom-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalBody = document.getElementById('modal-body');
+const modalCloseBtn = document.getElementById('modal-close-btn');
+const modalOkBtn = document.getElementById('modal-ok-btn');
+
 const audioBoot = document.getElementById('audio-boot');
 const audioLoading = document.getElementById('audio-loading');
 const audioClick = document.getElementById('audio-click');
 
+// MODAL LOGIC
+function showAlert(title, message, isHtml = false) {
+    modalTitle.innerText = title;
+    if (isHtml) {
+        modalBody.innerHTML = message;
+    } else {
+        modalBody.innerText = message;
+    }
+    customModal.classList.remove('hidden');
+}
+
+function hideAlert() {
+    customModal.classList.add('hidden');
+}
+
+modalCloseBtn.onclick = hideAlert;
+modalOkBtn.onclick = hideAlert;
+
 // 1. LOGIN LOGIC
 loginBtn.addEventListener('mouseover', () => {
-    if (loginFails < 3) {
-        // Blague du bouton qui change de place
-        const x = Math.random() * 200 - 100;
-        const y = Math.random() * 200 - 100;
+    if (loginFails < 12) {
+        const x = Math.random() * 300 - 150;
+        const y = Math.random() * 300 - 150;
         loginBtn.style.transform = `translate(${x}px, ${y}px)`;
+        loginBtn.style.setProperty('--last-x', `${x}px`);
+        loginBtn.style.setProperty('--last-y', `${y}px`);
         loginFails++;
+
+        if (loginFails === 12) {
+            loginBtn.classList.add('falling-btn');
+            setTimeout(() => {
+                // On ouvre 2 secondes après que le bouton soit tombé
+                if (passField.value.toLowerCase() === 'caca') {
+                   startBoot();
+                } else {
+                    // Reset pour que l'utilisateur puisse re-essayer si il a pas mis le mdp
+                    loginBtn.classList.remove('falling-btn');
+                    loginBtn.style.transform = "translate(0,0)";
+                    loginFails = 0;
+                    showAlert("Erreur Système", "Mot de passe incorrect ! Indice: C'est un mot de 4 lettres que les enfants aiment bien dire.");
+                }
+            }, 2000);
+        }
     }
 });
 
@@ -35,9 +78,7 @@ loginBtn.addEventListener('click', () => {
         audioClick.play();
         startBoot();
     } else {
-        alert("Mot de passe incorrect ! Indice: C'est un mot de 4 lettres que les enfants aiment bien dire.");
-        loginBtn.style.transform = `translate(0, 0)`;
-        loginFails = 0;
+        showAlert("Erreur Système", "Mot de passe incorrect ! Indice: C'est un mot de 4 lettres que les enfants aiment bien dire.");
     }
 });
 
@@ -82,11 +123,14 @@ function startLoading() {
     let progress = 0;
     const interval = setInterval(() => {
         if (progress < 100) {
-            progress += 5;
+            progress += 2; // Slower and more squares
             loadingStatus.innerText = progress + "%";
-            const square = document.createElement('div');
-            square.className = 'loader-square';
-            squareLoader.appendChild(square);
+            if (progress % 4 === 0) {
+                const square = document.createElement('div');
+                square.className = 'loader-square';
+                square.style.flex = "0 0 15px"; // Fixed width to prevent wrapping
+                squareLoader.appendChild(square);
+            }
         } else {
             clearInterval(interval);
             setTimeout(startJourney, 1000);
@@ -104,37 +148,59 @@ function startJourney() {
 
 function renderCity() {
     const data = journeyData[currentStep];
-    const content = document.getElementById('journey-content');
     const title = document.getElementById('city-title');
     const text = document.getElementById('dialogue-text');
     const visual = document.getElementById('visual-container');
+    const nextBtn = document.getElementById('next-city-btn');
 
     // Theme transition
     journeyScreen.className = "screen theme-" + data.theme;
 
     title.innerText = `${data.city}, ${data.country}`;
-    text.innerText = data.text;
+    text.innerText = data.pages[currentPage];
 
-    // Clear & Fill Visuals
-    visual.innerHTML = "";
-    data.images.forEach(img => {
-        const wrapper = document.createElement('div');
-        wrapper.className = "image-wrapper";
+    // Button text update
+    if (currentPage < data.pages.length - 1) {
+        nextBtn.innerText = "Page suivante";
+    } else {
+        nextBtn.innerText = "Continuer le voyage";
+    }
 
-        const imgEl = document.createElement('img');
-        imgEl.src = img;
+    // Clear & Fill Visuals (only if first page of city to avoid flickering)
+    if (currentPage === 0) {
+        visual.innerHTML = "";
+        data.images.forEach(img => {
+            const wrapper = document.createElement('div');
+            wrapper.className = "image-wrapper";
 
-        wrapper.appendChild(imgEl);
-        visual.appendChild(wrapper);
-    });
+            const imgEl = document.createElement('img');
+            imgEl.src = img;
+
+            // Heuristic to detect landscape: images starting with IMG_ or having specific names
+            // For now, let's make every 3rd image a landscape to fill space creatively
+            if (data.images.indexOf(img) % 3 === 0) {
+                wrapper.classList.add('landscape');
+            }
+
+            wrapper.appendChild(imgEl);
+            visual.appendChild(wrapper);
+        });
+    }
 }
 
 document.getElementById('next-city-btn').addEventListener('click', () => {
-    currentStep++;
-    if (currentStep < journeyData.length) {
-        showTransition();
+    const data = journeyData[currentStep];
+    if (currentPage < data.pages.length - 1) {
+        currentPage++;
+        renderCity();
     } else {
-        showFinal();
+        currentStep++;
+        currentPage = 0;
+        if (currentStep < journeyData.length) {
+            showTransition();
+        } else {
+            showFinal();
+        }
     }
 });
 
@@ -151,8 +217,12 @@ function showTransition() {
         'bus': '🚌'
     };
 
+    const animations = ['move-right', 'move-left', 'move-up'];
+    const randomAnim = animations[Math.floor(Math.random() * animations.length)];
+
     trans.classList.remove('hidden');
     transIcon.innerText = icons[transport] || '👣';
+    transIcon.className = 'transport-icon ' + randomAnim;
     transText.innerText = `Direction ${journeyData[currentStep].city} par ${transport}...`;
 
     setTimeout(() => {
@@ -173,7 +243,10 @@ function showFinal() {
         icon.className = "floating-icon";
         icon.style.left = (Math.random() * 80 + 10) + "%";
         icon.style.top = (Math.random() * 80 + 10) + "%";
-        icon.onclick = () => alert(`${poem.title}\npar ${poem.author}\n\n${poem.text}`);
+        icon.onclick = () => {
+            icon.classList.toggle('dance');
+            showAlert(poem.title, `par ${poem.author}\n\n${poem.text}`);
+        };
         container.appendChild(icon);
     });
 
@@ -181,7 +254,7 @@ function showFinal() {
     container.onclick = (e) => {
         if (e.target === container) {
             const jokes = ["Pourquoi les oiseaux volent-ils vers le sud ? Parce que c'est trop loin pour y aller à pied.", "Un nuage dit à un autre : 'Tu as une mine grisâtre aujourd'hui.'"];
-            alert(jokes[Math.floor(Math.random()*jokes.length)]);
+            showAlert("Blague de Nuage", jokes[Math.floor(Math.random()*jokes.length)]);
         }
     };
 
@@ -193,9 +266,9 @@ function showFinal() {
         icon.style.left = (Math.random() * 80 + 10) + "%";
         icon.style.top = (Math.random() * 80 + 10) + "%";
         icon.onclick = () => {
+            icon.classList.toggle('dance');
             const randomImg = d.images[Math.floor(Math.random() * d.images.length)];
-            const win = window.open("", "_blank", "width=600,height=400");
-            win.document.write(`<img src='${randomImg}' style='width:100%'>`);
+            showAlert(`Souvenir de ${d.city}`, `<img src='${randomImg}' style='width:100%'>`, true);
         };
         container.appendChild(icon);
     });
