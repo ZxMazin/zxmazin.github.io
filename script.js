@@ -1,7 +1,10 @@
 // STATE
 let currentStep = 0;
 let currentPage = 0;
-let loginFails = 0;
+let loginMoves = 0;
+const MAX_LOGIN_MOVES = 12;
+let youtubeInterludeCount = 0;
+const MAX_YOUTUBE_INTERLUDES = 3;
 
 // DOM ELEMENTS
 const loginScreen = document.getElementById('login-screen');
@@ -47,29 +50,26 @@ modalOkBtn.onclick = hideAlert;
 
 // 1. LOGIN LOGIC
 loginBtn.addEventListener('mouseover', () => {
-    if (loginFails < 12) {
+    if (loginMoves < MAX_LOGIN_MOVES) {
         const x = Math.random() * 300 - 150;
         const y = Math.random() * 300 - 150;
         loginBtn.style.transform = `translate(${x}px, ${y}px)`;
         loginBtn.style.setProperty('--last-x', `${x}px`);
         loginBtn.style.setProperty('--last-y', `${y}px`);
-        loginFails++;
-
-        if (loginFails === 12) {
-            loginBtn.classList.add('falling-btn');
-            setTimeout(() => {
-                // On ouvre 2 secondes après que le bouton soit tombé
-                if (passField.value.toLowerCase() === 'caca') {
-                   startBoot();
-                } else {
-                    // Reset pour que l'utilisateur puisse re-essayer si il a pas mis le mdp
-                    loginBtn.classList.remove('falling-btn');
-                    loginBtn.style.transform = "translate(0,0)";
-                    loginFails = 0;
-                    showAlert("Erreur Système", "Mot de passe incorrect ! Indice: C'est un mot de 4 lettres que les enfants aiment bien dire.");
-                }
-            }, 2000);
-        }
+        loginMoves++;
+    } else if (loginMoves === MAX_LOGIN_MOVES) {
+        loginBtn.classList.add('falling-btn');
+        loginMoves++; // prevent repeated fall trigger
+        setTimeout(() => {
+            if (passField.value.toLowerCase() === 'caca') {
+                startBoot();
+            } else {
+                loginBtn.classList.remove('falling-btn');
+                loginBtn.style.transform = "translate(0,0)";
+                loginMoves = 0;
+                showAlert("Erreur Système", "Mot de passe incorrect ! Indice: C'est un mot de 4 lettres que les enfants aiment bien dire.");
+            }
+        }, 2000);
     }
 });
 
@@ -114,7 +114,7 @@ function startBoot() {
     }, 400);
 }
 
-// 3. LOADING SEQUENCE (Square loader)
+// 3. LOADING SEQUENCE
 function startLoading() {
     bootScreen.classList.add('hidden');
     loadingScreen.classList.remove('hidden');
@@ -123,19 +123,16 @@ function startLoading() {
     let progress = 0;
     const interval = setInterval(() => {
         if (progress < 100) {
-            progress += 2; // Slower and more squares
+            progress += 5;
             loadingStatus.innerText = progress + "%";
-            if (progress % 4 === 0) {
-                const square = document.createElement('div');
-                square.className = 'loader-square';
-                square.style.flex = "0 0 15px"; // Fixed width to prevent wrapping
-                squareLoader.appendChild(square);
-            }
+            const square = document.createElement('div');
+            square.className = 'loader-square';
+            squareLoader.appendChild(square);
         } else {
             clearInterval(interval);
             setTimeout(startJourney, 1000);
         }
-    }, 150);
+    }, 100);
 }
 
 // 4. JOURNEY ENGINE
@@ -153,38 +150,48 @@ function renderCity() {
     const visual = document.getElementById('visual-container');
     const nextBtn = document.getElementById('next-city-btn');
 
-    // Theme transition
     journeyScreen.className = "screen theme-" + data.theme;
-
     title.innerText = `${data.city}, ${data.country}`;
     text.innerText = data.pages[currentPage];
 
-    // Button text update
     if (currentPage < data.pages.length - 1) {
         nextBtn.innerText = "Page suivante";
     } else {
-        nextBtn.innerText = "Continuer le voyage";
+        nextBtn.innerText = (currentStep < journeyData.length - 1) ? "Continuer le voyage" : "Terminer l'aventure";
     }
 
-    // Clear & Fill Visuals (only if first page of city to avoid flickering)
     if (currentPage === 0) {
         visual.innerHTML = "";
-        data.images.forEach(img => {
+        data.images.forEach((img, idx) => {
             const wrapper = document.createElement('div');
             wrapper.className = "image-wrapper";
-
             const imgEl = document.createElement('img');
             imgEl.src = img;
-
-            // Heuristic to detect landscape: images starting with IMG_ or having specific names
-            // For now, let's make every 3rd image a landscape to fill space creatively
-            if (data.images.indexOf(img) % 3 === 0) {
-                wrapper.classList.add('landscape');
-            }
-
+            if (idx % 3 === 0) wrapper.classList.add('landscape');
             wrapper.appendChild(imgEl);
             visual.appendChild(wrapper);
         });
+
+        // Specific IKEA logic
+        if (data.theme === 'sweden') {
+            const basket = document.createElement('div');
+            basket.id = 'ikea-basket';
+            basket.innerHTML = "<h3>Mon Panier IKEA</h3><div id='basket-items'>Vide</div><button id='checkout-btn'>Passer à la caisse</button>";
+            visual.appendChild(basket);
+
+            document.querySelectorAll('.image-wrapper').forEach(w => {
+                w.onclick = () => {
+                    const itemName = w.getAttribute('data-name') || "Meuble Stockholm";
+                    const itemDiv = document.createElement('div');
+                    itemDiv.innerText = "1x " + itemName + " - 29.99€";
+                    document.getElementById('basket-items').appendChild(itemDiv);
+                };
+            });
+
+            document.getElementById('checkout-btn').onclick = () => {
+                showAlert("Paiement Sécurisé", "Veuillez insérer votre carte de crédit imaginaire... <br><br> Paiement accepté ! Merci de votre visite.", true);
+            };
+        }
     }
 }
 
@@ -197,38 +204,56 @@ document.getElementById('next-city-btn').addEventListener('click', () => {
         currentStep++;
         currentPage = 0;
         if (currentStep < journeyData.length) {
-            showTransition();
+            // Logic for YouTube interludes
+            if (youtubeInterludeCount < MAX_YOUTUBE_INTERLUDES &&
+                (currentStep === 3 || currentStep === 6 || currentStep === journeyData.length - 1)) {
+                showYoutubeInterlude();
+            } else {
+                showTransition();
+            }
         } else {
             showFinal();
         }
     }
 });
 
+function showYoutubeInterlude() {
+    const interlude = document.createElement('div');
+    interlude.id = 'youtube-interlude';
+    interlude.innerHTML = `
+        <div class="interlude-overlay">
+            <h2>Interlude Musical...</h2>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/J8ugZk1rPpU?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <button onclick="this.parentElement.parentElement.remove(); showTransition();">Passer l'interlude</button>
+        </div>
+    `;
+    document.body.appendChild(interlude);
+    youtubeInterludeCount++;
+}
+
 function showTransition() {
     const trans = document.getElementById('transport-transition');
     const transText = document.getElementById('transition-text');
-    const transIcon = trans.querySelector('.transport-icon');
     const transport = journeyData[currentStep-1].transport;
 
-    const icons = {
-        'train': '🚂',
-        'avion': '✈️',
-        'bateau': '🚢',
-        'bus': '🚌'
-    };
+    if (transport === 'fin' || transport === 'none') {
+        renderCity();
+        return;
+    }
 
-    const animations = ['move-right', 'move-left', 'move-up'];
-    const randomAnim = animations[Math.floor(Math.random() * animations.length)];
+    // Pick a random movement class
+    const moves = ['move-right', 'move-left', 'move-up'];
+    const randomMove = moves[Math.floor(Math.random() * moves.length)];
 
     trans.classList.remove('hidden');
-    transIcon.innerText = icons[transport] || '👣';
-    transIcon.className = 'transport-icon ' + randomAnim;
-    transText.innerText = `Direction ${journeyData[currentStep].city} par ${transport}...`;
+    trans.className = 'transition-container active ' + transport + ' ' + randomMove;
+    transText.innerText = `Déplacement vers ${journeyData[currentStep].city}...`;
 
     setTimeout(() => {
         trans.classList.add('hidden');
+        trans.classList.remove('active');
         renderCity();
-    }, 2500);
+    }, 3000);
 }
 
 // 5. FINAL SCREEN
@@ -237,6 +262,8 @@ function showFinal() {
     finalScreen.classList.remove('hidden');
 
     const container = document.getElementById('interactive-cloud-lake');
+    container.innerHTML = ""; // Clear
+
     poems.forEach((poem, i) => {
         const icon = document.createElement('img');
         icon.src = "https://win98icons.alexmeub.com/icons/png/document_writing-0.png";
@@ -250,26 +277,18 @@ function showFinal() {
         container.appendChild(icon);
     });
 
-    // Easter Egg: Random joke when clicking the sky
-    container.onclick = (e) => {
-        if (e.target === container) {
-            const jokes = ["Pourquoi les oiseaux volent-ils vers le sud ? Parce que c'est trop loin pour y aller à pied.", "Un nuage dit à un autre : 'Tu as une mine grisâtre aujourd'hui.'"];
-            showAlert("Blague de Nuage", jokes[Math.floor(Math.random()*jokes.length)]);
-        }
-    };
-
-    // Add some photo icons too
     journeyData.forEach(d => {
-        const icon = document.createElement('img');
-        icon.src = "https://win98icons.alexmeub.com/icons/png/image_file-0.png";
-        icon.className = "floating-icon";
-        icon.style.left = (Math.random() * 80 + 10) + "%";
-        icon.style.top = (Math.random() * 80 + 10) + "%";
-        icon.onclick = () => {
-            icon.classList.toggle('dance');
-            const randomImg = d.images[Math.floor(Math.random() * d.images.length)];
-            showAlert(`Souvenir de ${d.city}`, `<img src='${randomImg}' style='width:100%'>`, true);
-        };
-        container.appendChild(icon);
+        if (d.images.length > 0) {
+            const icon = document.createElement('img');
+            icon.src = "https://win98icons.alexmeub.com/icons/png/image_file-0.png";
+            icon.className = "floating-icon";
+            icon.style.left = (Math.random() * 80 + 10) + "%";
+            icon.style.top = (Math.random() * 80 + 10) + "%";
+            icon.onclick = () => {
+                const randomImg = d.images[Math.floor(Math.random() * d.images.length)];
+                showAlert(`Souvenir de ${d.city}`, `<img src='${randomImg}' style='width:100%'>`, true);
+            };
+            container.appendChild(icon);
+        }
     });
 }
