@@ -373,26 +373,31 @@ document.getElementById('next-city-btn').addEventListener('click', () => {
     }
 });
 
-function getYoutubeUrl() {
-    const origin = window.location.origin;
-    return `https://www.youtube.com/embed/J8ugZk1rPpU?enablejsapi=1&origin=${origin}&rel=0`;
-}
-
 function showYoutubeInterlude() {
     const interlude = document.createElement('div');
     interlude.id = 'youtube-interlude';
-    const url = getYoutubeUrl() + "&autoplay=1";
+
+    const url = "https://www.youtube-nocookie.com/embed/l5aZJBLAu1E?controls=0&autoplay=1";
+
     interlude.innerHTML = `
         <div class="interlude-overlay">
             <h2>Interlude Musical...</h2>
-            <iframe src="${url}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            <button class="retro-btn" onclick="this.parentElement.parentElement.remove(); showTransition();">Passer l'interlude</button>
+            <iframe 
+                width="560"
+                height="315"
+                src="${url}"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+            <button class="retro-btn" onclick="this.parentElement.parentElement.remove(); showTransition();">
+                Passer l'interlude
+            </button>
         </div>
     `;
-    document.body.appendChild(interlude);
-    youtubeInterludeCount++;
-}
 
+    document.body.appendChild(interlude);
+}
 // Easter Eggs
 document.addEventListener('keydown', (e) => {
     if (e.key === 'h') {
