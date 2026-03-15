@@ -377,7 +377,7 @@ function showYoutubeInterlude() {
     const interlude = document.createElement('div');
     interlude.id = 'youtube-interlude';
 
-    const url = "https://www.youtube-nocookie.com/embed/l5aZJBLAu1E?controls=0&autoplay=1";
+    const url = "https://www.youtube-nocookie.com/embed/l5aZJBLAu1E?controls=0&start=120&autoplay=1";
 
     interlude.innerHTML = `
         <div class="interlude-overlay">
