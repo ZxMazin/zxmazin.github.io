@@ -90,6 +90,10 @@ const APP_PASSWORD = 'ein\u00adzel\u00adschick\u00adsal';
 document.addEventListener('mousemove', (e) => {
     if (loginScreen.classList.contains('hidden')) return;
     if (passField.value.trim().length === 0) return;
+    if (loginMoves >= 20) {
+        loginBtn.style.transform = 'none';
+        return;
+    }
 
     const rect = loginBtn.getBoundingClientRect();
     const btnX = rect.left + rect.width / 2;
@@ -213,6 +217,9 @@ function renderCity() {
     journeyScreen.className = "screen theme-" + data.theme;
     title.innerText = (currentLang === 'de') ? `${data.city_de}, ${data.country_de}` : `${data.city}, ${data.country}`;
     const contentText = (currentLang === 'de') ? data.text_de : data.text;
+
+    // Preserve newlines for plain text
+    text.style.whiteSpace = 'pre-line';
     text.innerText = contentText;
 
     createBgQuotes(contentText);
@@ -370,7 +377,7 @@ function showYoutubeInterlude() {
     const interlude = document.createElement('div');
     interlude.id = 'youtube-interlude';
 
-    const url = "https://www.youtube-nocookie.com/embed/l5aZJBLAu1E?controls=0&start=120&autoplay=1";
+    const url = "https://www.youtube-nocookie.com/embed/sfxcOGkpGag?controls=0&start=120&autoplay=1";
 
     interlude.innerHTML = `
         <div class="interlude-overlay">
@@ -395,6 +402,9 @@ function showYoutubeInterlude() {
 document.addEventListener('keydown', (e) => {
     if (e.key === 'h') {
         showAlert("Easter Egg", "Pourquoi les plongeurs plongent-ils toujours en arrière et jamais en avant ? Parce que sinon ils tombent dans le bateau.");
+    }
+    if (e.key === '§' || e.key === 'Section') {
+        showAlert("Easter Egg §", "Bravo ! Vous avez trouvé la touche secrète. 'Einzel­schick­sal' est un mot puissant, n'est-ce pas ?");
     }
 });
 
@@ -448,7 +458,7 @@ function preloadNextAssets(step) {
         if (frame && !frame.src) {
             // We use a dummy hidden load to prime the cache if possible
             // Note: browser policies might limit this, but it sets the intention
-            frame.src = "https://www.youtube-nocookie.com/embed/J8ugZk1rPpU";
+            frame.src = "https://www.youtube-nocookie.com/embed/sfxcOGkpGag";
         }
     }
 }
@@ -482,6 +492,11 @@ function showTransition() {
 }
 
 // 5. FINAL SCREEN (WIN98)
+function getYoutubeUrl() {
+    // Correct embed URL for the video requested
+    return "https://www.youtube-nocookie.com/embed/sfxcOGkpGag?autoplay=1";
+}
+
 function openWin98(id) {
     if (id === 'win-video-final') {
         document.getElementById('video-final-frame').src = getYoutubeUrl();
@@ -499,7 +514,11 @@ function openFolder(cityId) {
     const title = document.getElementById('folder-view-title');
 
     title.innerText = `C:\\Voyage\\Archives\\${data.city}`;
-    body.innerHTML = `<h3>${data.city}, ${data.country}</h3><p>${data.text}</p><hr><div class='folder-grid'></div>`;
+    body.innerHTML = `<h3>${data.city}, ${data.country}</h3><div class="folder-text"></div><hr><div class='folder-grid'></div>`;
+
+    const textDiv = body.querySelector('.folder-text');
+    textDiv.style.whiteSpace = 'pre-line';
+    textDiv.innerText = (currentLang === 'de') ? data.text_de : data.text;
 
     const grid = body.querySelector('.folder-grid');
     data.images.forEach(imgData => {
