@@ -19,6 +19,9 @@ const bootLog = document.getElementById('boot-log');
 const squareLoader = document.getElementById('square-loader');
 const loadingStatus = document.getElementById('loading-status');
 
+const zoomOverlay = document.getElementById('zoom-overlay');
+const zoomImg = zoomOverlay.querySelector('img');
+
 // Modal Elements
 const customModal = document.getElementById('custom-modal');
 const modalTitle = document.getElementById('modal-title');
@@ -49,15 +52,23 @@ modalCloseBtn.onclick = hideAlert;
 modalOkBtn.onclick = hideAlert;
 
 // 1. LOGIN LOGIC
-loginBtn.addEventListener('mouseover', () => {
-    if (loginMoves < MAX_LOGIN_MOVES) {
-        const x = Math.random() * 300 - 150;
-        const y = Math.random() * 300 - 150;
+document.addEventListener('mousemove', (e) => {
+    if (loginScreen.classList.contains('hidden')) return;
+
+    const rect = loginBtn.getBoundingClientRect();
+    const btnX = rect.left + rect.width / 2;
+    const btnY = rect.top + rect.height / 2;
+
+    const dist = Math.sqrt(Math.pow(e.clientX - btnX, 2) + Math.pow(e.clientY - btnY, 2));
+
+    if (dist < 80 && loginMoves < MAX_LOGIN_MOVES) {
+        const x = (Math.random() - 0.5) * window.innerWidth * 0.6;
+        const y = (Math.random() - 0.5) * window.innerHeight * 0.6;
         loginBtn.style.transform = `translate(${x}px, ${y}px)`;
         loginBtn.style.setProperty('--last-x', `${x}px`);
         loginBtn.style.setProperty('--last-y', `${y}px`);
         loginMoves++;
-    } else if (loginMoves === MAX_LOGIN_MOVES) {
+    } else if (dist < 80 && loginMoves === MAX_LOGIN_MOVES) {
         loginBtn.classList.add('falling-btn');
         loginMoves++; // prevent repeated fall trigger
         setTimeout(() => {
@@ -143,6 +154,23 @@ function startJourney() {
     renderCity();
 }
 
+function createBgQuotes(text) {
+    const container = document.getElementById('journey-screen');
+    // Clear old quotes
+    document.querySelectorAll('.bg-quote').forEach(q => q.remove());
+
+    const lines = text.split('\n').filter(l => l.length > 20);
+    lines.forEach((line, i) => {
+        const q = document.createElement('div');
+        q.className = 'bg-quote';
+        q.innerText = line;
+        q.style.top = (10 + (i * 15) % 80) + '%';
+        q.style.animationDelay = (i * 2) + 's';
+        q.style.animationDuration = (20 + Math.random() * 20) + 's';
+        container.appendChild(q);
+    });
+}
+
 function renderCity() {
     const data = journeyData[currentStep];
     const title = document.getElementById('city-title');
@@ -152,68 +180,136 @@ function renderCity() {
 
     journeyScreen.className = "screen theme-" + data.theme;
     title.innerText = `${data.city}, ${data.country}`;
-    text.innerText = data.pages[currentPage];
+    text.innerText = data.text;
 
-    if (currentPage < data.pages.length - 1) {
-        nextBtn.innerText = "Page suivante";
-    } else {
-        nextBtn.innerText = (currentStep < journeyData.length - 1) ? "Continuer le voyage" : "Terminer l'aventure";
-    }
+    createBgQuotes(data.text);
+
+    nextBtn.innerText = (currentStep < journeyData.length - 1) ? "Continuer le voyage" : "Terminer l'aventure";
 
     if (currentPage === 0) {
         visual.innerHTML = "";
-        data.images.forEach((img, idx) => {
+        data.images.forEach((imgData, idx) => {
             const wrapper = document.createElement('div');
             wrapper.className = "image-wrapper";
+
+            // Layout variety
+            if (idx % 5 === 0) wrapper.classList.add('big');
+            else if (idx % 3 === 0) wrapper.classList.add('landscape');
+            else if (idx % 4 === 0) wrapper.classList.add('portrait');
+
             const imgEl = document.createElement('img');
-            imgEl.src = img;
-            if (idx % 3 === 0) wrapper.classList.add('landscape');
+            const imgSrc = (typeof imgData === 'string') ? imgData : imgData.src;
+            imgEl.src = imgSrc;
+
+            wrapper.onclick = () => {
+                zoomImg.src = imgSrc;
+                zoomOverlay.style.display = 'flex';
+            };
+
             wrapper.appendChild(imgEl);
             visual.appendChild(wrapper);
         });
 
         // Specific IKEA logic
         if (data.theme === 'sweden') {
+            window.ikeaCart = window.ikeaCart || {};
+            window.ikeaPaid = false;
+
             const basket = document.createElement('div');
             basket.id = 'ikea-basket';
-            basket.innerHTML = "<h3>Mon Panier IKEA</h3><div id='basket-items'>Vide</div><button id='checkout-btn'>Passer à la caisse</button>";
             visual.appendChild(basket);
 
-            document.querySelectorAll('.image-wrapper').forEach(w => {
-                w.onclick = () => {
-                    const itemName = w.getAttribute('data-name') || "Meuble Stockholm";
-                    const itemDiv = document.createElement('div');
-                    itemDiv.innerText = "1x " + itemName + " - 29.99€";
-                    document.getElementById('basket-items').appendChild(itemDiv);
-                };
-            });
+            const updateBasket = () => {
+                const itemsDiv = document.createElement('div');
+                let total = 0;
+                let count = 0;
 
-            document.getElementById('checkout-btn').onclick = () => {
-                showAlert("Paiement Sécurisé", "Veuillez insérer votre carte de crédit imaginaire... <br><br> Paiement accepté ! Merci de votre visite.", true);
+                basket.innerHTML = "<h3>Smarte Shopping Cart (SEK)</h3>";
+
+                Object.keys(window.ikeaCart).forEach(id => {
+                    const item = window.ikeaCart[id];
+                    if (item.qty <= 0) return;
+
+                    count += item.qty;
+                    total += item.price * item.qty;
+
+                    const row = document.createElement('div');
+                    row.className = 'basket-item';
+                    row.innerHTML = `
+                        <span>${item.name} x${item.qty}</span>
+                        <div class='basket-controls'>
+                            <button onclick="window.modIkea('${id}', -1)">-</button>
+                            <button onclick="window.modIkea('${id}', 1)">+</button>
+                            <span>${(item.price * item.qty).toLocaleString()} kr</span>
+                        </div>
+                    `;
+                    basket.appendChild(row);
+                });
+
+                if (count === 0) {
+                    basket.innerHTML += "<p>Votre panier est vide.</p>";
+                } else {
+                    const foot = document.createElement('div');
+                    foot.style.marginTop = '10px';
+                    foot.style.fontWeight = 'bold';
+                    foot.innerHTML = `Total: ${total.toLocaleString()} kr <button id='checkout-btn' style='float:right'>PAYER</button>`;
+                    basket.appendChild(foot);
+                    document.getElementById('checkout-btn').onclick = showPaymentModal;
+                }
             };
+
+            window.modIkea = (id, delta) => {
+                if (window.ikeaCart[id]) {
+                    window.ikeaCart[id].qty += delta;
+                    if (window.ikeaCart[id].qty < 0) window.ikeaCart[id].qty = 0;
+                    updateBasket();
+                }
+            };
+
+            updateBasket();
+
+            // Re-render images with product info
+            visual.querySelectorAll('.image-wrapper').forEach((w, idx) => {
+                const p = data.images[idx];
+                if (!p.name) return;
+
+                w.innerHTML += `<div class='product-info'>${p.name}<br>${p.price} kr</div>`;
+                const btn = document.createElement('button');
+                btn.className = 'add-to-cart-btn';
+                btn.innerText = 'Ajouter au panier';
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    const itemId = 'item-' + idx;
+                    if (!window.ikeaCart[itemId]) {
+                        window.ikeaCart[itemId] = { name: p.name, price: p.price, qty: 0 };
+                    }
+                    window.ikeaCart[itemId].qty++;
+                    updateBasket();
+                };
+                w.appendChild(btn);
+            });
         }
     }
 }
 
 document.getElementById('next-city-btn').addEventListener('click', () => {
-    const data = journeyData[currentStep];
-    if (currentPage < data.pages.length - 1) {
-        currentPage++;
-        renderCity();
-    } else {
-        currentStep++;
-        currentPage = 0;
-        if (currentStep < journeyData.length) {
-            // Logic for YouTube interludes
-            if (youtubeInterludeCount < MAX_YOUTUBE_INTERLUDES &&
-                (currentStep === 3 || currentStep === 6 || currentStep === journeyData.length - 1)) {
-                showYoutubeInterlude();
-            } else {
-                showTransition();
-            }
+    // Check for payment lock if in Sweden
+    if (journeyData[currentStep].id === 'stockholm' && !window.ikeaPaid) {
+        showAlert("Accès Refusé", "Vous devez régler vos achats IKEA avant de quitter la Suède !");
+        return;
+    }
+
+    currentStep++;
+    if (currentStep < journeyData.length) {
+        // Logic for YouTube interludes
+        if (youtubeInterludeCount < MAX_YOUTUBE_INTERLUDES &&
+            (currentStep === 3 || currentStep === 6 || currentStep === journeyData.length - 1)) {
+            showYoutubeInterlude();
         } else {
-            showFinal();
+            showTransition();
         }
+    } else {
+        showFinal();
     }
 });
 
@@ -223,12 +319,51 @@ function showYoutubeInterlude() {
     interlude.innerHTML = `
         <div class="interlude-overlay">
             <h2>Interlude Musical...</h2>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/J8ugZk1rPpU?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/J8ugZk1rPpU?autoplay=1&mute=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             <button onclick="this.parentElement.parentElement.remove(); showTransition();">Passer l'interlude</button>
         </div>
     `;
     document.body.appendChild(interlude);
     youtubeInterludeCount++;
+}
+
+// Easter Eggs
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'h') {
+        showAlert("Easter Egg", "Pourquoi les plongeurs plongent-ils toujours en arrière et jamais en avant ? Parce que sinon ils tombent dans le bateau.");
+    }
+});
+
+zoomOverlay.onclick = () => zoomOverlay.style.display = 'none';
+
+function showPaymentModal() {
+    const html = `
+        <div style='color:#000'>
+            <p>Veuillez choisir votre méthode de paiement :</p>
+            <div style='margin: 15px 0; display: flex; flex-direction: column; gap: 10px;'>
+                <label><input type="radio" name="pay" value="card"> Carte de Crédit Imaginaire</label>
+                <label><input type="radio" name="pay" value="gold"> Or de Leprechaun</label>
+                <label><input type="radio" name="pay" value="cacao"> Fèves de Cacao</label>
+            </div>
+            <p><i>Note: Aucun remboursement possible après le départ du ferry.</i></p>
+        </div>
+    `;
+    showAlert("Paiement Sécurisé", html, true);
+
+    // Override the OK button for this specific modal
+    const okBtn = document.getElementById('modal-ok-btn');
+    const oldClick = okBtn.onclick;
+    okBtn.onclick = () => {
+        const selected = document.querySelector('input[name="pay"]:checked');
+        if (selected) {
+            window.ikeaPaid = true;
+            hideAlert();
+            showAlert("Succès", "Paiement accepté ! Vous pouvez maintenant continuer votre voyage vers la Finlande.");
+            okBtn.onclick = oldClick; // Restore
+        } else {
+            alert("Veuillez sélectionner une méthode !");
+        }
+    };
 }
 
 function showTransition() {
@@ -242,7 +377,7 @@ function showTransition() {
     }
 
     // Pick a random movement class
-    const moves = ['move-right', 'move-left', 'move-up'];
+    const moves = ['move-right', 'move-left', 'move-up', 'move-down'];
     const randomMove = moves[Math.floor(Math.random() * moves.length)];
 
     trans.classList.remove('hidden');
@@ -256,39 +391,65 @@ function showTransition() {
     }, 3000);
 }
 
-// 5. FINAL SCREEN
+// 5. FINAL SCREEN (WIN98)
+function openWin98(id) {
+    document.getElementById(id).style.display = 'flex';
+}
+function closeWin98(id) {
+    document.getElementById(id).style.display = 'none';
+}
+
+function openFolder(cityId) {
+    const data = journeyData.find(d => d.id === cityId);
+    const win = document.getElementById('win-folder-view');
+    const body = document.getElementById('folder-view-body');
+    const title = document.getElementById('folder-view-title');
+
+    title.innerText = `C:\\Voyage\\Archives\\${data.city}`;
+    body.innerHTML = `<h3>${data.city}, ${data.country}</h3><p>${data.text}</p><hr><div class='folder-grid'></div>`;
+
+    const grid = body.querySelector('.folder-grid');
+    data.images.forEach(img => {
+        const src = (typeof img === 'string') ? img : img.src;
+        const icon = document.createElement('div');
+        icon.className = 'desktop-icon';
+        icon.style.color = '#000';
+        icon.innerHTML = `<img src="${src}" style="width:50px; height:50px; object-fit:cover;"><span>Photo</span>`;
+        icon.onclick = () => {
+            zoomImg.src = src;
+            zoomOverlay.style.display = 'flex';
+        };
+        grid.appendChild(icon);
+    });
+
+    openWin98('win-folder-view');
+}
+
 function showFinal() {
     journeyScreen.classList.add('hidden');
     finalScreen.classList.remove('hidden');
 
-    const container = document.getElementById('interactive-cloud-lake');
-    container.innerHTML = ""; // Clear
-
-    poems.forEach((poem, i) => {
-        const icon = document.createElement('img');
-        icon.src = "https://win98icons.alexmeub.com/icons/png/document_writing-0.png";
-        icon.className = "floating-icon";
-        icon.style.left = (Math.random() * 80 + 10) + "%";
-        icon.style.top = (Math.random() * 80 + 10) + "%";
-        icon.onclick = () => {
-            icon.classList.toggle('dance');
-            showAlert(poem.title, `par ${poem.author}\n\n${poem.text}`);
-        };
-        container.appendChild(icon);
-    });
-
+    const arcGrid = document.getElementById('archives-grid');
+    arcGrid.innerHTML = "";
     journeyData.forEach(d => {
         if (d.images.length > 0) {
-            const icon = document.createElement('img');
-            icon.src = "https://win98icons.alexmeub.com/icons/png/image_file-0.png";
-            icon.className = "floating-icon";
-            icon.style.left = (Math.random() * 80 + 10) + "%";
-            icon.style.top = (Math.random() * 80 + 10) + "%";
-            icon.onclick = () => {
-                const randomImg = d.images[Math.floor(Math.random() * d.images.length)];
-                showAlert(`Souvenir de ${d.city}`, `<img src='${randomImg}' style='width:100%'>`, true);
-            };
-            container.appendChild(icon);
+            const icon = document.createElement('div');
+            icon.className = 'desktop-icon';
+            icon.style.color = '#000';
+            icon.innerHTML = `<img src="https://win98icons.alexmeub.com/icons/png/directory_closed-4.png"><span>${d.city}</span>`;
+            icon.onclick = () => openFolder(d.id);
+            arcGrid.appendChild(icon);
         }
+    });
+
+    const poemGrid = document.getElementById('poems-grid');
+    poemGrid.innerHTML = "";
+    poems.forEach(p => {
+        const icon = document.createElement('div');
+        icon.className = 'desktop-icon';
+        icon.style.color = '#000';
+        icon.innerHTML = `<img src="https://win98icons.alexmeub.com/icons/png/document_writing-0.png"><span>${p.title}</span>`;
+        icon.onclick = () => showAlert(p.title, `par ${p.author}\n\n${p.text}`);
+        poemGrid.appendChild(icon);
     });
 }

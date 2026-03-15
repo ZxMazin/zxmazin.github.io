@@ -5,10 +5,7 @@ const journeyData = [
         country: "Maroc",
         transport: "train",
         theme: "morocco-meknes",
-        pages: [
-            `Il y avait aussi une tradition : à l’arrivée dans notre village natal, il fallait rendre visite aux morts. Mon père et ma grand-mère sont enterrés à côté, une drôle de coïncidence. Mon père n’était pas du tout marocain. Il était né en Égypte et avait immigré en Suisse pour devenir ingénieur informaticien, alors que le métier en était encore à ses débuts. Il est décédé d’un cancer du cerveau quand j’avais six ans.`,
-            `J’aime bien le Maroc. C’est un endroit très vrai, où le superficiel n’a pas sa place. Lorsque je rendis visite à une amie de la famille, Soukaina Boubia, professeur d’histoire-géographie à la Haute École de tourisme de Rabat-Salé, elle m’offrit un livre sur l’histoire du Maroc. C’est un très beau cadeau : offrir le savoir.`
-        ],
+        text: `Il y avait aussi une tradition : à l’arrivée dans notre village natal, il fallait rendre visite aux morts. Mon père et ma grand-mère sont enterrés à côté, une drôle de coïncidence. Mon père n’était pas du tout marocain. Il était né en Égypte et avait immigré en Suisse pour devenir ingénieur informaticien, alors que le métier en était encore à ses débuts. Il est décédé d’un cancer du cerveau quand j’avais six ans.\n\nJ’aime bien le Maroc. C’est un endroit très vrai, où le superficiel n’a pas sa place. Lorsque je rendis visite à une amie de la famille, Soukaina Boubia, professeur d’histoire-géographie à la Haute École de tourisme de Rabat-Salé, elle m’offrit un livre sur l’histoire du Maroc. C’est un très beau cadeau : offrir le savoir.`,
         images: [
             "images/meknes/000118380040.jpg",
             "images/meknes/IMG_0043.JPG",
@@ -28,11 +25,7 @@ const journeyData = [
         country: "Maroc",
         transport: "avion",
         theme: "morocco-rabat",
-        pages: [
-            `Je rejoignis ma famille à l’avenue Hassan, près du mausolée de Mohamed V. Nous nous rendîmes directement à la gare ferroviaire et prîmes le train Al Atlas, qui relie les grandes villes marocaines.`,
-            `Dans mon compartiment, à part ma sœur et ma mère, il y avait un homme dans un coin qui lisait son journal pendant tout le trajet. À côté, toute une famille était également présente : la grand-mère, la mère, la fille et la petite fille.`,
-            `Ma mère me raconta une habitude de ses années étudiantes, lorsqu’elle faisait la navette entre Rabat et Meknès. À l’arrivée à une gare, ses camarades masculins ouvraient toujours les portes alors que le train était encore en approche, prétendant que c’était pour s’aérer.`
-        ],
+        text: `Je rejoignis ma famille à l’avenue Hassan, près du mausolée de Mohamed V. Nous nous rendîmes directement à la gare ferroviaire et prîmes le train Al Atlas, qui relie les grandes villes marocaines.\n\nDans mon compartiment, à part ma sœur et ma mère, il y avait un homme dans un coin qui lisait son journal pendant tout le trajet. À côté, toute une famille était également présente : la grand-mère, la mère, la fille et la petite fille.\n\nMa mère me raconta une habitude de ses années étudiantes, lorsqu’elle faisait la navette entre Rabat et Meknès. À l’arrivée à une gare, ses camarades masculins ouvraient toujours les portes alors que le train était encore en approche, prétendant que c’était pour s’aérer.`,
         images: [
             "images/rabat/000118380036.jpg",
             "images/rabat/000118380037.jpg",
@@ -50,11 +43,7 @@ const journeyData = [
         country: "France",
         transport: "avion",
         theme: "paris",
-        pages: [
-            `Paris Paris, ville lumière, ville des arts, mais surtout ville de misère. On entend souvent dire que les inégalités sont aujourd’hui plus fortes que du temps de la Révolution française.`,
-            `Le lendemain, je me levai pour continuer ma visite. Objectif : banlieue. Je me dirigeai vers le quartier qui me correspondrait : Barbès-Rochechouart, un quartier à forte population maghrébine.`,
-            `L’après-midi, je me rends au cimetière du Père-Lachaise. Je suis allé voir quelques tombes précises pour, en quelque sorte, recevoir leur bénédiction : Guillaume Apollinaire, Frédéric Chopin, Jean-Baptiste Poquelin, etc.`
-        ],
+        text: `Paris Paris, ville lumière, ville des arts, mais surtout ville de misère. On entend souvent dire que les inégalités sont aujourd’hui plus fortes que du temps de la Révolution française.\n\nLe lendemain, je me levai pour continuer ma visite. Objectif : banlieue. Je me dirigeai vers le quartier qui me correspondrait : Barbès-Rochechouart, un quartier à forte population maghrébine.\n\nL’après-midi, je me rends au cimetière du Père-Lachaise. Je suis allé voir quelques tombes précises pour, en quelque sorte, recevoir leur bénédiction : Guillaume Apollinaire, Frédéric Chopin, Jean-Baptiste Poquelin, etc.`,
         images: [
             "images/paris/IMG_0377.JPG",
             "images/paris/IMG_0380.JPG",
@@ -72,19 +61,16 @@ const journeyData = [
         country: "Suède",
         transport: "avion",
         theme: "sweden",
-        pages: [
-            `J’arrive à l’aéroport de Stockholm-Arlanda à 00h20. C’est la première fois que je ne comprends rien. Où sont les belles blondes pour me guider vers mon hôtel ?`,
-            `J’aime bien Stockholm : les cinnamon rolls, Ikea, et leur lait d’avoine. Je pense que je pourrais y vivre quelque temps. Mais il me reste quand même ce sentiment qu’au fond, je ne serai jamais vraiment accepté.`
-        ],
+        text: `J’arrive à l’aéroport de Stockholm-Arlanda à 00h20. C’est la première fois que je ne comprends rien. Où sont les belles blondes pour me guider vers mon hôtel ?\n\nJ’aime bien Stockholm : les cinnamon rolls, Ikea, et leur lait d’avoine. Je pense que je pourrais y vivre quelque temps. Mais il me reste quand même ce sentiment qu’au fond, je ne serai jamais vraiment accepté.`,
         images: [
-            "images/stockholm/IMG_0660.JPG",
-            "images/stockholm/IMG_0663.JPG",
-            "images/stockholm/IMG_0687.JPG",
-            "images/stockholm/IMG_0689.JPG",
-            "images/stockholm/IMG_0697.JPG",
-            "images/stockholm/IMG_0730.JPG",
-            "images/stockholm/IMG_0742.JPG",
-            "images/stockholm/IMG_0743.JPG"
+            { src: "images/stockholm/IMG_0660.JPG", name: "BILLY Bibliothèque", price: 599 },
+            { src: "images/stockholm/IMG_0663.JPG", name: "POÄNG Fauteuil", price: 899 },
+            { src: "images/stockholm/IMG_0687.JPG", name: "KALLAX Étagère", price: 499 },
+            { src: "images/stockholm/IMG_0689.JPG", name: "MALM Lit", price: 1995 },
+            { src: "images/stockholm/IMG_0697.JPG", name: "STOCKHOLM Miroir", price: 799 },
+            { src: "images/stockholm/IMG_0730.JPG", name: "HEMNES Commode", price: 1495 },
+            { src: "images/stockholm/IMG_0742.JPG", name: "LACK Table", price: 99 },
+            { src: "images/stockholm/IMG_0743.JPG", name: "FÄRGKLAR Assiette", price: 49 }
         ]
     },
     {
@@ -93,10 +79,7 @@ const journeyData = [
         country: "Finlande",
         transport: "bateau",
         theme: "finland",
-        pages: [
-            `C’est seulement après avoir découvert les Moomins que j’ai commencé à apprécier Helsinki. La nuit tombe tellement vite. Elle s’écrase.`,
-            `Le départ de ce pays fut fabuleux. Sur le pont d’un ferry, je voyais défiler d’abord Helsinki, puis ses îles, et je me retrouvais sur la mer du Nord. Une immensité de bleu à perte de vue.`
-        ],
+        text: `C’est seulement après avoir découvert les Moomins que j’ai commencé à apprécier Helsinki. La nuit tombe tellement vite. Elle s’écrase.\n\nLe départ de ce pays fut fabuleux. Sur le pont d’un ferry, je voyais défiler d’abord Helsinki, puis ses îles, et je me retrouvais sur la mer du Nord. Une immensité de bleu à perte de vue.`,
         images: [
             "images/helsinki/000118380034.jpg",
             "images/helsinki/IMG_1005.JPG",
@@ -114,10 +97,7 @@ const journeyData = [
         country: "Estonie",
         transport: "bus",
         theme: "estonia",
-        pages: [
-            `Ce qui m’a surpris à Tallinn, c’est la manière dont ce pays est passé d’un pays communiste à un pays européen comme les autres. Certes, il restait des vestiges, mais la comparaison avec la Suisse était tentante.`,
-            `Je visitai le musée national des arts estoniens. L’approche critique et sociale a été déclenchée par les profondes inégalités ressenties dans la société des années 1990.`
-        ],
+        text: `Ce qui m’a surpris à Tallinn, c’est la manière dont ce pays est passé d’un pays communiste à un pays européen comme les autres. Certes, il restait des vestiges, mais la comparaison avec la Suisse était tentante.\n\nJe visitai le musée national des arts estoniens. L’approche critique et sociale a été déclenchée par les profondes inégalités ressenties dans la société des années 1990.`,
         images: [
             "images/tallinn/000118380030.jpg",
             "images/tallinn/000118380031.jpg",
@@ -135,9 +115,7 @@ const journeyData = [
         country: "Lettonie",
         transport: "bus",
         theme: "latvia",
-        pages: [
-            `La Lettonie ressemble davantage au communisme d’avant. Les gens y sont d’une gentillesse débordante. Le froid signifie beaucoup de choses : la solitude, la température, l’atmosphère.`
-        ],
+        text: `La Lettonie ressemble davantage au communisme d’avant. Les gens y sont d’une gentillesse débordante. Le froid signifie beaucoup de choses : la solitude, la température, l’atmosphère.`,
         images: [
             "images/riga/IMG_1690.JPG",
             "images/riga/IMG_1704.JPG",
@@ -155,10 +133,7 @@ const journeyData = [
         country: "Pologne",
         transport: "train",
         theme: "poland",
-        pages: [
-            `Après une longue nuit dans ce car polonais, je me sens assommé à l’arrivée. Un froid que je n’avais jamais ressenti m’a paralysé.`,
-            `Le soir, je retournai à la gare de Warszawa Centralna pour prendre le train Chopin, direction Praha hlavní nádraží.`
-        ],
+        text: `Après une longue nuit dans ce car polonais, je me sens assommé à l’arrivée. Un froid que je n’avais jamais ressenti m’a paralysé.\n\nLe soir, je retournai à la gare de Warszawa Centralna pour prendre le train Chopin, direction Praha hlavní nádraží.`,
         images: [
             "images/varsovie/000118380024.jpg",
             "images/varsovie/000118380025.jpg",
@@ -176,10 +151,7 @@ const journeyData = [
         country: "République Tchèque",
         transport: "avion",
         theme: "czechia",
-        pages: [
-            `Prague est une belle ville. J’ai surtout aimé sa ressemblance avec la Suisse : c’était comme retrouver mon chez-moi. Prague a été profondément marquée par l’influence du Kremlin.`,
-            `Ce soir-là, je partis pour la Suisse avec un goût amer en bouche. Comment peut-on être à ce point aveugle à la misère ?`
-        ],
+        text: `Prague est une belle ville. J’ai surtout aimé sa ressemblance avec la Suisse : cétait comme retrouver mon chez-moi. Prague a été profondément marquée par l’influence du Kremlin.\n\nCe soir-là, je partis pour la Suisse avec un goût amer en bouche. Comment peut-on être à ce point aveugle à la misère ?`,
         images: [
             "images/prague/000118380001.jpg",
             "images/prague/000118380002.jpg",
@@ -197,10 +169,7 @@ const journeyData = [
         country: "Mazin",
         transport: "none",
         theme: "author",
-        pages: [
-            "Je m'appelle Mazin, et ce voyage est le reflet de ma quête d'identité entre l'Orient et l'Occident.",
-            "Passionné d'informatique et d'histoire, j'ai voulu documenter ces moments de vie à travers une interface qui rappelle mes premiers pas sur un ordinateur."
-        ],
+        text: "Je m'appelle Mazin, et ce voyage est le reflet de ma quête d'identité entre l'Orient et l'Occident.\n\nPassionné d'informatique et d'histoire, j'ai voulu documenter ces moments de vie à travers une interface qui rappelle mes premiers pas sur un ordinateur.",
         images: []
     },
     {
@@ -209,10 +178,7 @@ const journeyData = [
         country: "Documentation",
         transport: "fin",
         theme: "project",
-        pages: [
-            "Ce site est une SPA narrative utilisant des technologies web modernes pour simuler un système rétro.",
-            "Chaque pays dispose d'un univers visuel propre, codé en CSS pour refléter l'âme du voyage."
-        ],
+        text: "Ce site est une SPA narrative utilisant des technologies web modernes pour simuler un système rétro.\n\nChaque pays dispose d'un univers visuel propre, codé en CSS pour refléter l'âme du voyage.",
         images: []
     }
 ];
