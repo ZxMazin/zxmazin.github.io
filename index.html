@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="retro-body">
+    <div id="language-toggle">
+        <button class="retro-btn" onclick="setLanguage('fr')">FR</button>
+        <button class="retro-btn" onclick="setLanguage('de')">DE</button>
+    </div>
     <div id="app">
         <!-- Section Login -->
         <section id="login-screen" class="screen">
@@ -14,7 +18,7 @@
                 <h2>Système d'Accès Souvenir</h2>
                 <p>Veuillez entrer le mot de passe pour charger les archives.</p>
                 <input type="password" id="password-field" placeholder="Mot de passe...">
-                <button id="login-ok-btn">OK</button>
+                <button id="login-ok-btn" class="retro-btn">OK</button>
             </div>
         </section>
 
@@ -43,7 +47,7 @@
                     <div class="dialogue-box">
                         <h2 id="city-title">Ville</h2>
                         <div id="dialogue-text">Texte ici...</div>
-                        <button id="next-city-btn">Continuer le voyage</button>
+                        <button id="next-city-btn" class="retro-btn">Continuer le voyage</button>
                     </div>
                 </div>
                 <div id="visual-container">
@@ -56,15 +60,15 @@
         <section id="final-screen" class="screen hidden">
             <!-- Desktop Icons -->
             <div class="desktop-icon" onclick="openWin98('win-archives')">
-                <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png">
+                <div class="fallback-icon folder"></div>
                 <span>Mes Archives</span>
             </div>
             <div class="desktop-icon" onclick="openWin98('win-video-final')">
-                <img src="https://win98icons.alexmeub.com/icons/png/mplayer-0.png">
+                <div class="fallback-icon video"></div>
                 <span>Vidéo Final</span>
             </div>
             <div class="desktop-icon" onclick="openWin98('win-poems')">
-                <img src="https://win98icons.alexmeub.com/icons/png/document_writing-0.png">
+                <div class="fallback-icon poem"></div>
                 <span>Poèmes</span>
             </div>
 
@@ -87,7 +91,7 @@
             <div id="win-video-final" class="win98-window" style="width: 600px; height: 450px;">
                 <div class="win98-title"><span>Windows Media Player</span><button class="win98-close" onclick="closeWin98('win-video-final')">X</button></div>
                 <div class="win98-content" style="background:#000; padding:0;">
-                    <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/J8ugZk1rPpU?rel=0" frameborder="0" allowfullscreen></iframe>
+                    <iframe id="video-final-frame" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
 
@@ -106,7 +110,7 @@
                     <!-- Content goes here -->
                 </div>
                 <div class="modal-footer">
-                    <button id="modal-ok-btn">OK</button>
+                    <button id="modal-ok-btn" class="retro-btn">OK</button>
                 </div>
             </div>
         </div>
@@ -119,6 +123,10 @@
 
     <div id="zoom-overlay">
         <img src="" alt="Zoomed memory">
+        <div id="zoom-cart-banner">
+            <span id="zoom-product-name">Nom du produit</span>
+            <button class="retro-btn" id="zoom-add-btn">Ajouter au panier</button>
+        </div>
     </div>
 
     <script src="data.js"></script>

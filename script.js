@@ -1,4 +1,5 @@
 // STATE
+let currentLang = 'fr';
 let currentStep = 0;
 let currentPage = 0;
 let loginMoves = 0;
@@ -21,6 +22,9 @@ const loadingStatus = document.getElementById('loading-status');
 
 const zoomOverlay = document.getElementById('zoom-overlay');
 const zoomImg = zoomOverlay.querySelector('img');
+const zoomCartBanner = document.getElementById('zoom-cart-banner');
+const zoomProductName = document.getElementById('zoom-product-name');
+const zoomAddBtn = document.getElementById('zoom-add-btn');
 
 // Modal Elements
 const customModal = document.getElementById('custom-modal');
@@ -32,6 +36,35 @@ const modalOkBtn = document.getElementById('modal-ok-btn');
 const audioBoot = document.getElementById('audio-boot');
 const audioLoading = document.getElementById('audio-loading');
 const audioClick = document.getElementById('audio-click');
+
+window.setLanguage = (lang) => {
+    currentLang = lang;
+    updateUILanguage();
+    if (!journeyScreen.classList.contains('hidden')) renderCity();
+    if (!finalScreen.classList.contains('hidden')) showFinal();
+};
+
+function updateUILanguage() {
+    const s = uiStrings[currentLang];
+    document.querySelector('#login-screen h2').innerText = s.login_title;
+    document.querySelector('#login-screen p').innerText = s.login_pass;
+    document.getElementById('password-field').placeholder = s.login_placeholder;
+    document.querySelector('#loading-screen h3').innerText = s.booting;
+
+    // Update next button if applicable
+    const nextBtn = document.getElementById('next-city-btn');
+    if (nextBtn) {
+        if (currentStep < journeyData.length - 1) {
+            nextBtn.innerText = s.next;
+        } else {
+            nextBtn.innerText = s.finish;
+        }
+    }
+
+    // Update Zoom button
+    const zoomAddBtnText = document.getElementById('zoom-add-btn');
+    if (zoomAddBtnText) zoomAddBtnText.innerText = s.add_to_cart;
+}
 
 // MODAL LOGIC
 function showAlert(title, message, isHtml = false) {
@@ -90,6 +123,12 @@ loginBtn.addEventListener('click', () => {
         startBoot();
     } else {
         showAlert("Erreur Système", "Mot de passe incorrect ! Indice: C'est un mot de 4 lettres que les enfants aiment bien dire.");
+    }
+});
+
+passField.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        loginBtn.click();
     }
 });
 
@@ -177,14 +216,16 @@ function renderCity() {
     const text = document.getElementById('dialogue-text');
     const visual = document.getElementById('visual-container');
     const nextBtn = document.getElementById('next-city-btn');
+    const s = uiStrings[currentLang];
 
     journeyScreen.className = "screen theme-" + data.theme;
-    title.innerText = `${data.city}, ${data.country}`;
-    text.innerText = data.text;
+    title.innerText = (currentLang === 'de') ? `${data.city_de}, ${data.country_de}` : `${data.city}, ${data.country}`;
+    const contentText = (currentLang === 'de') ? data.text_de : data.text;
+    text.innerText = contentText;
 
-    createBgQuotes(data.text);
+    createBgQuotes(contentText);
 
-    nextBtn.innerText = (currentStep < journeyData.length - 1) ? "Continuer le voyage" : "Terminer l'aventure";
+    nextBtn.innerText = (currentStep < journeyData.length - 1) ? s.next : s.finish;
 
     if (currentPage === 0) {
         visual.innerHTML = "";
@@ -204,6 +245,22 @@ function renderCity() {
             wrapper.onclick = () => {
                 zoomImg.src = imgSrc;
                 zoomOverlay.style.display = 'flex';
+
+                if (imgData.name) {
+                    zoomCartBanner.style.display = 'flex';
+                    zoomProductName.innerText = (currentLang === 'de') ? (imgData.name_de || imgData.name) : imgData.name;
+                    zoomAddBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        const itemId = 'item-' + idx;
+                        if (!window.ikeaCart[itemId]) {
+                            window.ikeaCart[itemId] = { name: imgData.name, price: imgData.price, qty: 0 };
+                        }
+                        window.ikeaCart[itemId].qty++;
+                        if (window.updateIkeaBasket) window.updateIkeaBasket();
+                    };
+                } else {
+                    zoomCartBanner.style.display = 'none';
+                }
             };
 
             wrapper.appendChild(imgEl);
@@ -220,11 +277,12 @@ function renderCity() {
             visual.appendChild(basket);
 
             const updateBasket = () => {
+                window.updateIkeaBasket = updateBasket;
                 const itemsDiv = document.createElement('div');
                 let total = 0;
                 let count = 0;
 
-                basket.innerHTML = "<h3>Smarte Shopping Cart (SEK)</h3>";
+                basket.innerHTML = `<h3>${uiStrings[currentLang].cart_title}</h3>`;
 
                 Object.keys(window.ikeaCart).forEach(id => {
                     const item = window.ikeaCart[id];
@@ -252,7 +310,7 @@ function renderCity() {
                     const foot = document.createElement('div');
                     foot.style.marginTop = '10px';
                     foot.style.fontWeight = 'bold';
-                    foot.innerHTML = `Total: ${total.toLocaleString()} kr <button id='checkout-btn' style='float:right'>PAYER</button>`;
+                    foot.innerHTML = `Total: ${total.toLocaleString()} kr <button id='checkout-btn' class='retro-btn' style='float:right'>${s.pay}</button>`;
                     basket.appendChild(foot);
                     document.getElementById('checkout-btn').onclick = showPaymentModal;
                 }
@@ -273,10 +331,11 @@ function renderCity() {
                 const p = data.images[idx];
                 if (!p.name) return;
 
-                w.innerHTML += `<div class='product-info'>${p.name}<br>${p.price} kr</div>`;
+                const pName = (currentLang === 'de') ? (p.name_de || p.name) : p.name;
+                w.innerHTML += `<div class='product-info'>${pName}<br>${p.price} kr</div>`;
                 const btn = document.createElement('button');
                 btn.className = 'add-to-cart-btn';
-                btn.innerText = 'Ajouter au panier';
+                btn.innerText = s.add_to_cart;
                 btn.onclick = (e) => {
                     e.stopPropagation();
                     const itemId = 'item-' + idx;
@@ -293,9 +352,10 @@ function renderCity() {
 }
 
 document.getElementById('next-city-btn').addEventListener('click', () => {
+    const s = uiStrings[currentLang];
     // Check for payment lock if in Sweden
     if (journeyData[currentStep].id === 'stockholm' && !window.ikeaPaid) {
-        showAlert("Accès Refusé", "Vous devez régler vos achats IKEA avant de quitter la Suède !");
+        showAlert(s.access_denied, s.access_denied_msg);
         return;
     }
 
@@ -313,14 +373,20 @@ document.getElementById('next-city-btn').addEventListener('click', () => {
     }
 });
 
+function getYoutubeUrl() {
+    const origin = window.location.origin;
+    return `https://www.youtube.com/embed/J8ugZk1rPpU?enablejsapi=1&origin=${origin}&rel=0`;
+}
+
 function showYoutubeInterlude() {
     const interlude = document.createElement('div');
     interlude.id = 'youtube-interlude';
+    const url = getYoutubeUrl() + "&autoplay=1";
     interlude.innerHTML = `
         <div class="interlude-overlay">
             <h2>Interlude Musical...</h2>
-            <iframe src="https://www.youtube-nocookie.com/embed/J8ugZk1rPpU?autoplay=1&mute=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            <button onclick="this.parentElement.parentElement.remove(); showTransition();">Passer l'interlude</button>
+            <iframe src="${url}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <button class="retro-btn" onclick="this.parentElement.parentElement.remove(); showTransition();">Passer l'interlude</button>
         </div>
     `;
     document.body.appendChild(interlude);
@@ -337,18 +403,19 @@ document.addEventListener('keydown', (e) => {
 zoomOverlay.onclick = () => zoomOverlay.style.display = 'none';
 
 function showPaymentModal() {
+    const s = uiStrings[currentLang];
     const html = `
         <div style='color:#000'>
-            <p>Veuillez choisir votre méthode de paiement :</p>
+            <p>${s.payment_choice}</p>
             <div style='margin: 15px 0; display: flex; flex-direction: column; gap: 10px;'>
-                <label><input type="radio" name="pay" value="card"> Carte de Crédit Imaginaire</label>
-                <label><input type="radio" name="pay" value="gold"> Or de Leprechaun</label>
-                <label><input type="radio" name="pay" value="cacao"> Fèves de Cacao</label>
+                <label><input type="radio" name="pay" value="card"> ${s.payment_card}</label>
+                <label><input type="radio" name="pay" value="gold"> ${s.payment_gold}</label>
+                <label><input type="radio" name="pay" value="cacao"> ${s.payment_cacao}</label>
             </div>
-            <p><i>Note: Aucun remboursement possible après le départ du ferry.</i></p>
+            <p><i>${s.payment_note}</i></p>
         </div>
     `;
-    showAlert("Paiement Sécurisé", html, true);
+    showAlert(s.payment_title, html, true);
 
     // Override the OK button for this specific modal
     const okBtn = document.getElementById('modal-ok-btn');
@@ -358,7 +425,7 @@ function showPaymentModal() {
         if (selected) {
             window.ikeaPaid = true;
             hideAlert();
-            showAlert("Succès", "Paiement accepté ! Vous pouvez maintenant continuer votre voyage vers la Finlande.");
+            showAlert("OK", s.payment_success);
             okBtn.onclick = oldClick; // Restore
         } else {
             alert("Veuillez sélectionner une méthode !");
@@ -393,6 +460,9 @@ function showTransition() {
 
 // 5. FINAL SCREEN (WIN98)
 function openWin98(id) {
+    if (id === 'win-video-final') {
+        document.getElementById('video-final-frame').src = getYoutubeUrl();
+    }
     document.getElementById(id).style.display = 'flex';
 }
 function closeWin98(id) {
@@ -426,8 +496,13 @@ function openFolder(cityId) {
 }
 
 function showFinal() {
+    const s = uiStrings[currentLang];
     journeyScreen.classList.add('hidden');
     finalScreen.classList.remove('hidden');
+
+    document.querySelector('.desktop-icon[onclick*="win-archives"] span').innerText = s.archives;
+    document.querySelector('.desktop-icon[onclick*="win-video-final"] span').innerText = s.video_final;
+    document.querySelector('.desktop-icon[onclick*="win-poems"] span').innerText = s.poems;
 
     const arcGrid = document.getElementById('archives-grid');
     arcGrid.innerHTML = "";
@@ -436,7 +511,7 @@ function showFinal() {
             const icon = document.createElement('div');
             icon.className = 'desktop-icon';
             icon.style.color = '#000';
-            icon.innerHTML = `<img src="https://win98icons.alexmeub.com/icons/png/directory_closed-4.png"><span>${d.city}</span>`;
+            icon.innerHTML = `<div class="fallback-icon folder"></div><span>${d.city}</span>`;
             icon.onclick = () => openFolder(d.id);
             arcGrid.appendChild(icon);
         }
@@ -448,8 +523,10 @@ function showFinal() {
         const icon = document.createElement('div');
         icon.className = 'desktop-icon';
         icon.style.color = '#000';
-        icon.innerHTML = `<img src="https://win98icons.alexmeub.com/icons/png/document_writing-0.png"><span>${p.title}</span>`;
-        icon.onclick = () => showAlert(p.title, `par ${p.author}\n\n${p.text}`);
+        const pTitle = (currentLang === 'de') ? (p.title_de || p.title) : p.title;
+        const pText = (currentLang === 'de') ? (p.text_de || p.text) : p.text;
+        icon.innerHTML = `<div class="fallback-icon poem"></div><span>${pTitle}</span>`;
+        icon.onclick = () => showAlert(pTitle, `von ${p.author}\n\n${pText}`);
         poemGrid.appendChild(icon);
     });
 }

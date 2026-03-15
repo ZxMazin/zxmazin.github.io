@@ -27,10 +27,7 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 }
 .login-box h2 { font-size: 1.2rem; margin-bottom: 10px; background: #000080; color: #fff; padding: 5px; }
 .login-box input { width: 80%; padding: 5px; margin-bottom: 20px; border: 2px inset #fff; }
-.login-box button {
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.login-box button, #next-city-btn, .modal-footer button {
+.retro-btn {
     padding: 8px 25px;
     background: #c0c0c0;
     border: 3px outset #fff;
@@ -40,11 +37,18 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
     font-family: inherit;
     transition: all 0.1s;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    color: #000;
 }
-.login-box button:active, #next-city-btn:active, .modal-footer button:active {
+.retro-btn:active {
     border-style: inset;
     transform: translate(1px, 1px);
     box-shadow: none;
+}
+.retro-btn:hover {
+    background: #d0d0d0;
+}
+.login-box button {
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 #next-city-btn {
     background: #008080;
@@ -117,10 +121,23 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 }
 #zoom-overlay img {
     max-width: 90%;
-    max-height: 90%;
+    max-height: 80%;
     box-shadow: 0 0 30px rgba(255,255,255,0.2);
     border: 5px solid #fff;
 }
+#zoom-cart-banner {
+    position: absolute;
+    bottom: 20px;
+    background: #ffcc00;
+    color: #0058a3;
+    padding: 15px 30px;
+    border: 3px outset #fff;
+    display: none;
+    align-items: center;
+    gap: 20px;
+    z-index: 10001;
+}
+#zoom-cart-banner span { font-weight: bold; font-size: 1.2rem; }
 
 /* THEMES */
 .theme-morocco-meknes { background: #ff4500 !important; } /* Desert Orange */
@@ -162,7 +179,10 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 .image-wrapper:hover .product-info { transform: translateY(0); }
 .add-to-cart-btn {
     width: 100%; padding: 5px; background: #0058a3; color: #fff;
-    border: none; cursor: pointer; font-weight: bold;
+    border: 3px outset #004a8b; cursor: pointer; font-weight: bold;
+}
+.add-to-cart-btn:active {
+    border-style: inset;
 }
 
 .theme-finland { background: #add8e6 !important; }
@@ -230,6 +250,44 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 .desktop-icon img { width: 48px; margin-bottom: 5px; }
 .desktop-icon span { font-size: 12px; text-align: center; }
 
+.fallback-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+    background: #ccc;
+    border: 2px outset #fff;
+    position: relative;
+}
+
+.fallback-icon.folder { background-color: #ffd700; }
+.fallback-icon.folder::after {
+    content: "";
+    position: absolute;
+    top: -5px; left: 0; width: 15px; height: 5px;
+    background: #ffd700;
+}
+
+.fallback-icon.video { background-color: #333; }
+.fallback-icon.video::after {
+    content: "▶";
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.fallback-icon.poem { background-color: #fff; }
+.fallback-icon.poem::after {
+    content: "≡";
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-weight: bold;
+}
+
 /* WIN98 WINDOWS */
 .win98-window {
     position: absolute; top: 50px; left: 50px;
@@ -275,6 +333,20 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
     100% { transform: translateY(110vh); }
 }
 .transition-container.move-down::before { animation: moveDown 3s infinite linear; }
+
+/* LANGUAGE TOGGLE */
+#language-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 10005;
+    display: flex;
+    gap: 5px;
+}
+#language-toggle button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
 
 /* CUSTOM MODAL */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; display: flex; justify-content: center; align-items: center; }
