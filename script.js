@@ -85,8 +85,11 @@ modalCloseBtn.onclick = hideAlert;
 modalOkBtn.onclick = hideAlert;
 
 // 1. LOGIN LOGIC
+const APP_PASSWORD = 'ein\u00adzel\u00adschick\u00adsal';
+
 document.addEventListener('mousemove', (e) => {
     if (loginScreen.classList.contains('hidden')) return;
+    if (passField.value.trim().length === 0) return;
 
     const rect = loginBtn.getBoundingClientRect();
     const btnX = rect.left + rect.width / 2;
@@ -94,35 +97,24 @@ document.addEventListener('mousemove', (e) => {
 
     const dist = Math.sqrt(Math.pow(e.clientX - btnX, 2) + Math.pow(e.clientY - btnY, 2));
 
-    if (dist < 80 && loginMoves < MAX_LOGIN_MOVES) {
-        const x = (Math.random() - 0.5) * window.innerWidth * 0.6;
-        const y = (Math.random() - 0.5) * window.innerHeight * 0.6;
+    if (dist < 120) {
+        // Move it even further and faster
+        const x = (Math.random() - 0.5) * window.innerWidth * 0.8;
+        const y = (Math.random() - 0.5) * window.innerHeight * 0.8;
         loginBtn.style.transform = `translate(${x}px, ${y}px)`;
         loginBtn.style.setProperty('--last-x', `${x}px`);
         loginBtn.style.setProperty('--last-y', `${y}px`);
         loginMoves++;
-    } else if (dist < 80 && loginMoves === MAX_LOGIN_MOVES) {
-        loginBtn.classList.add('falling-btn');
-        loginMoves++; // prevent repeated fall trigger
-        setTimeout(() => {
-            if (passField.value.toLowerCase() === 'caca') {
-                startBoot();
-            } else {
-                loginBtn.classList.remove('falling-btn');
-                loginBtn.style.transform = "translate(0,0)";
-                loginMoves = 0;
-                showAlert("Erreur Système", "Mot de passe incorrect ! Indice: C'est un mot de 4 lettres que les enfants aiment bien dire.");
-            }
-        }, 2000);
     }
 });
 
 loginBtn.addEventListener('click', () => {
-    if (passField.value.toLowerCase() === 'caca') {
+    const s = uiStrings[currentLang];
+    if (passField.value.toLowerCase() === APP_PASSWORD) {
         audioClick.play();
         startBoot();
     } else {
-        showAlert("Erreur Système", "Mot de passe incorrect ! Indice: C'est un mot de 4 lettres que les enfants aiment bien dire.");
+        showAlert(s.login_error_title, s.login_error_msg);
     }
 });
 
@@ -246,7 +238,8 @@ function renderCity() {
                 zoomImg.src = imgSrc;
                 zoomOverlay.style.display = 'flex';
 
-                if (imgData.name) {
+                // Only show banner if product info exists (Fix for Stockholm)
+                if (imgData && typeof imgData === 'object' && imgData.name) {
                     zoomCartBanner.style.display = 'flex';
                     zoomProductName.innerText = (currentLang === 'de') ? (imgData.name_de || imgData.name) : imgData.name;
                     zoomAddBtn.onclick = (e) => {
@@ -438,10 +431,35 @@ function showPaymentModal() {
     };
 }
 
+function preloadNextAssets(step) {
+    if (step >= journeyData.length) return;
+    const nextData = journeyData[step];
+
+    // Preload Images
+    nextData.images.forEach(imgData => {
+        const src = (typeof imgData === 'string') ? imgData : imgData.src;
+        const img = new Image();
+        img.src = src;
+    });
+
+    // Preload Video Frame if at final stages
+    if (step === journeyData.length - 1) {
+        const frame = document.getElementById('video-final-frame');
+        if (frame && !frame.src) {
+            // We use a dummy hidden load to prime the cache if possible
+            // Note: browser policies might limit this, but it sets the intention
+            frame.src = "https://www.youtube-nocookie.com/embed/J8ugZk1rPpU";
+        }
+    }
+}
+
 function showTransition() {
     const trans = document.getElementById('transport-transition');
     const transText = document.getElementById('transition-text');
     const transport = journeyData[currentStep-1].transport;
+
+    // Start preloading next city assets immediately
+    preloadNextAssets(currentStep);
 
     if (transport === 'fin' || transport === 'none') {
         renderCity();
@@ -484,15 +502,18 @@ function openFolder(cityId) {
     body.innerHTML = `<h3>${data.city}, ${data.country}</h3><p>${data.text}</p><hr><div class='folder-grid'></div>`;
 
     const grid = body.querySelector('.folder-grid');
-    data.images.forEach(img => {
-        const src = (typeof img === 'string') ? img : img.src;
+    data.images.forEach(imgData => {
+        const src = (typeof imgData === 'string') ? imgData : imgData.src;
         const icon = document.createElement('div');
         icon.className = 'desktop-icon';
         icon.style.color = '#000';
-        icon.innerHTML = `<img src="${src}" style="width:50px; height:50px; object-fit:cover;"><span>Photo</span>`;
+        icon.innerHTML = `<img src="${src}" style="width:50px; height:50px; object-fit:contain; background:#000;"><span>Photo</span>`;
+
         icon.onclick = () => {
             zoomImg.src = src;
             zoomOverlay.style.display = 'flex';
+            // Ensure IKEA banner is hidden in Archive view
+            zoomCartBanner.style.display = 'none';
         };
         grid.appendChild(icon);
     });
