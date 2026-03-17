@@ -7,7 +7,11 @@ const journeyData = [
         country_de: "Marokko",
         transport: "train",
         theme: "morocco-meknes",
-        text: `Il y avait aussi une tradition : à l’arrivée dans notre village natal, il fallait rendre visite aux morts. Mon père et ma grand-mère sont enterrés à côté, une drôle de coïncidence. Mon père n’était pas du tout marocain. Il était né en Égypte et avait immigré en Suisse pour devenir ingénieur informaticien, alors que le métier en était encore à ses débuts. Il est décédé d’un cancer du cerveau quand j’avais six ans.\n\nJ’aime bien le Maroc. C’est un endroit très vrai, où le superficiel n’a pas sa place. Lorsque je rendis visite à une amie de la famille, Soukaina Boubia, professeur d’histoire-géographie à la Haute École de tourisme de Rabat-Salé, elle m’offrit un livre sur l’histoire du Maroc. C’est un très beau cadeau : offrir le savoir.`,
+        text: `Il y avait aussi une tradition : à l’arrivée dans notre village natal, il fallait rendre visite aux morts. Mon père et ma grand-mère sont enterrés à côté, une drôle de coïncidence. Mon père n’était pas du tout marocain. Il était né en Égypte et avait immigré en Suisse pour devenir ingénieur informaticien, alors que le métier en était encore à ses débuts. Il est décédé d’un cancer du cerveau quand j’avais six ans. Sur le moment, je n’avais pas compris ce qui se passait. Ensuite, quand j’ai compris qu’il ne reviendrait pas, je me demandais pourquoi il était enterré là-bas. Parce que c’était l’endroit où il se sentait chez lui : le pays de sa femme, le Maroc. J’ai compris. Il n’était ni suisse ni égyptien. En Égypte, on l’aurait considéré comme Suisse. En Suisse, on l’aurait traité d’étranger. Au Maroc, on le considérait comme Marocain. Lors de son enterrement, les fidèles de la mosquée prièrent tous pour lui.
+
+Les Marocains sont drôles. À mon arrivée à la douane marocaine, lorsque je donnai mon passeport, l’agent commença à me fixer longuement. Premier réflexe un peu idiot : je me recoiffai et souris. Il rigola. Mais je fus le seul de ma file à qui l’on ne demande rien. Heureusement, je n’aurais pas pu répondre : je parle très mal le darija.
+
+J’aime bien le Maroc. C’est un endroit très vrai, où le superficiel n’a pas sa place. Lorsque je rendis visite à une amie de la famille, Soukaina Boubia, professeur d’histoire-géographie à la Haute École de tourisme de Rabat-Salé, elle m’offrit un livre sur l’histoire du Maroc, encore dans son sac de « la librairie populaire ». C’est un très beau cadeau : offrir le savoir.`,
         text_de: `Es gab auch eine Tradition: Bei der Ankunft in unserem Heimatdorf mussten wir die Toten besuchen. Mein Vater und mein Großvater sind nebeneinander begraben, ein seltsamer Zufall. Mein Vater war überhaupt kein Marokkaner. Er wurde in Ägypten geboren und war in die Schweiz eingewandert, um Informatikingenieur zu werden, als der Beruf noch in den Kinderschuhen steckte. Er starb an Hirnkrebs, als ich sechs Jahre alt war.\n\nIch mag Marokko sehr. Es ist ein sehr authentischer Ort, an dem Oberflächlichkeit keinen Platz hat. Als ich eine Freundin der Familie besuchte, Soukaina Boubia, Professorin für Geschichte und Geographie an der Tourismushochschule in Rabat-Salé, schenkte sie mir ein Buch über die Geschichte Marokkos. Es ist ein sehr schönes Geschenk: Wissen zu verschenken.`,
         images: [
             "images/meknes/000118380040.jpg",
@@ -37,7 +41,13 @@ const journeyData = [
         country_de: "Marokko",
         transport: "avion",
         theme: "morocco-rabat",
-        text: `Je rejoignis ma famille à l’avenue Hassan, près du mausolée de Mohamed V. Nous nous rendîmes directement à la gare ferroviaire et prîmes le train Al Atlas, qui relie les grandes villes marocaines.\n\nDans mon compartiment, à part ma sœur et ma mère, il y avait un homme dans un coin qui lisait son journal pendant tout le trajet. À côté, toute une famille était également présente : la grand-mère, la mère, la fille et la petite fille.\n\nMa mère me raconta une habitude de ses années étudiantes, lorsqu’elle faisait la navette entre Rabat et Meknès. À l’arrivée à une gare, ses camarades masculins ouvraient toujours les portes alors que le train était encore en approche, prétendant que c’était pour s’aérer.`,
+        text: `Je rejoignis ma famille à l’avenue Hassan, près du mausolée de Mohamed V. Nous nous rendîmes directement à la gare ferroviaire et prîmes le train Al Atlas, qui relie les grandes villes marocaines. Le trajet était long, le train n’allant pas très vite. On traversa des champs à perte de vue et passait parfois dans des villages reculés. Les trains au Maroc étaient les mêmes que les anciens trains à compartiments français. Ils avaient été revendus au Maroc, mais honnêtement, c’était plus un acte de recyclage qu’un geste de générosité. Au moins, c’était idéal pour faire des rencontres.
+
+Dans mon compartiment, à part ma sœur et ma mère, il y avait un homme dans un coin qui lisait son journal pendant tout le trajet. À côté, toute une famille était également présente : la grand-mère, la mère, la fille et la petite fille. Elles étaient habillées très différemment de ce que l’on verrait en Occident. Les deux aînées portaient chacune un voile ample qui couvrait tout leur corps. La fille était en djellaba, une robe colorée qui descendait jusqu’aux chevilles, mais sans voile. La petite-fille était dans sa poussette, vêtue d’un jogging et d’un pull Dora l’Exploratrice.
+
+Ma mère entama la discussion avec elles. Il s’avéra que la fille avait une grave maladie nerveuse et qu’elles rentraient d’un rendez-vous chez le médecin. Dernière fois que je me plaindrais du long trajet. Nous arrivâmes finalement à Meknès.
+
+Ma mère me raconta une habitude de ses années étudiantes, lorsqu’elle faisait la navette entre Rabat et Meknès, la ville où elle habitait. À l’arrivée à une gare, ses camarades masculins ouvraient toujours les portes alors que le train était encore en approche, prétendant que c’était pour s’aérer.`,
         text_de: `Ich traf meine Familie auf der Avenue Hassan, in der Nähe des Mausoleums von Mohamed V. Wir fuhren direkt zum Bahnhof und nahmen den Al Atlas-Zug, der die großen marokkanischen Städte verbindet.\n\nIn meinem Abteil saßen außer meiner Schwester und meiner Mutter noch ein Mann in einer Ecke, der während der gesamten Fahrt seine Zeitung las. Daneben war auch eine ganze Familie anwesend: die Großmutter, die Mutter, die Tochter und die Enkelin.\n\nMeine Mutter erzählte mir von einer Gewohnheit aus ihrer Studienzeit, als sie zwischen Rabat und Meknès pendelte. Bei der Einfahrt in einen Bahnhof öffneten ihre männlichen Kommilitonen immer die Türen, während der Zug noch in Bewegung war, und behaupteten, das sei zum Lüften.`,
         images: [
             "images/rabat/000118380036.jpg",
@@ -67,7 +77,19 @@ const journeyData = [
         country_de: "Frankreich",
         transport: "avion",
         theme: "paris",
-        text: `Paris Paris, ville lumière, ville des arts, mais surtout ville de misère. On entend souvent dire que les inégalités sont aujourd’hui plus fortes que du temps de la Révolution française.\n\nLe lendemain, je me levai pour continuer ma visite. Objectif : banlieue. Je me dirigeai vers le quartier qui me correspondrait : Barbès-Rochechouart, un quartier à forte population maghrébine.\n\nL’après-midi, je me rends au cimetière du Père-Lachaise. Je suis allé voir quelques tombes précises pour, en quelque sorte, recevoir leur bénédiction : Guillaume Apollinaire, Frédéric Chopin, Jean-Baptiste Poquelin, etc.`,
+        text: `Paris Paris, ville lumière, ville des arts, mais surtout ville de misère. On entend souvent dire que les inégalités sont aujourd’hui plus fortes que du temps de la Révolution française. Cependant, ceux qui savent cela appartiennent déjà à la classe haute.
+
+Après trois heures de retard et un cookie en guise de dédommagement, j’arrivai à Paris et commencai, pour ne pas changer, mon travail. Le soir, j’étais invité à dîner : pas question d’arriver en retard, cela ne se reproduirait pas pendant mon voyage. J’avais été invité par des amis de passage à Paris. Je pense que ce fut le meilleur dîner que j’ai pu avoir durant mon voyage. Les adieux furent aussi difficiles que d’expliquer le sens de mon périple. Quelle chance.
+
+Le lendemain, je me levai pour continuer ma visite. Objectif : banlieue. Je me dirigeai vers le quartier qui me correspondrait : Barbès-Rochechouart, un quartier à forte population maghrébine. La sensation est vraiment indescriptible. Les odeurs sont puissantes, ça sent les épices, le Ras el-hanout, mais, étant proche du métro, ça sent aussi l’urine. Les bruits sont intenses, on entend beaucoup de langues à voix haute.
+
+Cependant, j’avais peur. Me balader dans une banlieue avec une caméra au prix du SMIC, dans la France à Macron, n’est pas l’idée la plus intelligente. J’avance, les trottoirs sont bondés. On s’agglutine. Je vois des jeunes embêter deux jeunes agents de police. Le monde à l’envers. Beaucoup me regardent, et je ne sais pas comment le prendre. Je ne m’éternise pas et dès que j’aperçois un arrêt de métro, je file.
+
+Le quartier d’à côté, Montmartre, n’est pas moins calme, juste différent. Une masse de touristes monte pour voir la basilique du Sacré-Cœur. En même temps, je retrouve les mêmes gens d’avant qui m’appellent « sexy boy » et me vendent des maquettes de la Tour Eiffel pour « ten euro only for you ». Sympathique.
+
+L’après-midi, je me rends au cimetière du Père-Lachaise, un cimetière des martyrs de la célébrité. On y enterre seulement les personnalités ou les grandes familles. Même après la mort, on n’est pas égal. Il y a des petites sépultures et de véritables maisons. Allons-nous au paradis plus vite avec une tombe de quatre mètres de large ? Je suis allé voir quelques tombes précises pour, en quelque sorte, recevoir leur bénédiction : Guillaume Apollinaire, Frédéric Chopin, Jean-Baptiste Poquelin, etc.
+
+Paris est superficiel. On met les immigrés dans un coin de la ville, les riches à l’opposé, puis on fait un dégradé. Même si le système est hérité du XIXᵉ siècle, il est toujours là.`,
         text_de: `Paris Paris, Stadt des Lichts, Stadt der Künste, aber vor allem Stadt des Elends. Man hört oft, dass die Ungleichheiten heute größer sind als zur Zeit der Französischen Revolution.\n\nAm nächsten Tag stand ich auf, um meine Besichtigung fortzusetzen. Ziel: Vorstadt. Ich machte mich auf den Weg in das Viertel, das zu mir passen würde: Barbès-Rochechouart, ein Viertel mit einem hohen maghrebinischen Bevölkerungsanteil.\n\nAm Nachmittag gehe ich zum Friedhof Père-Lachaise. Ich besuchte einige bestimmte Gräber, um sozusagen ihren Segen zu empfangen: Guillaume Apollinaire, Frédéric Chopin, Jean-Baptiste Poquelin usw.`,
         images: [
             "images/paris/IMG_0377.JPG",
@@ -100,10 +122,22 @@ const journeyData = [
         city_de: "Stockholm",
         country: "Suède",
         country_de: "Schweden",
-        transport: "avion",
+        transport: "bateau",
         theme: "sweden",
-        text: `J’arrive à l’aéroport de Stockholm-Arlanda à 00h20. C’est la première fois que je ne comprends rien. Où sont les belles blondes pour me guider vers mon hôtel ?\n\nJ’aime bien Stockholm : les cinnamon rolls, Ikea, et leur lait d’avoine. Je pense que je pourrais y vivre quelque temps. Mais il me reste quand même ce sentiment qu’au fond, je ne serai jamais vraiment accepté.`,
-        text_de: `Ich komme um 00:20 Uhr am Flughafen Stockholm-Arlanda an. Es ist das erste Mal, dass ich gar nichts verstehe. Wo sind die schönen Blondinen, die mich zu meinem Hotel führen?\n\nIch mag Stockholm sehr: die Zimtschnecken, Ikea und ihre Hafermilch. Ich denke, ich könnte eine Zeit lang dort leben. Aber es bleibt mir trotzdem das Gefühl, dass ich im Grunde nie wirklich akzeptiert werde.`,
+        text: `En 2025, le Conseil national suisse refuse le nouveau budget pour la subvention du train de nuit qui aurait pu relier Bâle SBB à Malmö, en Suède. Les UDC justifiaient cette dépense comme inutile, car, je cite : « Ne pensez-vous pas qu’il s’agit de mettre 10 millions pour aller voir les belles blondes en Suède ? Ce n’est pas beaucoup d’argent pour le contribuable. »
+
+J’arrive à l’aéroport de Stockholm-Arlanda à 00h20 et à la gare Stockholm C à 1h24. C’est la première fois que je ne comprends rien. Où sont les belles blondes pour me guider vers mon hôtel ?
+
+Je finis enfin par comprendre leur système de tarification et prends un bus pour rejoindre mon hostel. Lors de mon trajet, je rencontre enfin les fameuses blondes. La première, complètement bourrée, crie au chauffeur alors que celui-ci lui demande simplement de valider son ticket. La deuxième et la troisième, je les croise à la quatrième station : deux messieurs les accompagnaient pour rejoindre le bus, pendant que la troisième, pieds nus, vomissait, et la deuxième, pieds nus également, lui tenait les cheveux. J’imagine leur soirée bien arrosée qui les a menées à ce banc, et la gentillesse de leurs compagnons. C’est froid.
+
+J’aime bien Stockholm : les cinnamon rolls, Ikea, et leur lait d’avoine. Je pense que je pourrais y vivre quelque temps. Mais il me reste quand même ce sentiment qu’au fond, je ne serai jamais vraiment accepté. Les gens ici suivent un schéma typique : le Suédois par défaut. J’espère que ce n’est qu’une impression.`,
+        text_de: `Im Jahr 2025 lehnt der Schweizer Nationalrat das neue Budget für die Subventionierung des Nachtzugs ab, der Basel SBB mit Malmö in Schweden hätte verbinden können. Die SVP rechtfertigte diese Ausgabe als unnötig, da sie, ich zitiere, fragte: „Glauben Sie nicht, dass es darum geht, 10 Millionen auszugeben, um die schönen Blondinen in Schweden zu sehen? Das ist nicht viel Geld für den Steuerzahler.“
+
+Ich komme um 00:20 Uhr am Flughafen Stockholm-Arlanda an und um 01:24 Uhr am Bahnhof Stockholm C. Es ist das erste Mal, dass ich gar nichts verstehe. Wo sind die schönen Blondinen, die mich zu meinem Hotel führen?
+
+Schließlich verstehe ich ihr Tarifsystem und nehme einen Bus zu meinem Hostel. Während meiner Fahrt treffe ich endlich die berühmten Blondinen. Die erste, völlig betrunken, schreit den Fahrer an, als dieser sie einfach bittet, ihr Ticket zu validieren. Die zweite und dritte treffe ich an der vierten Station: Zwei Herren begleiteten sie zum Bus, während die dritte, barfuß, sich übergab und die zweite, ebenfalls barfuß, ihre Haare hielt. Ich stelle mir ihren feuchtfröhlichen Abend vor, der sie zu dieser Bank geführt hat, und die Freundlichkeit ihrer Begleiter. Es ist kalt.
+
+Ich mag Stockholm: die Zimtschnecken, Ikea und ihre Hafermilch. Ich denke, ich könnte eine Zeit lang dort leben. Aber es bleibt mir trotzdem das Gefühl, dass ich im Grunde nie wirklich akzeptiert werde. Die Leute hier folgen einem typischen Schema: der Standard-Schwede. Ich hoffe, das ist nur ein Eindruck.`,
         images: [
             { src: "images/stockholm/IMG_0660.JPG", name: "BILLY Bibliothèque", name_de: "BILLY Bücherregal", price: 599 },
             { src: "images/stockholm/IMG_0663.JPG", name: "POÄNG Fauteuil", name_de: "POÄNG Sessel", price: 899 },
@@ -113,19 +147,19 @@ const journeyData = [
             { src: "images/stockholm/IMG_0730.JPG", name: "HEMNES Commode", name_de: "HEMNES Kommode", price: 1495 },
             { src: "images/stockholm/IMG_0742.JPG", name: "LACK Table", name_de: "LACK Tisch", price: 99 },
             { src: "images/stockholm/IMG_0743.JPG", name: "FÄRGKLAR Assiette", name_de: "FÄRGKLAR Teller", price: 49 },
-            "images/stockholm/IMG_0744.JPG",
-            "images/stockholm/IMG_0761.JPG",
-            "images/stockholm/IMG_0775.JPG",
-            "images/stockholm/IMG_0777.JPG",
-            "images/stockholm/IMG_0781.JPG",
-            "images/stockholm/IMG_0786.JPG",
-            "images/stockholm/IMG_0794.JPG",
-            "images/stockholm/IMG_0797.JPG",
-            "images/stockholm/IMG_0828.JPG",
-            "images/stockholm/IMG_0863.JPG",
-            "images/stockholm/IMG_0867.JPG",
-            "images/stockholm/IMG_0868.JPG",
-            "images/stockholm/IMG_0905.JPG"
+            { src: "images/stockholm/IMG_0744.JPG", name: "ÖSTERNÄS Poignée", name_de: "ÖSTERNÄS Griff", price: 99 },
+            { src: "images/stockholm/IMG_0761.JPG", name: "EKET Cabinet", name_de: "EKET Schrank", price: 450 },
+            { src: "images/stockholm/IMG_0775.JPG", name: "FJÄLLBO Étagère", name_de: "FJÄLLBO Regal", price: 1295 },
+            { src: "images/stockholm/IMG_0777.JPG", name: "GLADOM Table", name_de: "GLADOM Tisch", price: 199 },
+            { src: "images/stockholm/IMG_0781.JPG", name: "INGOLF Chaise", name_de: "INGOLF Stuhl", price: 599 },
+            { src: "images/stockholm/IMG_0786.JPG", name: "KNOPPÄNG Cadre", name_de: "KNOPPÄNG Rahmen", price: 80 },
+            { src: "images/stockholm/IMG_0794.JPG", name: "LACK Étagère murale", name_de: "LACK Wandregal", price: 150 },
+            { src: "images/stockholm/IMG_0797.JPG", name: "MUREN Fauteuil", name_de: "MUREN Sessel", price: 3495 },
+            { src: "images/stockholm/IMG_0828.JPG", name: "NISSE Chaise pliante", name_de: "NISSE Klappstuhl", price: 149 },
+            { src: "images/stockholm/IMG_0863.JPG", name: "ODGER Chaise", name_de: "ODGER Stuhl", price: 799 },
+            { src: "images/stockholm/IMG_0867.JPG", name: "PÄRLBAND Chandelier", name_de: "PÄRLBAND Kerzenständer", price: 59 },
+            { src: "images/stockholm/IMG_0868.JPG", name: "RÅSKOG Desserte", name_de: "RÅSKOG Servierwagen", price: 499 },
+            { src: "images/stockholm/IMG_0905.JPG", name: "SKÅDIS Panneau", name_de: "SKÅDIS Lochplatte", price: 249 }
         ]
     },
     {
@@ -136,7 +170,11 @@ const journeyData = [
         country_de: "Finnland",
         transport: "bateau",
         theme: "finland",
-        text: `C’est seulement après avoir découvert les Moomins que j’ai commencé à apprécier Helsinki. La nuit tombe tellement vite. Elle s’écrase.\n\nLe départ de ce pays fut fabuleux. Sur le pont d’un ferry, je voyais défiler d’abord Helsinki, puis ses îles, et je me retrouvais sur la mer du Nord. Une immensité de bleu à perte de vue.`,
+        text: `Là, c’était vraiment loin de chez moi. C’est un drôle de sentiment, je trouve. La fatigue commençait à se faire sentir et je n’étais plus émerveillé par ce voyage. Pourtant, Helsinki était ma destination de rêve depuis tout petit. Les « Crackeds » que je rencontrais dans le tram ne m’aidaient pas. C’est seulement après avoir découvert les Moomins que j’ai commencé à apprécier Helsinki.
+
+La nuit tombe tellement vite. Elle s’écrase. Quand j’y pense, après la chaleur du Maroc, c’était l’opposé dans tous les sens. Le soir, enfin en fin d’après-midi, j’ai pris un bateau en direction d’une île, enfin de huit îles pour être précis : la forteresse de Suomenlinna. Une grande île séparée en huit parties et reliée par des ponts. C’est le genre de lieu que l’on visite normalement de jour, mais par manque de bol, il ne me restait qu’une soirée. C’était froid en tout point, mais beau. L’histoire des Finlandais me fascinait. Le pays est passé du statut de plus pauvre à celui de plus heureux en moins d’un siècle.
+
+Le départ de ce pays fut fabuleux. Sur le pont d’un ferry, je voyais défiler d’abord Helsinki, puis ses îles, et je me retrouvais sur la mer du Nord. Une immensité de bleu à perte de vue.`,
         text_de: `Erst nachdem ich die Mumins entdeckt hatte, begann ich Helsinki zu schätzen. Die Nacht bricht so schnell herein. Sie erdrückt einen.\n\nDer Abschied von diesem Land war fabelhaft. Auf dem Deck einer Fähre sah ich erst Helsinki vorbeiziehen, dann seine Inseln, und ich fand mich auf der Nordsee wieder. Eine Unermesslichkeit von Blau, so weit das Auge reicht.`,
         images: [
             "images/helsinki/000118380034.jpg",
@@ -173,8 +211,26 @@ const journeyData = [
         country: "Estonie",
         country_de: "Estland",
         transport: "bus",
-        theme: "estonia",
-        text: `Ce qui m’a surpris à Tallinn, c’est la manière dont ce pays est passé d’un pays communiste à un pays européen comme les autres. Certes, il restait des vestiges, mais la comparaison avec la Suisse était tentante.\n\nJe visitai le musée national des arts estoniens. L’approche critique et sociale a été déclenchée par les profondes inégalités ressenties dans la société des années 1990.`,
+        theme: "tallinn",
+        text: `Ma première impression à Tallinn fut une dame d’une cinquantaine d’années qui me dit que je m’étais trompé de toilettes et que c’était « disgusting ». Ce sont des toilettes mixtes.
+
+Mise à part cet incident, ce qui m’a surpris à Tallinn, c’est la manière dont ce pays est passé d’un pays communiste à un pays européen comme les autres. Certes, il restait des vestiges, mais la comparaison avec la Suisse était tentante. Tallinn est une petite ville, beaucoup moins impressionnante que Stockholm, Paris ou Helsinki, mais elle garde son charme.
+
+Je visitai le musée national des arts estoniens. On me dit que le pays est connu pour son art et que beaucoup de visiteurs viennent de loin pour cette raison. Effectivement, cela ne laisse pas indifférent. Le premier étage présentait les œuvres modernes : de véritables chefs-d’œuvre.
+
+Le troisième étage, averti par un petit panneau de 10 × 5 cm indiquant qu’il contenait des scènes à caractère sexuel, faisait l’apologie du sado-masochisme du point de vue de l’artiste Anna-Stina Treumung. C’était une exposition très surprenante. Des jouets enfantins avaient été transformés en objets de domination.
+
+Le deuxième étage se concentrait sur l’art à l’époque du communisme. La critique émise par le musée sur cette période était très intéressante :
+
+Socialisme tardif - Les six paradoxes :
+1. Tout le monde travaille comme s'il était en vacances, mais les objectifs sont atteints.
+2. Les objectifs sont atteints, but it's not possible to buy anything in the stores.
+3. Il n'y a rien à acheter dans les magasins, mais les gens ont quand même un peu de nourriture dans leur réfrigérateur.
+4. Il y a un peu de nourriture dans les réfrigérateurs, mais tout le monde est mécontent.
+5. Tout le monde est mécontent, mais personne ne proteste.
+6. Personne ne proteste, mais les prisons sont pleines.
+
+Cela résume bien le communisme et explique pourquoi ce système n’a pas fonctionné. L’approche critique et sociale a été déclenchée par les profondes inégalités ressenties dans la société des années 1990.`,
         text_de: `Was mich in Tallinn überrascht hat, ist die Art und Weise, wie dieses Land von einem kommunistischen zu einem europäischen Land wie jedes andere geworden ist. Sicherlich gab es noch Überbleibsel, aber der Vergleich mit der Schweiz war verlockend.\n\nIch besuchte das Estnische Kunstmuseum. Der kritische und soziale Ansatz wurde durch die tiefen Ungleichheiten ausgelöst, die in der Gesellschaft der 1990er Jahre zu spüren waren.`,
         images: [
             "images/tallinn/000118380030.jpg",
@@ -216,8 +272,8 @@ const journeyData = [
         country: "Lettonie",
         country_de: "Lettland",
         transport: "bus",
-        theme: "latvia",
-        text: `La Lettonie ressemble davantage au communisme d’avant. Les gens y sont d’une gentillesse débordante. Le froid signifie beaucoup de choses : la solitude, la température, l’atmosphère.`,
+        theme: "riga",
+        text: `Alors, pour le coup, la Lettonie ressemble davantage au communisme d’avant. Les gens y sont d’une gentillesse débordante. Le Maroc, lui, est chaud. Je sais que le froid revient souvent dans mes textes, mais il signifie beaucoup de choses : la solitude, la température, l’atmosphère, etc. En même temps, cela ne veut rien dire. Pourquoi est-ce froid ici et pas là ?`,
         text_de: `Lettland ähnelt eher dem Kommunismus von früher. Die Menschen dort sind von einer überbordenden Freundlichkeit. Kälte bedeutet vieles: Einsamkeit, Temperatur, Atmosphäre.`,
         images: [
             "images/riga/IMG_1690.JPG",
@@ -255,7 +311,15 @@ const journeyData = [
         country_de: "Polen",
         transport: "train",
         theme: "poland",
-        text: `Après une longue nuit dans ce car polonais, je me sens assommé à l’arrivée. Un froid que je n’avais jamais ressenti m’a paralysé.\n\nLe soir, je retournai à la gare de Warszawa Centralna pour prendre le train Chopin, direction Praha hlavní nádraží.`,
+        text: `Après une longue nuit dans ce car polonais, je me sens assommé à l’arrivée. C’était vraiment violent. Un froid que je n’avais jamais ressenti m’a paralysé. Je trouvai refuge à la gare routière pendant quelques heures, jusqu’à ce que le jour se lève et que je comprenne comment prendre le bus. Toujours les mêmes soucis, pour finir.
+
+Arrivé au musée national de Varsovie, je ne comprenais pas toutes les informations, et surtout la plus importante : la gratuité du musée le mardi. Je me rendis au guichet pour demander un ticket, et le jeune caissier, sans me regarder et en rigolant with his colleague, tapota avec insolence la pancarte indiquant que l’entrée était gratuite, écrite en polonais. Ayant trop d’ego, je lui dis que je voulais voir l’exposition temporaire, qui était payante. Je ne savais pas ce que c’était, mais le prix, si : 30 zł, l’équivalent de 7 CHF, partie dans un caprice d’ego.
+
+Finalement, cela en valait vraiment la peine. La collection permanente était intéressante, mais sans plus. L’exposition temporaire, elle, était magique. C’est exactement ce que je cherchais. Merci à mon ego.
+
+Ensuite, j’enchaînai avec le musée Chopin. Grand auteur de musique romantique, il est l’icône de cette ville. C’est grâce à lui que j’ai passé des examens de piano au conservatoire quand j’étais petit.
+
+Le soir, je retournai à la gare de Warszawa Centralna pour prendre le train Chopin, direction Praha hlavní nádraží.`,
         text_de: `Nach einer langen Nacht in diesem polnischen Bus fühle ich mich bei der Ankunft wie erschlagen. Eine Kälte, die ich noch nie zuvor gespürt hatte, lähmte mich.\n\nAm Abend kehrte ich zum Bahnhof Warszawa Centralna zurück, um den Chopin-Zug Richtung Praha hlavní nádraží zu nehmen.`,
         images: [
             "images/varsovie/000118380024.jpg",
@@ -283,9 +347,13 @@ const journeyData = [
         city_de: "Prag",
         country: "République Tchèque",
         country_de: "Tschechien",
-        transport: "avion",
+        transport: "fin",
         theme: "czechia",
-        text: `Prague est une belle ville. J’ai surtout aimé sa ressemblance avec la Suisse : cétait comme retrouver mon chez-moi. Prague a été profondément marquée par l’influence du Kremlin.\n\nCe soir-là, je partis pour la Suisse avec un goût amer en bouche. Comment peut-on être à ce point aveugle à la misère ?`,
+        text: `Prague est une belle ville, vraiment. Enfin, je pense que ce que j’ai surtout aimé, c’est sa ressemblance avec la Suisse : c’était comme retrouver mon chez-moi. Prague est aussi une ville qui a connu l’influence du Kremlin et qui a été profondément marquée par cette histoire.
+
+En me baladant dans les rues, je voyais un véritable marécage de touristes. Dans tout ce vacarme, on voyait les sans-abris supplier les passants pour leur donner ne serait-ce qu’une pièce. On pourrait croire que les touristes, vu l’argent qu’ils avaient déjà dépensé pour venir, donneraient au moins une pièce avant de repartir. Détrompez-vous.
+
+Ce soir-là, je partis pour la Suisse avec un goût amer en bouche. Comment peut-on être à ce point aveugle à la misère ?`,
         text_de: `Prag ist eine wunderschöne Stadt. Mir hat vor allem die Ähnlichkeit mit der Schweiz gefallen: Es war, als würde ich mein Zuhause wiederfinden. Prag war tief geprägt vom Einfluss des Kremls.\n\nAn jenem Abend reiste ich mit einem bitteren Beigeschmack im Mund in die Schweiz ab. Wie kann man nur so blind gegenüber dem Elend sein?`,
         images: [
             "images/prague/000118380001.jpg",

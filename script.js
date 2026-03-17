@@ -105,30 +105,24 @@ document.addEventListener('mousemove', (e) => {
         loginBtn.classList.add('falling-btn');
         loginMoves++; // prevent repeated fall trigger
         setTimeout(() => {
-            if (passField.value.toLowerCase() === 'caca') {
+            if (passField.value.toLowerCase() === '1234') {
                 startBoot();
             } else {
                 loginBtn.classList.remove('falling-btn');
                 loginBtn.style.transform = "translate(0,0)";
                 loginMoves = 0;
-                showAlert("Erreur Système", "Mot de passe incorrect ! Indice: C'est un mot de 4 lettres que les enfants aiment bien dire.");
+                showAlert("Erreur Système", "Mot de passe incorrect ! Indice: 1234");
             }
         }, 2000);
     }
 });
 
 loginBtn.addEventListener('click', () => {
-    if (passField.value.toLowerCase() === 'caca') {
+    if (passField.value.toLowerCase() === '1234') {
         audioClick.play();
         startBoot();
     } else {
-        showAlert("Erreur Système", "Mot de passe incorrect ! Indice: C'est un mot de 4 lettres que les enfants aiment bien dire.");
-    }
-});
-
-passField.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        loginBtn.click();
+        showAlert("Erreur Système", "Mot de passe incorrect ! Indice: 1234");
     }
 });
 
@@ -193,23 +187,6 @@ function startJourney() {
     renderCity();
 }
 
-function createBgQuotes(text) {
-    const container = document.getElementById('journey-screen');
-    // Clear old quotes
-    document.querySelectorAll('.bg-quote').forEach(q => q.remove());
-
-    const lines = text.split('\n').filter(l => l.length > 20);
-    lines.forEach((line, i) => {
-        const q = document.createElement('div');
-        q.className = 'bg-quote';
-        q.innerText = line;
-        q.style.top = (10 + (i * 15) % 80) + '%';
-        q.style.animationDelay = (i * 2) + 's';
-        q.style.animationDuration = (20 + Math.random() * 20) + 's';
-        container.appendChild(q);
-    });
-}
-
 function renderCity() {
     const data = journeyData[currentStep];
     const title = document.getElementById('city-title');
@@ -223,20 +200,21 @@ function renderCity() {
     const contentText = (currentLang === 'de') ? data.text_de : data.text;
     text.innerText = contentText;
 
-    createBgQuotes(contentText);
-
     nextBtn.innerText = (currentStep < journeyData.length - 1) ? s.next : s.finish;
+
+    if (data.theme === 'sweden' && !window.ikeaPaid) {
+        nextBtn.style.opacity = '0.5';
+        nextBtn.style.cursor = 'not-allowed';
+    } else {
+        nextBtn.style.opacity = '1';
+        nextBtn.style.cursor = 'pointer';
+    }
 
     if (currentPage === 0) {
         visual.innerHTML = "";
         data.images.forEach((imgData, idx) => {
             const wrapper = document.createElement('div');
             wrapper.className = "image-wrapper";
-
-            // Layout variety
-            if (idx % 5 === 0) wrapper.classList.add('big');
-            else if (idx % 3 === 0) wrapper.classList.add('landscape');
-            else if (idx % 4 === 0) wrapper.classList.add('portrait');
 
             const imgEl = document.createElement('img');
             const imgSrc = (typeof imgData === 'string') ? imgData : imgData.src;
@@ -270,7 +248,7 @@ function renderCity() {
         // Specific IKEA logic
         if (data.theme === 'sweden') {
             window.ikeaCart = window.ikeaCart || {};
-            window.ikeaPaid = false;
+            if (window.ikeaPaid === undefined) window.ikeaPaid = false;
 
             const basket = document.createElement('div');
             basket.id = 'ikea-basket';
@@ -332,7 +310,11 @@ function renderCity() {
                 if (!p.name) return;
 
                 const pName = (currentLang === 'de') ? (p.name_de || p.name) : p.name;
-                w.innerHTML += `<div class='product-info'>${pName}<br>${p.price} kr</div>`;
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'product-info';
+                infoDiv.innerHTML = `${pName}<br>${p.price} kr`;
+                w.appendChild(infoDiv);
+
                 const btn = document.createElement('button');
                 btn.className = 'add-to-cart-btn';
                 btn.innerText = s.add_to_cart;
@@ -354,7 +336,7 @@ function renderCity() {
 document.getElementById('next-city-btn').addEventListener('click', () => {
     const s = uiStrings[currentLang];
     // Check for payment lock if in Sweden
-    if (journeyData[currentStep].id === 'stockholm' && !window.ikeaPaid) {
+    if (journeyData[currentStep].theme === 'sweden' && !window.ikeaPaid) {
         showAlert(s.access_denied, s.access_denied_msg);
         return;
     }
@@ -429,6 +411,11 @@ function showPaymentModal() {
         const selected = document.querySelector('input[name="pay"]:checked');
         if (selected) {
             window.ikeaPaid = true;
+            const nextBtn = document.getElementById('next-city-btn');
+            if (nextBtn) {
+                nextBtn.style.opacity = '1';
+                nextBtn.style.cursor = 'pointer';
+            }
             hideAlert();
             showAlert("OK", s.payment_success);
             okBtn.onclick = oldClick; // Restore
