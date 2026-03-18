@@ -1,3 +1,8 @@
+// MOBILE BLOCK
+if (window.innerWidth < 768) {
+    document.getElementById('mobile-block').classList.remove('hidden');
+}
+
 // STATE
 let currentLang = 'fr';
 let currentStep = 0;
@@ -123,6 +128,12 @@ loginBtn.addEventListener('click', () => {
         startBoot();
     } else {
         showAlert("Erreur Système", "Mot de passe incorrect ! Indice: 1234");
+    }
+});
+
+passField.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
     }
 });
 
@@ -460,6 +471,88 @@ function openWin98(id) {
 function closeWin98(id) {
     document.getElementById(id).style.display = 'none';
 }
+
+// MINESWEEPER LOGIC
+let mines = [];
+function initMinesweeper() {
+    const grid = document.getElementById('mines-grid');
+    grid.innerHTML = "";
+    mines = [];
+    for (let i = 0; i < 100; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'mine-cell';
+        cell.dataset.index = i;
+        cell.onclick = () => revealCell(i);
+        cell.oncontextmenu = (e) => { e.preventDefault(); cell.classList.toggle('flagged'); };
+        grid.appendChild(cell);
+        mines.push({ mine: Math.random() < 0.15, revealed: false });
+    }
+}
+
+function revealCell(idx) {
+    if (mines[idx].revealed) return;
+    const grid = document.getElementById('mines-grid');
+    const cells = grid.querySelectorAll('.mine-cell');
+    mines[idx].revealed = true;
+    cells[idx].classList.add('revealed');
+    if (mines[idx].mine) {
+        cells[idx].innerText = "💣";
+        showAlert("Game Over", "BOOM!");
+        initMinesweeper();
+    } else {
+        const count = countMines(idx);
+        if (count > 0) cells[idx].innerText = count;
+        else {
+            const neighbors = getNeighbors(idx);
+            neighbors.forEach(n => revealCell(n));
+        }
+    }
+}
+
+function countMines(idx) {
+    return getNeighbors(idx).filter(n => mines[n].mine).length;
+}
+
+function getNeighbors(idx) {
+    const n = [];
+    const r = Math.floor(idx / 10);
+    const c = idx % 10;
+    for (let dr = -1; dr <= 1; dr++) {
+        for (let dc = -1; dc <= 1; dc++) {
+            if (dr === 0 && dc === 0) continue;
+            const nr = r + dr;
+            const nc = c + dc;
+            if (nr >= 0 && nr < 10 && nc >= 0 && nc < 10) n.push(nr * 10 + nc);
+        }
+    }
+    return n;
+}
+
+// DRAGGING LOGIC
+let draggedWin = null;
+let offset = { x: 0, y: 0 };
+
+document.addEventListener('mousedown', (e) => {
+    if (e.target.classList.contains('win98-title') || e.target.parentElement.classList.contains('win98-title')) {
+        draggedWin = e.target.closest('.win98-window');
+        const rect = draggedWin.getBoundingClientRect();
+        offset.x = e.clientX - rect.left;
+        offset.y = e.clientY - rect.top;
+        draggedWin.style.zIndex = 1000;
+    }
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (draggedWin) {
+        draggedWin.style.left = (e.clientX - offset.x) + 'px';
+        draggedWin.style.top = (e.clientY - offset.y) + 'px';
+    }
+});
+
+document.addEventListener('mouseup', () => {
+    if (draggedWin) draggedWin.style.zIndex = 500;
+    draggedWin = null;
+});
 
 function openFolder(cityId) {
     const data = journeyData.find(d => d.id === cityId);
