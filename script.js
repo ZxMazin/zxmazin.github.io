@@ -144,15 +144,13 @@ function startBoot() {
     audioBoot.play();
 
     const messages = [
-        "BIOS Version 1.0.4 - Souvenir System",
-        "Copyright (C) 1998, Mazin Corp.",
-        "CPU: 486DX2 at 66MHz",
-        "Memory Test: 16384K OK",
-        "Detecting primary master... VOYAGE-HD-2GB",
-        "Loading Kernel...",
-        "Init: Loading drivers [OK]",
-        "Mounting /mnt/memories... [OK]",
-        "Starting Trip.exe..."
+        "Initializing core protocols...",
+        "Syncing neural memories...",
+        "Establishing connection to archive.v1",
+        "Decrypting travel logs [256-bit AES]",
+        "Loading destination assets...",
+        "Optimizing visual interface...",
+        "Ready for departure."
     ];
 
     let i = 0;
@@ -176,18 +174,19 @@ function startLoading() {
     audioLoading.play();
 
     let progress = 0;
+    squareLoader.innerHTML = '<div class="loader-square"></div>';
+    const bar = squareLoader.querySelector('.loader-square');
+
     const interval = setInterval(() => {
         if (progress < 100) {
-            progress += 5;
+            progress += 2;
             loadingStatus.innerText = progress + "%";
-            const square = document.createElement('div');
-            square.className = 'loader-square';
-            squareLoader.appendChild(square);
+            bar.style.width = progress + "%";
         } else {
             clearInterval(interval);
-            setTimeout(startJourney, 1000);
+            setTimeout(startJourney, 800);
         }
-    }, 100);
+    }, 50);
 }
 
 // 4. JOURNEY ENGINE
@@ -403,14 +402,14 @@ zoomOverlay.onclick = () => zoomOverlay.style.display = 'none';
 function showPaymentModal() {
     const s = uiStrings[currentLang];
     const html = `
-        <div style='color:#000'>
+        <div style='color:#fff'>
             <p>${s.payment_choice}</p>
-            <div style='margin: 15px 0; display: flex; flex-direction: column; gap: 10px;'>
-                <label><input type="radio" name="pay" value="card"> ${s.payment_card}</label>
-                <label><input type="radio" name="pay" value="gold"> ${s.payment_gold}</label>
-                <label><input type="radio" name="pay" value="cacao"> ${s.payment_cacao}</label>
+            <div style='margin: 20px 0; display: flex; flex-direction: column; gap: 15px;'>
+                <label style="display:flex; align-items:center; gap:10px; cursor:pointer;"><input type="radio" name="pay" value="card"> ${s.payment_card}</label>
+                <label style="display:flex; align-items:center; gap:10px; cursor:pointer;"><input type="radio" name="pay" value="gold"> ${s.payment_gold}</label>
+                <label style="display:flex; align-items:center; gap:10px; cursor:pointer;"><input type="radio" name="pay" value="cacao"> ${s.payment_cacao}</label>
             </div>
-            <p><i>${s.payment_note}</i></p>
+            <p style="opacity:0.6; font-size:0.8rem;"><i>${s.payment_note}</i></p>
         </div>
     `;
     showAlert(s.payment_title, html, true);
@@ -568,8 +567,8 @@ function openFolder(cityId) {
         const src = (typeof img === 'string') ? img : img.src;
         const icon = document.createElement('div');
         icon.className = 'desktop-icon';
-        icon.style.color = '#000';
-        icon.innerHTML = `<img src="${src}" style="width:50px; height:50px; object-fit:cover;"><span>Photo</span>`;
+        icon.style.color = '#fff';
+        icon.innerHTML = `<img src="${src}" style="width:50px; height:50px; object-fit:cover; border-radius:4px;"><span>Photo</span>`;
         icon.onclick = () => {
             zoomImg.src = src;
             zoomOverlay.style.display = 'flex';
@@ -595,7 +594,7 @@ function showFinal() {
         if (d.images.length > 0) {
             const icon = document.createElement('div');
             icon.className = 'desktop-icon';
-            icon.style.color = '#000';
+            icon.style.color = '#fff';
             icon.innerHTML = `<div class="fallback-icon folder"></div><span>${d.city}</span>`;
             icon.onclick = () => openFolder(d.id);
             arcGrid.appendChild(icon);
@@ -607,7 +606,7 @@ function showFinal() {
     poems.forEach(p => {
         const icon = document.createElement('div');
         icon.className = 'desktop-icon';
-        icon.style.color = '#000';
+        icon.style.color = '#fff';
         const pTitle = (currentLang === 'de') ? (p.title_de || p.title) : p.title;
         const pText = (currentLang === 'de') ? (p.text_de || p.text) : p.text;
         icon.innerHTML = `<div class="fallback-icon poem"></div><span>${pTitle}</span>`;

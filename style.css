@@ -18,7 +18,15 @@
     border: 3px double #fff;
     padding: 30px;
 }
-body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, monospace; overflow: hidden; background: #000; color: #fff; }
+body, html {
+    height: 100%;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    background: #0a0a0a;
+    color: #f5f5f5;
+    font-weight: 300;
+}
 
 .screen {
     position: absolute;
@@ -33,38 +41,70 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 .hidden { display: none !important; }
 
 /* LOGIN SCREEN */
-#login-screen { background: linear-gradient(135deg, #2c3e50, #000); }
+#login-screen { background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%); }
 .login-box {
-    background: #c0c0c0;
-    color: #000;
-    padding: 20px;
-    border: 3px outset #fff;
-    width: 350px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: #fff;
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    width: 400px;
     text-align: center;
-    box-shadow: 10px 10px 0 rgba(0,0,0,0.5);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
-.login-box h2 { font-size: 1.2rem; margin-bottom: 10px; background: #000080; color: #fff; padding: 5px; }
-.login-box input { width: 80%; padding: 5px; margin-bottom: 20px; border: 2px inset #fff; }
+.login-box h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    background: transparent;
+    color: #fff;
+    padding: 0;
+    letter-spacing: 1px;
+}
+.login-box p {
+    margin-bottom: 25px;
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+.login-box input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.3s;
+}
+.login-box input:focus {
+    border-color: #fff;
+}
 .retro-btn {
-    padding: 8px 25px;
-    background: #c0c0c0;
-    border: 3px outset #fff;
+    padding: 12px 30px;
+    background: #fff;
+    border: none;
+    border-radius: 30px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
     position: relative;
     font-family: inherit;
-    transition: all 0.1s;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     color: #000;
-}
-.retro-btn:active {
-    border-style: inset;
-    transform: translate(1px, 1px);
-    box-shadow: none;
-    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.8rem;
 }
 .retro-btn:hover {
-    background: #d0d0d0;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+    background: #f0f0f0;
+}
+.retro-btn:active {
+    transform: translateY(0);
+    opacity: 0.8;
 }
 .login-box button {
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -87,23 +127,76 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 }
 
 /* BOOT & LOADING */
-#boot-screen { background: #000; color: #0f0; justify-content: flex-start; align-items: flex-start; padding: 40px; flex-direction: column; }
-#loading-screen { background: #000080; flex-direction: column; }
-#square-loader { display: flex; gap: 5px; margin: 20px 0; background: #fff; padding: 5px; border: 2px solid #000; width: 400px; height: 40px; }
-.loader-square { width: 15px; height: 100%; background: #000080; }
+#boot-screen {
+    background: #000;
+    color: rgba(255, 255, 255, 0.7);
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 40px;
+    flex-direction: column;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+#loading-screen {
+    background: #000;
+    flex-direction: column;
+}
+#loading-screen h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+#square-loader {
+    display: flex;
+    gap: 0;
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0;
+    border: none;
+    width: 300px;
+    height: 2px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+}
+.loader-square {
+    width: 0%;
+    height: 100%;
+    background: #fff;
+    transition: width 0.3s ease-out;
+    box-shadow: 0 0 10px #fff;
+}
 
 /* JOURNEY ENGINE */
 #journey-screen { background: #eee; color: #000; }
 #journey-content { display: flex; width: 100%; height: 100%; }
-#dialogue-container { flex: 1; padding: 40px; overflow-y: auto; background: rgba(255,255,255,0.9); border-right: 2px solid #ccc; z-index: 10; }
+#dialogue-container {
+    flex: 1;
+    padding: 60px 40px;
+    overflow-y: auto;
+    background: rgba(20, 20, 20, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 10;
+    color: #fff;
+}
+#dialogue-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    color: rgba(255, 255, 255, 0.8);
+}
 #visual-container {
     flex: 1.5;
     position: relative;
     overflow-y: auto;
-    background: #ddd;
+    background: #0f0f0f;
     column-count: 3;
-    column-gap: 0;
-    padding: 0;
+    column-gap: 20px;
+    padding: 20px;
 }
 .image-wrapper {
     display: block;
@@ -112,15 +205,18 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
     position: relative;
     background: #000;
     break-inside: avoid;
-    margin: 0;
+    margin-bottom: 20px;
     padding: 0;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease;
 }
 
 .image-wrapper img {
     width: 100%;
     height: auto;
     display: block;
-    transition: transform 0.5s;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     object-fit: contain;
 }
 .image-wrapper:hover img { transform: scale(1.1); cursor: zoom-in; }
@@ -156,13 +252,68 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 #zoom-cart-banner span { font-weight: bold; font-size: 1.2rem; }
 
 /* THEMES */
-.theme-morocco-meknes { background: #ff4500 !important; } /* Desert Orange */
-.theme-morocco-meknes #visual-container { background: #f4a460; border: 20px solid #d2691e; border-image: url('https://www.transparenttextures.com/patterns/zellige.png') 30 round; }
-.theme-morocco-meknes .dialogue-box { border: 10px solid #d2691e; padding: 20px; background: #fff8dc; font-family: 'Georgia', serif; }
+.theme-morocco-meknes, .theme-morocco-rabat {
+    background: #050505 !important;
+}
 
-.theme-morocco-rabat { background: #0000cd !important; } /* Chefchaouen Blue */
-.theme-morocco-rabat #visual-container { background: #1e90ff; border: 20px solid #fff; }
-.theme-morocco-rabat .dialogue-box { border: 10px solid #fff; background: #f0f8ff; color: #004a8b; }
+.theme-morocco-meknes #journey-content, .theme-morocco-rabat #journey-content {
+    position: relative;
+}
+
+.theme-morocco-meknes #journey-content::before, .theme-morocco-rabat #journey-content::before {
+    content: "MOROCCO";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 20vw;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.02);
+    z-index: 0;
+    pointer-events: none;
+    letter-spacing: 2vw;
+}
+
+.theme-morocco-meknes #city-title, .theme-morocco-rabat #city-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 400;
+    font-style: italic;
+    color: #fff;
+    margin-bottom: 30px;
+    letter-spacing: -1px;
+}
+
+.theme-morocco-meknes #dialogue-container, .theme-morocco-rabat #dialogue-container {
+    background: transparent;
+    border-right: none;
+    z-index: 10;
+    padding-left: 80px;
+}
+
+.theme-morocco-meknes .dialogue-box, .theme-morocco-rabat .dialogue-box {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.theme-morocco-meknes #visual-container, .theme-morocco-rabat #visual-container {
+    background: transparent;
+    padding: 40px;
+}
+
+.theme-morocco-meknes .image-wrapper, .theme-morocco-rabat .image-wrapper {
+    border-radius: 4px;
+    margin-bottom: 20px;
+    filter: sepia(20%) contrast(1.1) brightness(0.8);
+    transition: filter 0.5s, transform 0.5s;
+}
+
+.theme-morocco-meknes .image-wrapper:hover, .theme-morocco-rabat .image-wrapper:hover {
+    filter: sepia(0%) contrast(1.1) brightness(1);
+}
 
 .theme-paris { background: #fff !important; }
 .theme-paris #visual-container { background: #eee; background-image: radial-gradient(#ccc 1px, transparent 1px); background-size: 20px 20px; }
@@ -376,8 +527,36 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 }
 
 /* CUSTOM MODAL */
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; display: flex; justify-content: center; align-items: center; }
-.modal-content { background: #c0c0c0; border: 3px outset #fff; width: 90%; max-width: 500px; color: #000; }
-.modal-header { background: #000080; color: #fff; padding: 5px 10px; display: flex; justify-content: space-between; font-weight: bold; }
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    color: #fff;
+    overflow: hidden;
+}
+.modal-header {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+}
 .modal-body { padding: 20px; max-height: 60vh; overflow-y: auto; }
 .modal-footer { padding: 10px; text-align: right; border-top: 1px solid #888; }
