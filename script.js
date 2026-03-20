@@ -393,8 +393,7 @@ function showYoutubeInterlude() {
     document.body.appendChild(interlude);
 }
 
-    document.body.appendChild(interlude);
-}
+
 // Easter Eggs
 document.addEventListener('keydown', (e) => {
     if (e.key === 'h') {
