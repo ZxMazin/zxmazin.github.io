@@ -375,10 +375,11 @@ function showYoutubeInterlude() {
     interlude.innerHTML = `
         <div class="interlude-overlay">
             <h2>Interlude Musical...</h2>
-            <iframe 
+            <iframe
                 width="560"
                 height="315"
                 src="${url}"
+                title="YouTube video player"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
@@ -388,6 +389,9 @@ function showYoutubeInterlude() {
             </button>
         </div>
     `;
+
+    document.body.appendChild(interlude);
+}
 
     document.body.appendChild(interlude);
 }
