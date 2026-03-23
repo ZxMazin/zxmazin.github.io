@@ -72,7 +72,7 @@ function updateUILanguage() {
 
     // Update Read Aloud button
     const readBtn = document.getElementById('audio-read-btn');
-    if (readBtn) readBtn.innerText = "🔊 " + (s.read_aloud || (currentLang === 'fr' ? 'Lire' : 'Vorlesen'));
+    if (readBtn) readBtn.innerText = "🔊 " + s.read_aloud;
 }
 
 // MODAL LOGIC
@@ -103,27 +103,31 @@ document.addEventListener('mousemove', (e) => {
 
     const dist = Math.sqrt(Math.pow(e.clientX - btnX, 2) + Math.pow(e.clientY - btnY, 2));
 
-    if (dist < 120 && loginMoves < MAX_LOGIN_MOVES) {
+    // Only flee if password field is not empty, to make it more "teasing"
+    if (dist < 150 && loginMoves < MAX_LOGIN_MOVES && passField.value.length > 0) {
         // Calculate vector from mouse to button center
         const diffX = btnX - e.clientX;
         const diffY = btnY - e.clientY;
         const angle = Math.atan2(diffY, diffX);
-        const fleeDist = 180;
+        const fleeDist = 200;
 
-        let currentX = parseFloat(loginBtn.style.getPropertyValue('--last-x')) || 0;
-        let currentY = parseFloat(loginBtn.style.getPropertyValue('--last-y')) || 0;
+        let currentX = parseFloat(loginBtn.getAttribute('data-last-x')) || 0;
+        let currentY = parseFloat(loginBtn.getAttribute('data-last-y')) || 0;
 
         let newX = currentX + Math.cos(angle) * fleeDist;
         let newY = currentY + Math.sin(angle) * fleeDist;
 
-        // Boundaries check
-        const limitX = window.innerWidth * 0.4;
-        const limitY = window.innerHeight * 0.4;
+        // Boundaries check - keep within reasonable screen space
+        const boxRect = document.querySelector('.login-box').getBoundingClientRect();
+        const limitX = window.innerWidth / 2 - 50;
+        const limitY = window.innerHeight / 2 - 50;
 
         if (Math.abs(newX) > limitX) newX = (newX > 0 ? limitX : -limitX);
         if (Math.abs(newY) > limitY) newY = (newY > 0 ? limitY : -limitY);
 
         loginBtn.style.transform = `translate(${newX}px, ${newY}px)`;
+        loginBtn.setAttribute('data-last-x', newX);
+        loginBtn.setAttribute('data-last-y', newY);
         loginBtn.style.setProperty('--last-x', `${newX}px`);
         loginBtn.style.setProperty('--last-y', `${newY}px`);
         loginMoves++;
@@ -159,22 +163,39 @@ passField.addEventListener('keydown', (e) => {
 });
 
 let speechUtterance = null;
+const narrativeAudio = document.getElementById('narrative-audio');
+
 function toggleSpeech() {
+    // 1. Check if audio file is playing
+    if (!narrativeAudio.paused) {
+        narrativeAudio.pause();
+        narrativeAudio.currentTime = 0;
+        return;
+    }
+
+    // 2. Check if TTS is speaking
     if (window.speechSynthesis.speaking) {
         window.speechSynthesis.cancel();
         return;
     }
 
-    const text = document.getElementById('dialogue-text').innerText;
-    speechUtterance = new SpeechSynthesisUtterance(text);
-    speechUtterance.lang = (currentLang === 'fr') ? 'fr-FR' : 'de-DE';
+    const data = journeyData[currentStep];
+    const customAudio = (currentLang === 'de') ? data.audio_de : data.audio_fr;
 
-    // Pick a voice for the language if possible
-    const voices = window.speechSynthesis.getVoices();
-    const voice = voices.find(v => v.lang.startsWith(speechUtterance.lang));
-    if (voice) speechUtterance.voice = voice;
+    if (customAudio) {
+        narrativeAudio.src = customAudio;
+        narrativeAudio.play();
+    } else {
+        const text = document.getElementById('dialogue-text').innerText;
+        speechUtterance = new SpeechSynthesisUtterance(text);
+        speechUtterance.lang = (currentLang === 'fr') ? 'fr-FR' : 'de-DE';
 
-    window.speechSynthesis.speak(speechUtterance);
+        const voices = window.speechSynthesis.getVoices();
+        const voice = voices.find(v => v.lang.startsWith(speechUtterance.lang));
+        if (voice) speechUtterance.voice = voice;
+
+        window.speechSynthesis.speak(speechUtterance);
+    }
 }
 
 document.getElementById('audio-read-btn').addEventListener('click', toggleSpeech);
@@ -392,6 +413,8 @@ function renderCity() {
 
 document.getElementById('next-city-btn').addEventListener('click', () => {
     window.speechSynthesis.cancel();
+    narrativeAudio.pause();
+    narrativeAudio.currentTime = 0;
     const s = uiStrings[currentLang];
     // Check for payment lock if in Sweden
     if (journeyData[currentStep].theme === 'sweden' && !window.ikeaPaid) {
