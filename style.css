@@ -67,7 +67,7 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
     background: #d0d0d0;
 }
 .login-box button {
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.3s cubic-bezier(0.2, 1, 0.3, 1);
 }
 #next-city-btn {
     background: #008080;
@@ -99,11 +99,25 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 #visual-container {
     flex: 1.5;
     position: relative;
-    overflow-y: auto;
+    overflow: hidden;
     background: #ddd;
+    padding: 0;
+}
+
+#scrolling-wrapper {
+    display: block;
     column-count: 3;
     column-gap: 0;
-    padding: 0;
+    animation: scrollVertical 60s linear infinite;
+}
+
+@keyframes scrollVertical {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(-100%); }
+}
+
+#scrolling-wrapper:hover {
+    animation-play-state: paused;
 }
 .image-wrapper {
     display: block;

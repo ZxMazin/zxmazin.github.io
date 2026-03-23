@@ -69,6 +69,10 @@ function updateUILanguage() {
     // Update Zoom button
     const zoomAddBtnText = document.getElementById('zoom-add-btn');
     if (zoomAddBtnText) zoomAddBtnText.innerText = s.add_to_cart;
+
+    // Update Read Aloud button
+    const readBtn = document.getElementById('audio-read-btn');
+    if (readBtn) readBtn.innerText = "🔊 " + (s.read_aloud || (currentLang === 'fr' ? 'Lire' : 'Vorlesen'));
 }
 
 // MODAL LOGIC
@@ -99,14 +103,31 @@ document.addEventListener('mousemove', (e) => {
 
     const dist = Math.sqrt(Math.pow(e.clientX - btnX, 2) + Math.pow(e.clientY - btnY, 2));
 
-    if (dist < 80 && loginMoves < MAX_LOGIN_MOVES) {
-        const x = (Math.random() - 0.5) * window.innerWidth * 0.6;
-        const y = (Math.random() - 0.5) * window.innerHeight * 0.6;
-        loginBtn.style.transform = `translate(${x}px, ${y}px)`;
-        loginBtn.style.setProperty('--last-x', `${x}px`);
-        loginBtn.style.setProperty('--last-y', `${y}px`);
+    if (dist < 120 && loginMoves < MAX_LOGIN_MOVES) {
+        // Calculate vector from mouse to button center
+        const diffX = btnX - e.clientX;
+        const diffY = btnY - e.clientY;
+        const angle = Math.atan2(diffY, diffX);
+        const fleeDist = 180;
+
+        let currentX = parseFloat(loginBtn.style.getPropertyValue('--last-x')) || 0;
+        let currentY = parseFloat(loginBtn.style.getPropertyValue('--last-y')) || 0;
+
+        let newX = currentX + Math.cos(angle) * fleeDist;
+        let newY = currentY + Math.sin(angle) * fleeDist;
+
+        // Boundaries check
+        const limitX = window.innerWidth * 0.4;
+        const limitY = window.innerHeight * 0.4;
+
+        if (Math.abs(newX) > limitX) newX = (newX > 0 ? limitX : -limitX);
+        if (Math.abs(newY) > limitY) newY = (newY > 0 ? limitY : -limitY);
+
+        loginBtn.style.transform = `translate(${newX}px, ${newY}px)`;
+        loginBtn.style.setProperty('--last-x', `${newX}px`);
+        loginBtn.style.setProperty('--last-y', `${newY}px`);
         loginMoves++;
-    } else if (dist < 80 && loginMoves === MAX_LOGIN_MOVES) {
+    } else if (dist < 100 && loginMoves === MAX_LOGIN_MOVES) {
         loginBtn.classList.add('falling-btn');
         loginMoves++; // prevent repeated fall trigger
         setTimeout(() => {
@@ -136,6 +157,27 @@ passField.addEventListener('keydown', (e) => {
         e.preventDefault();
     }
 });
+
+let speechUtterance = null;
+function toggleSpeech() {
+    if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        return;
+    }
+
+    const text = document.getElementById('dialogue-text').innerText;
+    speechUtterance = new SpeechSynthesisUtterance(text);
+    speechUtterance.lang = (currentLang === 'fr') ? 'fr-FR' : 'de-DE';
+
+    // Pick a voice for the language if possible
+    const voices = window.speechSynthesis.getVoices();
+    const voice = voices.find(v => v.lang.startsWith(speechUtterance.lang));
+    if (voice) speechUtterance.voice = voice;
+
+    window.speechSynthesis.speak(speechUtterance);
+}
+
+document.getElementById('audio-read-btn').addEventListener('click', toggleSpeech);
 
 // 2. BOOT SEQUENCE
 function startBoot() {
@@ -223,6 +265,10 @@ function renderCity() {
 
     if (currentPage === 0) {
         visual.innerHTML = "";
+        const scrollWrapper = document.createElement('div');
+        scrollWrapper.id = "scrolling-wrapper";
+        visual.appendChild(scrollWrapper);
+
         data.images.forEach((imgData, idx) => {
             const wrapper = document.createElement('div');
             wrapper.className = "image-wrapper";
@@ -253,7 +299,7 @@ function renderCity() {
             };
 
             wrapper.appendChild(imgEl);
-            visual.appendChild(wrapper);
+            scrollWrapper.appendChild(wrapper);
         });
 
         // Specific IKEA logic
@@ -263,7 +309,7 @@ function renderCity() {
 
             const basket = document.createElement('div');
             basket.id = 'ikea-basket';
-            visual.appendChild(basket);
+            visual.insertBefore(basket, scrollWrapper);
 
             const updateBasket = () => {
                 window.updateIkeaBasket = updateBasket;
@@ -345,6 +391,7 @@ function renderCity() {
 }
 
 document.getElementById('next-city-btn').addEventListener('click', () => {
+    window.speechSynthesis.cancel();
     const s = uiStrings[currentLang];
     // Check for payment lock if in Sweden
     if (journeyData[currentStep].theme === 'sweden' && !window.ikeaPaid) {
@@ -370,7 +417,9 @@ function showYoutubeInterlude() {
     const interlude = document.createElement('div');
     interlude.id = 'youtube-interlude';
 
-    const url = "https://www.youtube-nocookie.com/embed/l5aZJBLAu1E?controls=0&start=120&autoplay=1";
+    const data = journeyData[currentStep];
+    const vid = data.videoId || "l5aZJBLAu1E";
+    const url = `https://www.youtube-nocookie.com/embed/${vid}?controls=0&autoplay=1`;
 
     interlude.innerHTML = `
         <div class="interlude-overlay">
@@ -462,6 +511,10 @@ function showTransition() {
         trans.classList.remove('active');
         renderCity();
     }, 3000);
+}
+
+function getYoutubeUrl() {
+    return "https://www.youtube-nocookie.com/embed/J8ugZk1rPpU?autoplay=1";
 }
 
 // 5. FINAL SCREEN (WIN98)

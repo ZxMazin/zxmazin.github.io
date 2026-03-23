@@ -7,6 +7,7 @@ const journeyData = [
         country_de: "Marokko",
         transport: "train",
         theme: "morocco-meknes",
+        videoId: "l5aZJBLAu1E",
         text: `Il y avait aussi une tradition : à l’arrivée dans notre village natal, il fallait rendre visite aux morts. Mon père et ma grand-mère sont enterrés à côté, une drôle de coïncidence. Mon père n’était pas du tout marocain. Il était né en Égypte et avait immigré en Suisse pour devenir ingénieur informaticien, alors que le métier en était encore à ses débuts. Il est décédé d’un cancer du cerveau quand j’avais six ans. Sur le moment, je n’avais pas compris ce qui se passait. Ensuite, quand j’ai compris qu’il ne reviendrait pas, je me demandais pourquoi il était enterré là-bas. Parce que c’était l’endroit où il se sentait chez lui : le pays de sa femme, le Maroc. J’ai compris. Il n’était ni suisse ni égyptien. En Égypte, on l’aurait considéré comme Suisse. En Suisse, on l’aurait traité d’étranger. Au Maroc, on le considérait comme Marocain. Lors de son enterrement, les fidèles de la mosquée prièrent tous pour lui.
 
 Les Marocains sont drôles. À mon arrivée à la douane marocaine, lorsque je donnai mon passeport, l’agent commença à me fixer longuement. Premier réflexe un peu idiot : je me recoiffai et souris. Il rigola. Mais je fus le seul de ma file à qui l’on ne demande rien. Heureusement, je n’aurais pas pu répondre : je parle très mal le darija.
@@ -45,6 +46,7 @@ Ich mag Marokko sehr. Es ist ein sehr authentischer Ort, an dem Oberflächlichke
         country_de: "Marokko",
         transport: "avion",
         theme: "morocco-rabat",
+        videoId: "J8ugZk1rPpU",
         text: `Je rejoignis ma famille à l’avenue Hassan, près du mausolée de Mohamed V. Nous nous rendîmes directement à la gare ferroviaire et prîmes le train Al Atlas, qui relie les grandes villes marocaines. Le trajet était long, le train n’allant pas très vite. On traversa des champs à perte de vue et passait parfois dans des villages reculés. Les trains au Maroc étaient les mêmes que les anciens trains à compartiments français. Ils avaient été revendus au Maroc, mais honnêtement, c’était plus un acte de recyclage qu’un geste de générosité. Au moins, c’était idéal pour faire des rencontres.
 
 Dans mon compartiment, à part ma sœur et ma mère, il y avait un homme dans un coin qui lisait son journal pendant tout le trajet. À côté, toute une famille était également présente : la grand-mère, la mère, la fille et la petite fille. Elles étaient habillées très différemment de ce que l’on verrait en Occident. Les deux aînées portaient chacune un voile ample qui couvrait tout leur corps. La fille était en djellaba, une robe colorée qui descendait jusqu’aux chevilles, mais sans voile. La petite-fille était dans sa poussette, vêtue d’un jogging et d’un pull Dora l’Exploratrice.
@@ -87,6 +89,7 @@ Meine Mutter erzählte mir von einer Gewohnheit aus ihrer Studienzeit, als sie z
         country_de: "Frankreich",
         transport: "avion",
         theme: "paris",
+        videoId: "eB6hA_zIatQ",
         text: `Paris Paris, ville lumière, ville des arts, mais surtout ville de misère. On entend souvent dire que les inégalités sont aujourd’hui plus fortes que du temps de la Révolution française. Cependant, ceux qui savent cela appartiennent déjà à la classe haute.
 
 Après trois heures de retard et un cookie en guise de dédommagement, j’arrivai à Paris et commencai, pour ne pas changer, mon travail. Le soir, j’étais invité à dîner : pas question d’arriver en retard, cela ne se reproduirait pas pendant mon voyage. J’avais été invité par des amis de passage à Paris. Je pense que ce fut le meilleur dîner que j’ai pu avoir durant mon voyage. Les adieux furent aussi difficiles que d’expliquer le sens de mon périple. Quelle chance.
@@ -146,6 +149,7 @@ Paris ist oberflächlich. Man steckt die Einwanderer in eine Ecke der Stadt, die
         country_de: "Schweden",
         transport: "bateau",
         theme: "sweden",
+        videoId: "lS-af9qz7uE",
         text: `En 2025, le Conseil national suisse refuse le nouveau budget pour la subvention du train de nuit qui aurait pu relier Bâle SBB à Malmö, en Suède. Les UDC justifiaient cette dépense comme inutile, car, je cite : « Ne pensez-vous pas qu’il s’agit de mettre 10 millions pour aller voir les belles blondes en Suède ? Ce n’est pas beaucoup d’argent pour le contribuable. »
 
 J’arrive à l’aéroport de Stockholm-Arlanda à 00h20 et à la gare Stockholm C à 1h24. C’est la première fois que je ne comprends rien. Où sont les belles blondes pour me guider vers mon hôtel ?
@@ -192,6 +196,7 @@ Ich mag Stockholm: die Zimtschnecken, Ikea und ihre Hafermilch. Ich denke, ich k
         country_de: "Finnland",
         transport: "bateau",
         theme: "finland",
+        videoId: "9_gkpYORQLU",
         text: `Là, c’était vraiment loin de chez moi. C’est un drôle de sentiment, je trouve. La fatigue commençait à se faire sentir et je n’étais plus émerveillé par ce voyage. Pourtant, Helsinki était ma destination de rêve depuis tout petit. Les « Crackeds » que je rencontrais dans le tram ne m’aidaient pas. C’est seulement après avoir découvert les Moomins que j’ai commencé à apprécier Helsinki.
 
 La nuit tombe tellement vite. Elle s’écrase. Quand j’y pense, après la chaleur du Maroc, c’était l’opposé dans tous les sens. Le soir, enfin en fin d’après-midi, j’ai pris un bateau en direction d’une île, enfin de huit îles pour être précis : la forteresse de Suomenlinna. Une grande île séparée en huit parties et reliée par des ponts. C’est le genre de lieu que l’on visite normalement de jour, mais par manque de bol, il ne me restait qu’une soirée. C’était froid en tout point, mais beau. L’histoire des Finlandais me fascinait. Le pays est passé du statut de plus pauvre à celui de plus heureux en moins d’un siècle.
@@ -238,6 +243,7 @@ Der Abschied von diesem Land war fabelhaft. Auf dem Deck einer Fähre sah ich er
         country_de: "Estland",
         transport: "bus",
         theme: "tallinn",
+        videoId: "m_09YI6V3S8",
         text: `Ma première impression à Tallinn fut une dame d’une cinquantaine d’années qui me dit que je m’étais trompé de toilettes et que c’était « disgusting ». Ce sont des toilettes mixtes.
 
 Mise à part cet incident, ce qui m’a surpris à Tallinn, c’est la manière dont ce pays est passé d’un pays communiste à un pays européen comme les autres. Certes, il restait des vestiges, mais la comparaison avec la Suisse était tentante. Tallinn est une petite ville, beaucoup moins impressionnante que Stockholm, Paris ou Helsinki, mais elle garde son charme.
@@ -317,6 +323,7 @@ Das fasst den Kommunismus gut zusammen und erklärt, warum dieses System nicht f
         country_de: "Lettland",
         transport: "bus",
         theme: "riga",
+        videoId: "L0_j8S6_070",
         text: `Alors, pour le coup, la Lettonie ressemble davantage au communisme d’avant. Les gens y sont d’une gentillesse débordante. Le Maroc, lui, est chaud. Je sais que le froid revient souvent dans mes textes, mais il signifie beaucoup de choses : la solitude, la température, l’atmosphère, etc. En même temps, cela ne veut rien dire. Pourquoi est-ce froid ici et pas là ?`,
         text_de: `Also, für den Moment ähnelt Lettland eher dem Kommunismus von früher. Die Menschen dort sind von einer überbordenden Freundlichkeit. Marokko hingegen ist warm. Ich weiß, dass die Kälte in meinen Texten oft vorkommt, aber sie bedeutet vieles: Einsamkeit, Temperatur, Atmosphäre usw. Gleichzeitig bedeutet es gar nichts. Warum ist es hier kalt und dort nicht?`,
         images: [
@@ -355,6 +362,7 @@ Das fasst den Kommunismus gut zusammen und erklärt, warum dieses System nicht f
         country_de: "Polen",
         transport: "train",
         theme: "poland",
+        videoId: "n9oRE_p0m_g",
         text: `Après une longue nuit dans ce car polonais, je me sens assommé à l’arrivée. C’était vraiment violent. Un froid que je n’avais jamais ressenti m’a paralysé. Je trouvai refuge à la gare routière pendant quelques heures, jusqu’à ce que le jour se lève et que je comprenne comment prendre le bus. Toujours les mêmes soucis, pour finir.
 
 Arrivé au musée national de Varsovie, je ne comprenais pas toutes les informations, et surtout la plus importante : la gratuité du musée le mardi. Je me rendis au guichet pour demander un ticket, et le jeune caissier, sans me regarder et en rigolant avec sa collègue, tapota avec insolence la pancarte indiquant que l’entrée était gratuite, écrite en polonais. Ayant trop d’ego, je lui dis que je voulais voir l’exposition temporaire, qui était payante. Je ne savais pas ce que c’était, mais le prix, si : 30 zł, l’équivalent de 7 CHF, partie dans un caprice d’ego.
@@ -401,6 +409,7 @@ Am Abend kehrte ich zum Bahnhof Warszawa Centralna zurück, um den Chopin-Zug Ri
         country_de: "Tschechien",
         transport: "fin",
         theme: "czechia",
+        videoId: "M8-vje-ur6Q",
         text: `Prague est une belle ville, vraiment. Enfin, je pense que ce que j’ai surtout aimé, c’est sa ressemblance avec la Suisse : c’était comme retrouver mon chez-moi. Prague est aussi une ville qui a connu l’influence du Kremlin et qui a été profondément marquée par cette histoire.
 
 En me baladant dans les rues, je voyais un véritable marécage de touristes. Dans tout ce vacarme, on voyait les sans-abris supplier les passants pour leur donner ne serait-ce qu’une pièce. On pourrait croire que les touristes, vu l’argent qu’ils avaient déjà dépensé pour venir, donneraient au moins une pièce avant de repartir. Détrompez-vous.
