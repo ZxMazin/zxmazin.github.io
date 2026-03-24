@@ -9,6 +9,7 @@ let currentStep = 0;
 let currentPage = 0;
 let loginMoves = 0;
 const MAX_LOGIN_MOVES = 12;
+let loginFleeing = false;
 let youtubeInterludeCount = 0;
 const MAX_YOUTUBE_INTERLUDES = 3;
 
@@ -104,7 +105,8 @@ document.addEventListener('mousemove', (e) => {
     const dist = Math.sqrt(Math.pow(e.clientX - btnX, 2) + Math.pow(e.clientY - btnY, 2));
 
     // Only flee if password field is not empty, to make it more "teasing"
-    if (dist < 150 && loginMoves < MAX_LOGIN_MOVES && passField.value.length > 0) {
+    if (dist < 150 && loginMoves < MAX_LOGIN_MOVES && passField.value.length > 0 && !loginFleeing) {
+        loginFleeing = true;
         // Calculate vector from mouse to button center
         const diffX = btnX - e.clientX;
         const diffY = btnY - e.clientY;
@@ -118,9 +120,8 @@ document.addEventListener('mousemove', (e) => {
         let newY = currentY + Math.sin(angle) * fleeDist;
 
         // Boundaries check - keep within reasonable screen space
-        const boxRect = document.querySelector('.login-box').getBoundingClientRect();
-        const limitX = window.innerWidth / 2 - 50;
-        const limitY = window.innerHeight / 2 - 50;
+        const limitX = window.innerWidth / 2 - 60;
+        const limitY = window.innerHeight / 2 - 40;
 
         if (Math.abs(newX) > limitX) newX = (newX > 0 ? limitX : -limitX);
         if (Math.abs(newY) > limitY) newY = (newY > 0 ? limitY : -limitY);
@@ -131,6 +132,8 @@ document.addEventListener('mousemove', (e) => {
         loginBtn.style.setProperty('--last-x', `${newX}px`);
         loginBtn.style.setProperty('--last-y', `${newY}px`);
         loginMoves++;
+
+        setTimeout(() => { loginFleeing = false; }, 500); // Cooldown to match transition
     } else if (dist < 100 && loginMoves === MAX_LOGIN_MOVES) {
         loginBtn.classList.add('falling-btn');
         loginMoves++; // prevent repeated fall trigger
@@ -184,8 +187,15 @@ function toggleSpeech() {
 
     if (customAudio) {
         narrativeAudio.src = customAudio;
-        narrativeAudio.play();
+        narrativeAudio.play().catch(e => {
+            console.warn("Audio file failed to load, falling back to TTS.", e);
+            startTTS();
+        });
     } else {
+        startTTS();
+    }
+
+    function startTTS() {
         const text = document.getElementById('dialogue-text').innerText;
         speechUtterance = new SpeechSynthesisUtterance(text);
         speechUtterance.lang = (currentLang === 'fr') ? 'fr-FR' : 'de-DE';
@@ -437,12 +447,13 @@ document.getElementById('next-city-btn').addEventListener('click', () => {
 });
 
 function showYoutubeInterlude() {
+    youtubeInterludeCount++;
     const interlude = document.createElement('div');
     interlude.id = 'youtube-interlude';
 
     const data = journeyData[currentStep];
     const vid = data.videoId || "l5aZJBLAu1E";
-    const url = `https://www.youtube-nocookie.com/embed/${vid}?controls=0&autoplay=1`;
+    const url = `https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&mute=0&controls=1&modestbranding=1`;
 
     interlude.innerHTML = `
         <div class="interlude-overlay">
@@ -536,14 +547,10 @@ function showTransition() {
     }, 3000);
 }
 
-function getYoutubeUrl() {
-    return "https://www.youtube-nocookie.com/embed/J8ugZk1rPpU?autoplay=1";
-}
-
 // 5. FINAL SCREEN (WIN98)
 function openWin98(id) {
     if (id === 'win-video-final') {
-        document.getElementById('video-final-frame').src = getYoutubeUrl();
+        document.getElementById('video-final-frame').src = "https://www.youtube-nocookie.com/embed/J8ugZk1rPpU?autoplay=1";
     }
     document.getElementById(id).style.display = 'flex';
 }

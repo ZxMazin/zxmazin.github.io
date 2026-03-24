@@ -7,7 +7,6 @@ def verify_files():
         style = f.read()
         assert 'translateY(100%)' in style, "Scroll animation should start at 100%"
         assert 'translateY(-100%)' in style, "Scroll animation should end at -100%"
-        assert 'padding-bottom: 100vh' in style, "Scroll wrapper should have bottom padding"
         assert 'cubic-bezier(0.34, 1.56, 0.64, 1)' in style, "Login button should have bouncy transition"
 
     # 2. Check script.js for audio and video logic

@@ -102,14 +102,17 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
     overflow: hidden;
     background: #ddd;
     padding: 0;
+    display: flex;
+    align-items: flex-start;
 }
 
 #scrolling-wrapper {
-    display: block;
-    column-count: 3;
-    column-gap: 0;
-    animation: scrollVertical 120s linear infinite;
-    padding-bottom: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    animation: scrollVertical 80s linear infinite;
+    width: 100%;
 }
 
 @keyframes scrollVertical {
@@ -121,14 +124,11 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
     animation-play-state: paused;
 }
 .image-wrapper {
-    display: block;
     width: 100%;
     overflow: hidden;
     position: relative;
     background: #000;
-    break-inside: avoid;
-    margin: 0;
-    padding: 0;
+    min-height: 200px;
 }
 
 .image-wrapper img {
