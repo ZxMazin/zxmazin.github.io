@@ -96,13 +96,18 @@ modalCloseBtn.onclick = hideAlert;
 modalOkBtn.onclick = hideAlert;
 
 // 1. LOGIN LOGIC
+// Initialize original button position for collision logic
+loginBtn.style.setProperty('--last-x', '0px');
+loginBtn.style.setProperty('--last-y', '0px');
+
 function teleportBtn(btn) {
-    const limitX = 180;
-    const limitY = 140;
+    const limitX = 120; // Bound to 380px container
+    const limitY = 90;  // Bound to 300px container
     let newX, newY, tooClose;
     let attempts = 0;
 
-    const others = Array.from(document.querySelectorAll('.login-box .retro-btn')).filter(b => b !== btn);
+    const others = Array.from(document.querySelectorAll('.login-box .retro-btn'))
+        .filter(b => b !== btn && b.style.opacity !== "0");
 
     do {
         newX = (Math.random() * limitX * 2) - limitX;
@@ -114,7 +119,7 @@ function teleportBtn(btn) {
             const lx = parseFloat(other.style.getPropertyValue('--last-x')) || 0;
             const ly = parseFloat(other.style.getPropertyValue('--last-y')) || 0;
             const d = Math.sqrt(Math.pow(newX - lx, 2) + Math.pow(newY - ly, 2));
-            if (d < 100) {
+            if (d < 70) {
                 tooClose = true;
                 break;
             }
