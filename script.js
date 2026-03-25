@@ -8,8 +8,9 @@ let currentLang = 'fr';
 let currentStep = 0;
 let currentPage = 0;
 let loginMoves = 0;
-const MAX_LOGIN_MOVES = 12;
+const MAX_LOGIN_MOVES = 20; // Increased for the "game"
 let loginFleeing = false;
+let decoys = [];
 let youtubeInterludeCount = 0;
 const MAX_YOUTUBE_INTERLUDES = 3;
 
@@ -95,6 +96,50 @@ modalCloseBtn.onclick = hideAlert;
 modalOkBtn.onclick = hideAlert;
 
 // 1. LOGIN LOGIC
+function teleportBtn(btn) {
+    const limitX = 50; // More conservative to prevent overflow
+    const limitY = 40;
+    const newX = (Math.random() * limitX * 2) - limitX;
+    const newY = (Math.random() * limitY * 2) - limitY;
+
+    btn.style.position = "absolute";
+    btn.style.left = `calc(50% + ${newX}px)`;
+    btn.style.top = `calc(50% + ${newY}px)`;
+    btn.style.transform = "translate(-50%, -50%)";
+
+    btn.style.setProperty('--last-x', `${newX}px`);
+    btn.style.setProperty('--last-y', `${newY}px`);
+}
+
+function spawnDecoy() {
+    const decoy = loginBtn.cloneNode(true);
+    decoy.id = "";
+    decoy.classList.add('decoy-btn');
+    decoy.innerText = ["Pas moi !", "Perdu !", "Ici ?", "Raté !"][Math.floor(Math.random() * 4)];
+    document.querySelector('.login-box').appendChild(decoy);
+
+    // Decoys need absolute positioning setup
+    decoy.style.position = "absolute";
+    teleportBtn(decoy);
+
+    decoy.addEventListener('mouseover', () => {
+        teleportBtn(decoy);
+        if (Math.random() > 0.7) { // 30% chance to disappear on hover to keep things interesting
+            decoy.style.opacity = "0";
+            setTimeout(() => decoy.remove(), 300);
+        }
+    });
+
+    // Also disappear on click (even though they don't log you in)
+    decoy.addEventListener('click', (e) => {
+        e.stopPropagation();
+        decoy.innerText = "Haha !";
+        setTimeout(() => decoy.remove(), 500);
+    });
+
+    decoys.push(decoy);
+}
+
 document.addEventListener('mousemove', (e) => {
     if (loginScreen.classList.contains('hidden')) return;
 
@@ -104,43 +149,54 @@ document.addEventListener('mousemove', (e) => {
 
     const dist = Math.sqrt(Math.pow(e.clientX - btnX, 2) + Math.pow(e.clientY - btnY, 2));
 
-    // Only flee if password field is not empty, to make it more "teasing"
-    if (dist < 150 && loginMoves < MAX_LOGIN_MOVES && passField.value.length > 0 && !loginFleeing) {
+    if (dist < 100 && loginMoves < MAX_LOGIN_MOVES && passField.value.length > 0 && !loginFleeing) {
         loginFleeing = true;
-        // Calculate vector from mouse to button center
-        const diffX = btnX - e.clientX;
-        const diffY = btnY - e.clientY;
-        const angle = Math.atan2(diffY, diffX);
-        const fleeDist = 200;
-
-        let currentX = parseFloat(loginBtn.getAttribute('data-last-x')) || 0;
-        let currentY = parseFloat(loginBtn.getAttribute('data-last-y')) || 0;
-
-        let newX = currentX + Math.cos(angle) * fleeDist;
-        let newY = currentY + Math.sin(angle) * fleeDist;
-
-        // Boundaries check - keep within the login-box
-        const limitX = 120;
-        const limitY = 60;
-
-        if (Math.abs(newX) > limitX) newX = (newX > 0 ? limitX : -limitX);
-        if (Math.abs(newY) > limitY) newY = (newY > 0 ? limitY : -limitY);
-
-        loginBtn.style.transform = `translate(${newX}px, ${newY}px)`;
-        loginBtn.setAttribute('data-last-x', newX);
-        loginBtn.setAttribute('data-last-y', newY);
-        loginBtn.style.setProperty('--last-x', `${newX}px`);
-        loginBtn.style.setProperty('--last-y', `${newY}px`);
         loginMoves++;
 
-        setTimeout(() => { loginFleeing = false; }, 500); // Cooldown to match transition
-    } else if (dist < 100 && loginMoves === MAX_LOGIN_MOVES) {
-        // After MAX_LOGIN_MOVES, the button stays in place so the user can click it
-        loginBtn.style.boxShadow = "0 0 20px #00ff00";
+        // Evil Teleport
+        teleportBtn(loginBtn);
+
+        // Activate evil screen effect
+        if (loginMoves === 1) loginScreen.classList.add('evil-active');
+
+        // Dynamic labels based on stage
+        if (loginMoves < 5) {
+            loginBtn.innerText = ["Raté !", "Oups !", "Ici ?", "Non."][Math.floor(Math.random() * 4)];
+        } else if (loginMoves < 12) {
+            loginBtn.innerText = ["Cherche encore !", "Vise mieux !", "Un effort...", "😈"][Math.floor(Math.random() * 4)];
+            if (decoys.length < 5) spawnDecoy();
+        } else {
+            loginBtn.innerText = ["JE SUIS LÀ !", "C'EST FINI ?", "ABANDONNE !", "HAHAHA"][Math.floor(Math.random() * 4)];
+            if (decoys.length < 12) spawnDecoy();
+        }
+
+        // Glitch Effect
+        loginBtn.classList.add('glitch-active');
+        setTimeout(() => loginBtn.classList.remove('glitch-active'), 150);
+
+        // Cooldown gets shorter as moves increase
+        const cooldown = Math.max(100, 300 - (loginMoves * 10));
+        setTimeout(() => { loginFleeing = false; }, cooldown);
+    } else if (dist < 100 && loginMoves >= MAX_LOGIN_MOVES) {
+        // VICTORY STATE - Button becomes stationary and green
+        loginBtn.style.boxShadow = "0 0 30px #00ff00";
+        loginBtn.style.background = "#00ff00";
+        loginBtn.style.color = "#000";
+        loginBtn.innerText = "OK !";
+        loginBtn.classList.remove('glitch-active');
+        loginScreen.classList.remove('evil-active');
+        // Clear decoys
+        decoys.forEach(d => d.remove());
+        decoys = [];
     }
 });
 
 loginBtn.addEventListener('click', () => {
+    if (loginMoves < MAX_LOGIN_MOVES && passField.value.length > 0) {
+        // Prevent clicking while it's still "evil" unless you are super fast
+        // but since it teleports on hover, it's hard anyway.
+        return;
+    }
     if (passField.value.toLowerCase() === '1234') {
         audioClick.play();
         startBoot();

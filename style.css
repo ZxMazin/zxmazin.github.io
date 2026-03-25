@@ -40,8 +40,14 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
     padding: 20px;
     border: 3px outset #fff;
     width: 350px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     box-shadow: 10px 10px 0 rgba(0,0,0,0.5);
+    position: relative;
 }
 .login-box h2 { font-size: 1.2rem; margin-bottom: 10px; background: #000080; color: #fff; padding: 5px; }
 .login-box input { width: 80%; padding: 5px; margin-bottom: 20px; border: 2px inset #fff; }
@@ -67,7 +73,41 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
     background: #d0d0d0;
 }
 .login-box button {
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s;
+    z-index: 10;
+}
+.decoy-btn {
+    position: absolute !important;
+    pointer-events: auto;
+    z-index: 5;
+    opacity: 1;
+    transition: opacity 0.3s, transform 0.2s !important;
+}
+.glitch-active {
+    animation: glitch 0.1s infinite;
+    filter: hue-rotate(180deg) invert(1);
+    box-shadow: 0 0 15px #ff0000;
+}
+@keyframes glitch {
+    0% { transform: translate(-50%, -50%) scale(1) skew(0deg); }
+    20% { transform: translate(calc(-50% + 8px), calc(-50% - 3px)) scale(1.1) skew(10deg); }
+    40% { transform: translate(calc(-50% - 8px), calc(-50% + 3px)) scale(0.9) skew(-10deg); }
+    60% { transform: translate(calc(-50% + 4px), calc(-50% + 4px)) scale(1.2) skew(5deg); }
+    80% { transform: translate(calc(-50% - 4px), calc(-50% - 4px)) scale(0.8) skew(-5deg); }
+    100% { transform: translate(-50%, -50%) scale(1) skew(0deg); }
+}
+
+#login-screen::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 20%, rgba(255, 0, 0, 0.1) 80%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s;
+}
+#login-screen.evil-active::after {
+    opacity: 1;
 }
 #next-city-btn {
     background: #008080;
