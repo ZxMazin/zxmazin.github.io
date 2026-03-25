@@ -97,10 +97,29 @@ modalOkBtn.onclick = hideAlert;
 
 // 1. LOGIN LOGIC
 function teleportBtn(btn) {
-    const limitX = 50; // More conservative to prevent overflow
-    const limitY = 40;
-    const newX = (Math.random() * limitX * 2) - limitX;
-    const newY = (Math.random() * limitY * 2) - limitY;
+    const limitX = 180;
+    const limitY = 140;
+    let newX, newY, tooClose;
+    let attempts = 0;
+
+    const others = Array.from(document.querySelectorAll('.login-box .retro-btn')).filter(b => b !== btn);
+
+    do {
+        newX = (Math.random() * limitX * 2) - limitX;
+        newY = (Math.random() * limitY * 2) - limitY;
+        tooClose = false;
+        attempts++;
+
+        for (const other of others) {
+            const lx = parseFloat(other.style.getPropertyValue('--last-x')) || 0;
+            const ly = parseFloat(other.style.getPropertyValue('--last-y')) || 0;
+            const d = Math.sqrt(Math.pow(newX - lx, 2) + Math.pow(newY - ly, 2));
+            if (d < 100) {
+                tooClose = true;
+                break;
+            }
+        }
+    } while (tooClose && attempts < 20);
 
     btn.style.position = "absolute";
     btn.style.left = `calc(50% + ${newX}px)`;
