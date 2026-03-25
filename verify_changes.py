@@ -2,11 +2,11 @@ import os
 import re
 
 def verify_files():
-    # 1. Check style.css for vertical scroll and transition
+    # 1. Check style.css for grid gallery and transition
     with open('style.css', 'r') as f:
         style = f.read()
-        assert 'translateY(100%)' in style, "Scroll animation should start at 100%"
-        assert 'translateY(-100%)' in style, "Scroll animation should end at -100%"
+        assert 'display: grid' in style, "Gallery should use grid layout"
+        assert 'grid-template-columns:' in style, "Gallery should have grid columns defined"
         assert 'cubic-bezier(0.34, 1.56, 0.64, 1)' in style, "Login button should have bouncy transition"
 
     # 2. Check script.js for audio and video logic

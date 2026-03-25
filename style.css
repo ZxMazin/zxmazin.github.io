@@ -99,44 +99,32 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 #visual-container {
     flex: 1.5;
     position: relative;
-    overflow: hidden;
+    overflow-y: auto;
     background: #ddd;
     padding: 0;
-    display: flex;
-    align-items: flex-start;
 }
 
 #scrolling-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
     padding: 20px;
-    animation: scrollVertical 80s linear infinite;
     width: 100%;
-}
-
-@keyframes scrollVertical {
-    0% { transform: translateY(100%); }
-    100% { transform: translateY(-100%); }
-}
-
-#scrolling-wrapper:hover {
-    animation-play-state: paused;
 }
 .image-wrapper {
     width: 100%;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
     position: relative;
     background: #000;
-    min-height: 200px;
 }
 
 .image-wrapper img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     transition: transform 0.5s;
-    object-fit: contain;
+    object-fit: cover;
 }
 .image-wrapper:hover img { transform: scale(1.1); cursor: zoom-in; }
 
@@ -209,8 +197,12 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 }
 .image-wrapper:hover .product-info { transform: translateY(0); }
 .add-to-cart-btn {
-    width: 100%; padding: 5px; background: #0058a3; color: #fff;
+    position: absolute;
+    top: 5px; right: 5px;
+    padding: 5px 10px; background: #0058a3; color: #fff;
     border: 3px outset #004a8b; cursor: pointer; font-weight: bold;
+    font-size: 0.7rem;
+    z-index: 10;
 }
 .add-to-cart-btn:active {
     border-style: inset;

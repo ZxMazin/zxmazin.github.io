@@ -119,9 +119,9 @@ document.addEventListener('mousemove', (e) => {
         let newX = currentX + Math.cos(angle) * fleeDist;
         let newY = currentY + Math.sin(angle) * fleeDist;
 
-        // Boundaries check - keep within reasonable screen space
-        const limitX = window.innerWidth / 2 - 60;
-        const limitY = window.innerHeight / 2 - 40;
+        // Boundaries check - keep within the login-box
+        const limitX = 120;
+        const limitY = 60;
 
         if (Math.abs(newX) > limitX) newX = (newX > 0 ? limitX : -limitX);
         if (Math.abs(newY) > limitY) newY = (newY > 0 ? limitY : -limitY);
@@ -135,18 +135,8 @@ document.addEventListener('mousemove', (e) => {
 
         setTimeout(() => { loginFleeing = false; }, 500); // Cooldown to match transition
     } else if (dist < 100 && loginMoves === MAX_LOGIN_MOVES) {
-        loginBtn.classList.add('falling-btn');
-        loginMoves++; // prevent repeated fall trigger
-        setTimeout(() => {
-            if (passField.value.toLowerCase() === '1234') {
-                startBoot();
-            } else {
-                loginBtn.classList.remove('falling-btn');
-                loginBtn.style.transform = "translate(0,0)";
-                loginMoves = 0;
-                showAlert("Erreur Système", "Mot de passe incorrect ! Indice: 1234");
-            }
-        }, 2000);
+        // After MAX_LOGIN_MOVES, the button stays in place so the user can click it
+        loginBtn.style.boxShadow = "0 0 20px #00ff00";
     }
 });
 
@@ -550,7 +540,7 @@ function showTransition() {
 // 5. FINAL SCREEN (WIN98)
 function openWin98(id) {
     if (id === 'win-video-final') {
-        document.getElementById('video-final-frame').src = "https://www.youtube-nocookie.com/embed/J8ugZk1rPpU?autoplay=1";
+        document.getElementById('video-final-frame').src = "https://www.youtube-nocookie.com/embed/jH_G6u-xW4M?autoplay=1";
     }
     document.getElementById(id).style.display = 'flex';
 }
