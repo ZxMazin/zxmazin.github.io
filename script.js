@@ -505,12 +505,15 @@ document.getElementById('next-city-btn').addEventListener('click', () => {
     currentStep++;
     if (currentStep < journeyData.length) {
         // Logic for YouTube interludes
+        /* standby
         if (youtubeInterludeCount < MAX_YOUTUBE_INTERLUDES &&
             (currentStep === 3 || currentStep === 6 || currentStep === journeyData.length - 1)) {
             showYoutubeInterlude();
         } else {
             showTransition();
         }
+        */
+        showTransition();
     } else {
         showFinal();
     }
@@ -620,7 +623,7 @@ function showTransition() {
 // 5. FINAL SCREEN (WIN98)
 function openWin98(id) {
     if (id === 'win-video-final') {
-        document.getElementById('video-final-frame').src = "https://www.youtube-nocookie.com/embed/jH_G6u-xW4M?autoplay=1";
+        // document.getElementById('video-final-frame').src = "https://www.youtube-nocookie.com/embed/jH_G6u-xW4M?autoplay=1";
     }
     document.getElementById(id).style.display = 'flex';
 }
