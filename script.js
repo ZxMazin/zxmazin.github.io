@@ -295,12 +295,11 @@ function startLoading() {
             setTimeout(() => showStartVideo(), 1000);
         }
     }, 100);
-}
 
 function showStartVideo() {
     loadingScreen.classList.add('hidden');
     audioLoading.pause();
-    showYoutubeInterlude("HJuGB3M2Lu8", startJourney);
+    showYoutubeInterlude("HJuGB3M2Lu8?si=dbgIwkYbFEZN3-iw", startJourney);
 }
 
 // 4. JOURNEY ENGINE
@@ -499,7 +498,7 @@ function showYoutubeInterlude(videoId, callback) {
     interlude.id = 'youtube-interlude';
     const s = uiStrings[currentLang];
 
-    const url = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=0&controls=0&modestbranding=1`;
+    const url = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&mute=0&controls=1&modestbranding=1`;
 
     interlude.innerHTML = `
         <div class="interlude-overlay">
