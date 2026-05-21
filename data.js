@@ -559,13 +559,28 @@ An jenem Abend reiste ich mit einem bitteren Beigeschmack im Mund in die Schweiz
 ];
 
 const audios = [
-    { title: "Audio 1", file: "audio/file1.mp3" },
-    { title: "Audio 2", file: "audio/file2.mp3" },
-    { title: "Audio 3", file: "audio/file3.mp3" },
-    { title: "Audio 4", file: "audio/file4.mp3" },
-    { title: "Audio 5", file: "audio/file5.mp3" },
-    { title: "Audio 6", file: "audio/file6.mp3" },
-    { title: "Audio 7", file: "audio/file7.mp3" }
+    { title: "Audio 1", file: "audio/Aéroport Rabat-Salé 6.m4a" },
+    { title: "Audio 2", file: "audio/Barbès–Rochechouart.m4a" },
+    { title: "Audio 3", file: "audio/Compte rendu paris.m4a" },
+    { title: "Audio 4", file: "audio/Emsi hassan.m4a" },
+    { title: "Audio 5", file: "audio/Nouvel enregistrement 16.m4a" },
+    { title: "Audio 6", file: "audio/Nouvel enregistrement 23.m4a" },
+    { title: "Audio 7", file: "audio/Nouvel enregistrement 25.m4a" },
+    { title: "Audio 8", file: "audio/Nouvel enregistrement 8.m4a" },
+    { title: "Audio 9", file: "audio/Parc Łazienki.m4a" },
+    { title: "Audio 10", file: "audio/Place el Hedim 2.m4a" },
+    { title: "Audio 11", file: "audio/Rosé.m4a" },
+    { title: "Audio 12", file: "audio/Rue de la Villette.m4a" },
+    { title: "Audio 13", file: "audio/Son appelle pour Rabat.m4a" },
+    { title: "Audio 14", file: "audio/Son insulte dame prend bouteille.m4a" },
+    { title: "Audio 15", file: "audio/Son taxi Maroc.m4a" },
+    { title: "Audio 16", file: "audio/Suomenlinna 3.m4a" },
+    { title: "Audio 17", file: "audio/T-Centralen.m4a" },
+    { title: "Audio 18", file: "audio/Taponas.m4a" },
+    { title: "Audio 19", file: "audio/The People.m4a" },
+    { title: "Audio 20", file: "audio/Ulriksdal.m4a" },
+    { title: "Audio 21", file: "audio/WhatsApp Ptt 2026-05-21 at 19.15.44.ogg" },
+    { title: "Audio 22", file: "audio/Wok to walk.m4a" }
 ];
 
 const uiStrings = {

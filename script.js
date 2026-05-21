@@ -299,7 +299,36 @@ function startLoading() {
 function showStartVideo() {
     loadingScreen.classList.add('hidden');
     audioLoading.pause();
-    showYoutubeInterlude("HJuGB3M2Lu8?si=dbgIwkYbFEZN3-iw", startJourney);
+
+    const interlude = document.createElement('div');
+    interlude.id = 'youtube-interlude';
+    const s = uiStrings[currentLang];
+    const url = `https://www.youtube-nocookie.com/embed/HJuGB3M2Lu8?si=dbgIwkYbFEZN3-iw&autoplay=1&mute=0&controls=1&modestbranding=1`;
+
+    interlude.innerHTML = `
+        <div class="interlude-overlay">
+            <h2>Interlude Musical...</h2>
+            <iframe
+                width="560"
+                height="315"
+                src="${url}"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+            <button class="retro-btn">
+                ${s.skip_interlude}
+            </button>
+        </div>
+    `;
+
+    interlude.querySelector('button').onclick = () => {
+        interlude.remove();
+        startJourney();
+    };
+
+    document.body.appendChild(interlude);
 }
 
 // 4. JOURNEY ENGINE
@@ -474,15 +503,67 @@ document.getElementById('next-city-btn').addEventListener('click', () => {
     }
 
     if (currentStep === 1) { // After Rabat
-        showYoutubeInterlude("IRomV6YClMA", () => {
+        const interlude = document.createElement('div');
+        interlude.id = 'youtube-interlude';
+        const s_int = uiStrings[currentLang];
+        const url = `https://www.youtube-nocookie.com/embed/IRomV6YClMA?autoplay=1&mute=0&controls=1&modestbranding=1`;
+
+        interlude.innerHTML = `
+            <div class="interlude-overlay">
+                <h2>Interlude Musical...</h2>
+                <iframe
+                    width="560"
+                    height="315"
+                    src="${url}"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+                <button class="retro-btn">
+                    ${s_int.skip_interlude}
+                </button>
+            </div>
+        `;
+
+        interlude.querySelector('button').onclick = () => {
+            interlude.remove();
             currentStep++;
             showTransition();
-        });
+        };
+
+        document.body.appendChild(interlude);
     } else if (currentStep === 3) { // After Stockholm
-        showYoutubeInterlude("ZAiGsJZItxE", () => {
+        const interlude = document.createElement('div');
+        interlude.id = 'youtube-interlude';
+        const s_int = uiStrings[currentLang];
+        const url = `https://www.youtube-nocookie.com/embed/ZAiGsJZItxE?autoplay=1&mute=0&controls=1&modestbranding=1`;
+
+        interlude.innerHTML = `
+            <div class="interlude-overlay">
+                <h2>Interlude Musical...</h2>
+                <iframe
+                    width="560"
+                    height="315"
+                    src="${url}"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+                <button class="retro-btn">
+                    ${s_int.skip_interlude}
+                </button>
+            </div>
+        `;
+
+        interlude.querySelector('button').onclick = () => {
+            interlude.remove();
             currentStep++;
             showTransition();
-        });
+        };
+
+        document.body.appendChild(interlude);
     } else {
         currentStep++;
         if (currentStep < journeyData.length) {
@@ -493,38 +574,6 @@ document.getElementById('next-city-btn').addEventListener('click', () => {
     }
 });
 
-function showYoutubeInterlude(videoId, callback) {
-    const interlude = document.createElement('div');
-    interlude.id = 'youtube-interlude';
-    const s = uiStrings[currentLang];
-
-    const url = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&mute=0&controls=1&modestbranding=1`;
-
-    interlude.innerHTML = `
-        <div class="interlude-overlay">
-            <h2>Interlude Musical...</h2>
-            <iframe
-                width="560"
-                height="315"
-                src="${url}"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
-            <button class="retro-btn">
-                ${s.skip_interlude}
-            </button>
-        </div>
-    `;
-
-    interlude.querySelector('button').onclick = () => {
-        interlude.remove();
-        callback();
-    };
-
-    document.body.appendChild(interlude);
-}
 
 
 // Easter Eggs
