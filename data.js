@@ -606,11 +606,16 @@ const uiStrings = {
         archives: "Mes Archives",
         video_final: "Vidéo Final",
         audios: "Audios",
+        media_player: "Lecteur Multimédia",
         language: "Langue",
         add_to_cart: "Ajouter au panier",
         read_aloud: "Résumé",
         full_text: "Texte complet",
-        skip_interlude: "Passer l'interlude"
+        skip_interlude: "Passer l'interlude",
+        play: "Lecture",
+        pause: "Pause",
+        stop: "Arrêt",
+        rewind: "-10s"
     },
     de: {
         login_title: "Erinnerungszugangssystem",
@@ -634,10 +639,15 @@ const uiStrings = {
         archives: "Meine Archive",
         video_final: "Finales Video",
         audios: "Audios",
+        media_player: "Media Player",
         language: "Sprache",
         add_to_cart: "In den Warenkorb",
         read_aloud: "Zusammenfassung",
         full_text: "Vollständiger Text",
-        skip_interlude: "Interlude überspringen"
+        skip_interlude: "Interlude überspringen",
+        play: "Abspielen",
+        pause: "Pause",
+        stop: "Stopp",
+        rewind: "-10s"
     }
 };

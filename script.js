@@ -42,6 +42,7 @@ const modalOkBtn = document.getElementById('modal-ok-btn');
 const audioBoot = document.getElementById('audio-boot');
 const audioLoading = document.getElementById('audio-loading');
 const audioClick = document.getElementById('audio-click');
+const narrativeAudio = document.getElementById('narrative-audio');
 
 window.setLanguage = (lang) => {
     currentLang = lang;
@@ -76,6 +77,20 @@ function updateUILanguage() {
     if (resumeBtn) {
         resumeBtn.innerText = isShowingSummary ? "📝 " + s.full_text : "📝 " + s.read_aloud;
     }
+
+    // Update Media Player buttons
+    const playBtn = document.getElementById('media-play-btn');
+    if (playBtn) {
+        if (narrativeAudio.paused) {
+            playBtn.innerText = s.play;
+        } else {
+            playBtn.innerText = s.pause;
+        }
+    }
+    const stopBtn = document.getElementById('media-stop-btn');
+    if (stopBtn) stopBtn.innerText = s.stop;
+    const rewindBtn = document.getElementById('media-rewind-btn');
+    if (rewindBtn) rewindBtn.innerText = s.rewind;
 }
 
 // MODAL LOGIC
@@ -243,6 +258,62 @@ function toggleSummary() {
 }
 
 document.getElementById('audio-read-btn').addEventListener('click', toggleSummary);
+
+// MEDIA PLAYER LOGIC
+window.mediaTogglePlay = () => {
+    const s = uiStrings[currentLang];
+    const playBtn = document.getElementById('media-play-btn');
+    if (narrativeAudio.paused) {
+        narrativeAudio.play();
+        playBtn.innerText = s.pause;
+    } else {
+        narrativeAudio.pause();
+        playBtn.innerText = s.play;
+    }
+};
+
+window.mediaStop = () => {
+    const s = uiStrings[currentLang];
+    narrativeAudio.pause();
+    narrativeAudio.currentTime = 0;
+    document.getElementById('media-play-btn').innerText = s.play;
+};
+
+window.mediaRewind = () => {
+    narrativeAudio.currentTime = Math.max(0, narrativeAudio.currentTime - 10);
+};
+
+function formatTime(seconds) {
+    if (isNaN(seconds)) return "00:00";
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+}
+
+narrativeAudio.addEventListener('timeupdate', () => {
+    const progress = (narrativeAudio.currentTime / narrativeAudio.duration) * 100;
+    const bar = document.getElementById('media-progress-bar');
+    if (bar) bar.style.width = progress + "%";
+
+    const timeDisplay = document.getElementById('media-time');
+    if (timeDisplay) {
+        timeDisplay.innerText = `${formatTime(narrativeAudio.currentTime)} / ${formatTime(narrativeAudio.duration)}`;
+    }
+});
+
+narrativeAudio.addEventListener('ended', () => {
+    const s = uiStrings[currentLang];
+    const playBtn = document.getElementById('media-play-btn');
+    if (playBtn) playBtn.innerText = s.play;
+});
+
+// Click on progress bar to seek
+document.getElementById('media-progress-container').addEventListener('click', (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const clickedValue = (x / rect.width);
+    narrativeAudio.currentTime = clickedValue * narrativeAudio.duration;
+});
 
 // 2. BOOT SEQUENCE
 function startBoot() {
@@ -754,6 +825,18 @@ function openFolder(cityId) {
     openWin98('win-folder-view');
 }
 
+function openMediaPlayer(title, file) {
+    const s = uiStrings[currentLang];
+    const player = document.getElementById('narrative-audio');
+    const playBtn = document.getElementById('media-play-btn');
+
+    document.getElementById('media-title').innerText = title;
+    player.src = file;
+    player.play();
+    playBtn.innerText = s.pause;
+    openWin98('win-media');
+}
+
 function showFinal() {
     const s = uiStrings[currentLang];
     journeyScreen.classList.add('hidden');
@@ -761,6 +844,7 @@ function showFinal() {
 
     document.querySelector('.desktop-icon[onclick*="win-archives"] span').innerText = s.archives;
     document.querySelector('.desktop-icon[onclick*="win-audios"] span').innerText = s.audios;
+    document.querySelector('.desktop-icon[onclick*="win-media"] span').innerText = s.media_player;
 
     const arcGrid = document.getElementById('archives-grid');
     arcGrid.innerHTML = "";
@@ -782,12 +866,7 @@ function showFinal() {
         icon.className = 'desktop-icon';
         icon.style.color = '#000';
         icon.innerHTML = `<div class="fallback-icon video"></div><span>${a.title}</span>`;
-        icon.onclick = () => {
-            const player = document.getElementById('narrative-audio');
-            player.src = a.file;
-            player.play();
-            showAlert("Audio Player", `Lecture de : ${a.title}`);
-        };
+        icon.onclick = () => openMediaPlayer(a.title, a.file);
         audioGrid.appendChild(icon);
     });
 }

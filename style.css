@@ -428,3 +428,14 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 .modal-header { background: #000080; color: #fff; padding: 5px 10px; display: flex; justify-content: space-between; font-weight: bold; }
 .modal-body { padding: 20px; max-height: 60vh; overflow-y: auto; }
 .modal-footer { padding: 10px; text-align: right; border-top: 1px solid #888; }
+
+/* MEDIA PLAYER */
+#media-display {
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5);
+}
+#media-progress-container:active #media-progress-bar {
+    filter: brightness(1.2);
+}
+#media-progress-bar {
+    transition: width 0.1s linear;
+}
