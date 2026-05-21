@@ -295,7 +295,7 @@ function startLoading() {
             setTimeout(() => showStartVideo(), 1000);
         }
     }, 100);
-
+}
 function showStartVideo() {
     loadingScreen.classList.add('hidden');
     audioLoading.pause();
