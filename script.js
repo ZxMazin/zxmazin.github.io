@@ -11,8 +11,7 @@ let loginMoves = 0;
 const MAX_LOGIN_MOVES = 20; // Increased for the "game"
 let loginFleeing = false;
 let decoys = [];
-let youtubeInterludeCount = 0;
-const MAX_YOUTUBE_INTERLUDES = 3;
+let isShowingSummary = false;
 
 // DOM ELEMENTS
 const loginScreen = document.getElementById('login-screen');
@@ -72,9 +71,11 @@ function updateUILanguage() {
     const zoomAddBtnText = document.getElementById('zoom-add-btn');
     if (zoomAddBtnText) zoomAddBtnText.innerText = s.add_to_cart;
 
-    // Update Read Aloud button
-    const readBtn = document.getElementById('audio-read-btn');
-    if (readBtn) readBtn.innerText = "🔊 " + s.read_aloud;
+    // Update Resume button
+    const resumeBtn = document.getElementById('audio-read-btn');
+    if (resumeBtn) {
+        resumeBtn.innerText = isShowingSummary ? "📝 " + s.full_text : "📝 " + s.read_aloud;
+    }
 }
 
 // MODAL LOGIC
@@ -235,50 +236,13 @@ passField.addEventListener('keydown', (e) => {
     }
 });
 
-let speechUtterance = null;
-const narrativeAudio = document.getElementById('narrative-audio');
-
-function toggleSpeech() {
-    // 1. Check if audio file is playing
-    if (!narrativeAudio.paused) {
-        narrativeAudio.pause();
-        narrativeAudio.currentTime = 0;
-        return;
-    }
-
-    // 2. Check if TTS is speaking
-    if (window.speechSynthesis.speaking) {
-        window.speechSynthesis.cancel();
-        return;
-    }
-
-    const data = journeyData[currentStep];
-    const customAudio = (currentLang === 'de') ? data.audio_de : data.audio_fr;
-
-    if (customAudio) {
-        narrativeAudio.src = customAudio;
-        narrativeAudio.play().catch(e => {
-            console.warn("Audio file failed to load, falling back to TTS.", e);
-            startTTS();
-        });
-    } else {
-        startTTS();
-    }
-
-    function startTTS() {
-        const text = document.getElementById('dialogue-text').innerText;
-        speechUtterance = new SpeechSynthesisUtterance(text);
-        speechUtterance.lang = (currentLang === 'fr') ? 'fr-FR' : 'de-DE';
-
-        const voices = window.speechSynthesis.getVoices();
-        const voice = voices.find(v => v.lang.startsWith(speechUtterance.lang));
-        if (voice) speechUtterance.voice = voice;
-
-        window.speechSynthesis.speak(speechUtterance);
-    }
+function toggleSummary() {
+    isShowingSummary = !isShowingSummary;
+    updateUILanguage();
+    renderCity();
 }
 
-document.getElementById('audio-read-btn').addEventListener('click', toggleSpeech);
+document.getElementById('audio-read-btn').addEventListener('click', toggleSummary);
 
 // 2. BOOT SEQUENCE
 function startBoot() {
@@ -328,15 +292,19 @@ function startLoading() {
             squareLoader.appendChild(square);
         } else {
             clearInterval(interval);
-            setTimeout(startJourney, 1000);
+            setTimeout(() => showStartVideo(), 1000);
         }
     }, 100);
 }
 
-// 4. JOURNEY ENGINE
-function startJourney() {
+function showStartVideo() {
     loadingScreen.classList.add('hidden');
     audioLoading.pause();
+    showYoutubeInterlude("HJuGB3M2Lu8", startJourney);
+}
+
+// 4. JOURNEY ENGINE
+function startJourney() {
     journeyScreen.classList.remove('hidden');
     renderCity();
 }
@@ -351,7 +319,13 @@ function renderCity() {
 
     journeyScreen.className = "screen theme-" + data.theme;
     title.innerText = (currentLang === 'de') ? `${data.city_de}, ${data.country_de}` : `${data.city}, ${data.country}`;
-    const contentText = (currentLang === 'de') ? data.text_de : data.text;
+
+    let contentText;
+    if (isShowingSummary) {
+        contentText = (currentLang === 'de') ? data.summary_de : data.summary;
+    } else {
+        contentText = (currentLang === 'de') ? data.text_de : data.text;
+    }
     text.innerText = contentText;
 
     nextBtn.innerText = (currentStep < journeyData.length - 1) ? s.next : s.finish;
@@ -492,9 +466,7 @@ function renderCity() {
 }
 
 document.getElementById('next-city-btn').addEventListener('click', () => {
-    window.speechSynthesis.cancel();
-    narrativeAudio.pause();
-    narrativeAudio.currentTime = 0;
+    isShowingSummary = false;
     const s = uiStrings[currentLang];
     // Check for payment lock if in Sweden
     if (journeyData[currentStep].theme === 'sweden' && !window.ikeaPaid) {
@@ -502,31 +474,32 @@ document.getElementById('next-city-btn').addEventListener('click', () => {
         return;
     }
 
-    currentStep++;
-    if (currentStep < journeyData.length) {
-        // Logic for YouTube interludes
-        /* standby
-        if (youtubeInterludeCount < MAX_YOUTUBE_INTERLUDES &&
-            (currentStep === 3 || currentStep === 6 || currentStep === journeyData.length - 1)) {
-            showYoutubeInterlude();
-        } else {
+    if (currentStep === 1) { // After Rabat
+        showYoutubeInterlude("IRomV6YClMA", () => {
+            currentStep++;
             showTransition();
-        }
-        */
-        showTransition();
+        });
+    } else if (currentStep === 3) { // After Stockholm
+        showYoutubeInterlude("ZAiGsJZItxE", () => {
+            currentStep++;
+            showTransition();
+        });
     } else {
-        showFinal();
+        currentStep++;
+        if (currentStep < journeyData.length) {
+            showTransition();
+        } else {
+            showFinal();
+        }
     }
 });
 
-function showYoutubeInterlude() {
-    youtubeInterludeCount++;
+function showYoutubeInterlude(videoId, callback) {
     const interlude = document.createElement('div');
     interlude.id = 'youtube-interlude';
+    const s = uiStrings[currentLang];
 
-    const data = journeyData[currentStep];
-    const vid = data.videoId || "l5aZJBLAu1E";
-    const url = `https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&mute=0&controls=1&modestbranding=1`;
+    const url = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=0&controls=0&modestbranding=1`;
 
     interlude.innerHTML = `
         <div class="interlude-overlay">
@@ -540,11 +513,16 @@ function showYoutubeInterlude() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
             </iframe>
-            <button class="retro-btn" onclick="this.parentElement.parentElement.remove(); showTransition();">
-                Passer l'interlude
+            <button class="retro-btn">
+                ${s.skip_interlude}
             </button>
         </div>
     `;
+
+    interlude.querySelector('button').onclick = () => {
+        interlude.remove();
+        callback();
+    };
 
     document.body.appendChild(interlude);
 }
@@ -622,9 +600,6 @@ function showTransition() {
 
 // 5. FINAL SCREEN (WIN98)
 function openWin98(id) {
-    if (id === 'win-video-final') {
-        // document.getElementById('video-final-frame').src = "https://www.youtube-nocookie.com/embed/jH_G6u-xW4M?autoplay=1";
-    }
     document.getElementById(id).style.display = 'flex';
 }
 function closeWin98(id) {
@@ -745,8 +720,7 @@ function showFinal() {
     finalScreen.classList.remove('hidden');
 
     document.querySelector('.desktop-icon[onclick*="win-archives"] span').innerText = s.archives;
-    document.querySelector('.desktop-icon[onclick*="win-video-final"] span').innerText = s.video_final;
-    document.querySelector('.desktop-icon[onclick*="win-poems"] span').innerText = s.poems;
+    document.querySelector('.desktop-icon[onclick*="win-audios"] span').innerText = s.audios;
 
     const arcGrid = document.getElementById('archives-grid');
     arcGrid.innerHTML = "";
@@ -761,16 +735,19 @@ function showFinal() {
         }
     });
 
-    const poemGrid = document.getElementById('poems-grid');
-    poemGrid.innerHTML = "";
-    poems.forEach(p => {
+    const audioGrid = document.getElementById('audios-grid');
+    audioGrid.innerHTML = "";
+    audios.forEach(a => {
         const icon = document.createElement('div');
         icon.className = 'desktop-icon';
         icon.style.color = '#000';
-        const pTitle = (currentLang === 'de') ? (p.title_de || p.title) : p.title;
-        const pText = (currentLang === 'de') ? (p.text_de || p.text) : p.text;
-        icon.innerHTML = `<div class="fallback-icon poem"></div><span>${pTitle}</span>`;
-        icon.onclick = () => showAlert(pTitle, `von ${p.author}\n\n${pText}`);
-        poemGrid.appendChild(icon);
+        icon.innerHTML = `<div class="fallback-icon video"></div><span>${a.title}</span>`;
+        icon.onclick = () => {
+            const player = document.getElementById('narrative-audio');
+            player.src = a.file;
+            player.play();
+            showAlert("Audio Player", `Lecture de : ${a.title}`);
+        };
+        audioGrid.appendChild(icon);
     });
 }

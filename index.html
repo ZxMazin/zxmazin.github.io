@@ -53,7 +53,7 @@
                     <div class="dialogue-box">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <h2 id="city-title">Ville</h2>
-                            <button id="audio-read-btn" class="retro-btn" style="padding: 5px 10px;">🔊 Lire</button>
+                            <button id="audio-read-btn" class="retro-btn" style="padding: 5px 10px;">📝 Résumé</button>
                         </div>
                         <div id="dialogue-text">Texte ici...</div>
                         <button id="next-city-btn" class="retro-btn">Continuer le voyage</button>
@@ -72,13 +72,9 @@
                 <div class="fallback-icon folder"></div>
                 <span>Mes Archives</span>
             </div>
-            <div class="desktop-icon" onclick="openWin98('win-video-final')">
+            <div class="desktop-icon" onclick="openWin98('win-audios')">
                 <div class="fallback-icon video"></div>
-                <span>Vidéo Final</span>
-            </div>
-            <div class="desktop-icon" onclick="openWin98('win-poems')">
-                <div class="fallback-icon poem"></div>
-                <span>Poèmes</span>
+                <span>Audios</span>
             </div>
             <div class="desktop-icon" onclick="openWin98('win-mines'); initMinesweeper();">
                 <div class="fallback-icon game"></div>
@@ -96,16 +92,9 @@
                 <div class="win98-content scrollable" id="folder-view-body"></div>
             </div>
 
-            <div id="win-poems" class="win98-window">
-                <div class="win98-title"><span>Bibliothèque d'écrit</span><button class="win98-close" onclick="closeWin98('win-poems')">X</button></div>
-                <div class="win98-content folder-grid" id="poems-grid"></div>
-            </div>
-
-            <div id="win-video-final" class="win98-window" style="width: 600px; height: 450px;">
-                <div class="win98-title"><span>Windows Media Player</span><button class="win98-close" onclick="closeWin98('win-video-final')">X</button></div>
-                <div class="win98-content" style="background:#000; padding:0;">
-                    <iframe id="video-final-frame" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
-                </div>
+            <div id="win-audios" class="win98-window">
+                <div class="win98-title"><span>Bibliothèque Audio</span><button class="win98-close" onclick="closeWin98('win-audios')">X</button></div>
+                <div class="win98-content folder-grid" id="audios-grid"></div>
             </div>
 
             <div id="win-mines" class="win98-window" style="width: 250px; height: auto;">

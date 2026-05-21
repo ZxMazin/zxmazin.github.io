@@ -10,7 +10,10 @@ const journeyData = [
         videoId: "l5aZJBLAu1E",
         audio_fr: "audio/meknes_fr.mp3",
         audio_de: "audio/meknes_de.mp3",
+        summary: "Un retour aux racines marqué par les souvenirs d'un père et la découverte de l'histoire du Maroc.",
+        summary_de: "Eine Rückkehr zu den Wurzeln, geprägt von den Erinnerungen an einen Vater und der Entdeckung der Geschichte Marokkos.",
         text: `Ma mère me raconta une habitude de ses années étudiantes, lorsqu’elle faisait la navette entre Rabat et Meknès, la ville où elle habitait. À l’arrivée en gare, ses camarades masculins ouvraient toujours les portes alors que le train était encore en approche, prétendant que c’était pour s’aérer.
+
 Il y avait aussi une tradition : à l’arrivée dans notre village natal, il fallait rendre visite aux morts. Mon père et ma grand-mère sont enterrés pas loin l’un de l’autre, une drôle de coïncidence. Mon père n’était pas du tout marocain. Il était né en Égypte et avait immigré en Suisse pour devenir ingénieur informaticien, alors que le métier en était encore à ses débuts. Il est décédé d’un cancer du cerveau quand j’avais six ans. Sur le moment, je n’avais pas compris ce qui se passait. Ensuite, quand j’ai compris qu’il ne reviendrait pas, je me demandais pourquoi il était enterré là-bas. C’était parce que c’était l’endroit où il se sentait chez lui : le pays de sa femme, le Maroc. J’ai compris. Il n’était ni suisse ni égyptien. En Égypte, on l’aurait considéré comme Suisse. En Suisse, on l’aurait traité d’étranger. Au Maroc, on le considérait comme Marocain. Lors de son enterrement, les fidèles de la mosquée prièrent tous pour lui.
 Les Marocains sont drôles. À mon arrivée à la douane marocaine, lorsque je donnai mon passeport, l’agent commença à me fixer longuement. Premier réflexe un peu idiot : je me recoiffai et souris. Il rigola. Mais je fus le seul de ma file à qui l’on ne demanda rien. Heureusement, je n’aurais pas pu répondre : je parle très mal le darija.
 J’aime bien le Maroc. C’est un endroit très vrai, où le superficiel n’a pas sa place. Lorsque je rendis visite à une amie de la famille, Soukaina Boubia, professeure d’histoire-géographie à la Haute École de tourisme de Rabat-Salé, elle m’offrit un livre sur l’histoire du Maroc, encore dans son sac de « la librairie populaire ». C’est un très beau cadeau : offrir le savoir. C’était la veille de mon départ. Le lendemain, je pris l’avion pour Paris. Ma mère m’avait accompagné à l’aéroport en taxi. Je n’avais jamais craint de partir à l’aventure, sauf ce jour-là. Je craignais de ne plus revoir ma mère.`,
@@ -19,8 +22,7 @@ J’aime bien le Maroc. C’est un endroit très vrai, où le superficiel n’a 
 Die Marokkaner sind lustig. Als ich am marokkanischen Zoll ankam und meinen Reisepass abgab, begann der Beamte mich lange anzustarren. Mein erster, etwas dussliger Reflex: Ich richtete mir die Haare und lächelte. Er lachte. Aber ich war der Einzige in meiner Schlange, der nichts gefragt wurde. Zum Glück, denn ich hätte nicht antworten können: Ich spreche sehr schlecht Darija.
 
 Ich mag Marokko sehr. Es ist ein sehr authentischer Ort, an dem Oberflächlichkeit keinen Platz hat. Als ich eine Freundin der Familie besuchte, Soukaina Boubia, Professorin für Geschichte und Geographie an der Tourismushochschule in Rabat-Salé, schenkte sie mir ein Buch über die Geschichte Marokkos, noch in der Tüte der „Librairie Populaire“. Es ist ein sehr schönes Geschenk: Wissen zu verschenken.`,
-        images: [
-            "images/meknes/000118380040.jpg",
+        images: ["images/meknes/000118380040.jpg",
             "images/meknes/IMG_0043.JPG",
             "images/meknes/IMG_0047.JPG",
             "images/meknes/IMG_0061.JPG",
@@ -38,8 +40,7 @@ Ich mag Marokko sehr. Es ist ein sehr authentischer Ort, an dem Oberflächlichke
             "images/meknes/IMG_0136.JPG",
             "images/meknes/IMG_0138.JPG",
             "images/meknes/IMG_0141.JPG",
-            "images/meknes/IMG_0149.JPG"
-        ]
+            "images/meknes/IMG_0149.JPG"]
     },
     {
         id: "rabat",
@@ -52,6 +53,8 @@ Ich mag Marokko sehr. Es ist ein sehr authentischer Ort, an dem Oberflächlichke
         videoId: "J8ugZk1rPpU",
         audio_fr: "audio/rabat_fr.mp3",
         audio_de: "audio/rabat_de.mp3",
+        summary: "Un voyage en train Al Atlas, traversant le pays et rencontrant des familles marocaines authentiques.",
+        summary_de: "Eine Reise mit dem Al Atlas Zug, der das Land durchquert und authentische marokkanische Familien trifft.",
         text: `Je rejoignis ma famille à l’avenue Hassan, près du mausolée de Mohamed V. Ma mère et ma sœur étaient déjà venues quelques jours plus tôt. Nous nous rendîmes directement à la gare ferroviaire et prîmes le train Al Atlas, qui relie les grandes villes marocaines. Le trajet était long, le train n’allant pas très vite. On traversait des champs à perte de vue et on passait parfois dans des villages reculés. Les trains au Maroc étaient les mêmes que les anciens trains à compartiments français. Ils avaient été revendus au Maroc, mais honnêtement, c’était plus un acte de recyclage qu’un geste de générosité. Au moins, c’était idéal pour faire des rencontres.
 Dans mon compartiment, à part ma sœur et ma mère, il y avait un homme dans un coin qui lisait son journal pendant tout le trajet. À côté, toute une famille était également présente : la grand-mère, la mère, la fille et la petite-fille. Elles étaient habillées très différemment de ce que l’on verrait en Occident. Les deux aînées portaient chacune un voile ample qui couvrait tout leur corps. La fille était en djellaba, une robe colorée qui descendait jusqu’aux chevilles, mais sans voile. La petite-fille était dans sa poussette, vêtue d’un jogging et d’un pull Dora l’Exploratrice.
 Ma mère entama la discussion avec elles. Il s’avéra que la fille avait une grave maladie nerveuse et qu’elles rentraient d’un rendez-vous chez le médecin. C’était la dernière fois que je me plaindrais d’un long trajet. Nous arrivâmes finalement à Meknès.`,
@@ -98,6 +101,8 @@ Meine Mutter erzählte mir von einer Gewohnheit aus ihrer Studienzeit, als sie z
         videoId: "m9I-aN71B-c",
         audio_fr: "audio/paris_fr.mp3",
         audio_de: "audio/paris_de.mp3",
+        summary: "Entre luxe et misère, une exploration des contrastes de la ville Lumière, de Barbès au Père-Lachaise.",
+        summary_de: "Zwischen Luxus und Elend, eine Erkundung der Kontraste der Stadt des Lichts, von Barbès bis Père-Lachaise.",
         text: `Paris, ville Lumière, ville des arts, mais surtout ville de misère. On entend souvent dire que les inégalités sont aujourd’hui plus fortes qu’au temps de la Révolution française. Cependant, ceux qui le savent appartiennent déjà à la classe haute.
 Après trois heures de retard et un cookie en guise de dédommagement, j’arrivai à Paris et commençai, pour ne pas changer, mon travail. Je sentis déjà une habitude s’installer : observer, capturer et noter. Le soir, j’étais invité à dîner : pas question d’arriver en retard, cela ne se reproduirait pas pendant mon voyage. J’avais été invité par des amis de passage à Paris. Je pense que ce fut le meilleur dîner que j’aie pu avoir durant mon voyage. Les adieux furent aussi difficiles que d’expliquer le sens de mon périple. Quelle chance. Nombreux sont ceux qui n’éprouvent aucun mal. La banalité se porte bien.
 Le lendemain, je me suis levé pour continuer ma visite. Objectif : la banlieue. Je me dirigeai vers le quartier qui me correspondrait : Barbès-Rochechouart, un quartier à forte population maghrébine. La sensation est vraiment indescriptible. Les odeurs étaient puissantes : cela sentait les épices, le ras el-hanout, mais, étant proche du métro, cela sentait aussi l’urine. Les bruits étaient intenses : on entend beaucoup de langues, à voix haute.
@@ -165,11 +170,13 @@ Paris ist oberflächlich. Man steckt die Einwanderer in eine Ecke der Stadt, die
         city_de: "Stockholm",
         country: "Suède",
         country_de: "Schweden",
-        transport: "bateau",
+        transport: "avion",
         theme: "sweden",
         videoId: "q6f-JJmAM_k",
         audio_fr: "audio/stockholm_fr.mp3",
         audio_de: "audio/stockholm_de.mp3",
+        summary: "Découverte de la culture suédoise, entre Ikea, cinnamon rolls et le froid des rencontres nocturnes.",
+        summary_de: "Entdeckung der schwedischen Kultur, zwischen Ikea, Zimtschnecken und der Kälte nächtlicher Begegnungen.",
         text: `En 2025, le Conseil national suisse refusa le nouveau budget pour la subvention du train de nuit qui aurait pu relier Bâle SBB à Malmö, en Suède. Les UDC justifiaient cette dépense comme inutile, car, je cite : « Ne pensez-vous pas qu’il s’agit de mettre 10 millions pour aller voir les belles blondes en Suède ? Ce n’est pas beaucoup d’argent pour le contribuable. »
 J’arrivai à l’aéroport de Stockholm-Arlanda à 00h20 et à la gare Stockholm C à 1h24. C’était la première fois que je ne comprenais rien. Où étaient les belles blondes pour me guider vers mon hôtel ?
 Je finis enfin par comprendre leur système de tarification et pris un bus pour rejoindre mon hostel. Lors de mon trajet, je rencontrai enfin les fameuses blondes. La première, complètement bourrée, criait au chauffeur alors que celui-ci lui demandait simplement de valider son ticket. La deuxième et la troisième, je les croisai à la quatrième station : deux messieurs les accompagnaient pour rejoindre le bus, pendant que la troisième, pieds nus, vomissait et que la deuxième, pieds nus également, lui tenait les cheveux. J’imaginais leur soirée bien arrosée qui les avait menées à ce banc, ainsi que la gentillesse de leurs compagnons. C’était froid.
@@ -223,6 +230,8 @@ Ich mag Stockholm: die Zimtschnecken, Ikea und ihre Hafermilch. Ich denke, ich k
         videoId: "H6Osh7_Lz9I",
         audio_fr: "audio/helsinki_fr.mp3",
         audio_de: "audio/helsinki_de.mp3",
+        summary: "Une ville de rêve devenue réalité, des Moomins à la forteresse de Suomenlinna face à la mer du Nord.",
+        summary_de: "Eine Traumstadt, die wahr wurde, von den Mumins bis zur Festung Suomenlinna am Nordmeer.",
         text: `Là, c’était vraiment loin de chez moi. C’était un drôle de sentiment, je trouvais. La fatigue commençait à se faire sentir et je n’étais plus émerveillé par ce voyage. Pourtant, Helsinki était ma destination de rêve depuis tout petit. Les « crackheads » que je rencontrais dans le tram ne m’aidaient pas. Ce ne fut qu’après avoir découvert les Moomins que je commençai à apprécier Helsinki. J’avais compris.
 La nuit tombait tellement vite. Elle s’écrasait. Quand j’y pensais, après la chaleur du Maroc, c’était l’opposé dans tous les sens. Le soir ou en fin d’après-midi, je pris un bateau en direction d’une île, ou plutôt de huit îles pour être précis : la forteresse de Suomenlinna. Une grande île séparée en huit parties et reliée par des ponts. C’était le genre de lieu que l’on visitait normalement de jour, mais, par manque de bol, il ne me restait qu’une soirée. C’était froid en tout point, mais beau. L’histoire des Finlandais me fascinait. Le pays était passé du statut de l’un des plus pauvres à celui de plus heureux en moins d’un siècle.
 Le départ de ce pays fut fabuleux. Sur le pont d’un ferry, je voyais défiler d’abord Helsinki, puis ses îles, et je me retrouvai sur la mer du Nord. Une immensité de bleu à perte de vue.`,
@@ -281,9 +290,13 @@ Der Abschied von diesem Land war fabelhaft. Auf dem Deck einer Fähre sah ich er
         videoId: "P8f-I-C_A7U",
         audio_fr: "audio/tallinn_fr.mp3",
         audio_de: "audio/tallinn_de.mp3",
+        summary: "De l'ère communiste à la modernité européenne, une petite ville pleine de charme et de paradoxes artistiques.",
+        summary_de: "Von der kommunistischen Ära zur europäischen Moderne, eine kleine Stadt voller Charme und künstlerischer Paradoxien.",
         text: `Ma première impression à Tallinn fut celle d’une dame d’une cinquantaine d’années qui me disait que je m’étais trompé de toilettes et que c’était « disgusting ». Alors que c’étaient des toilettes mixtes.
 Mis à part cet incident, ce qui me surprit à Tallinn, ce fut la manière dont ce pays était passé d’un pays communiste à un pays européen comme les autres. Certes, il restait des vestiges, mais la comparaison avec la Suisse était tentante. Tallinn est une petite ville, beaucoup moins impressionnante que Stockholm, Paris ou Helsinki, mais elle garde son charme.
+
 Je visitai le musée national des arts estoniens. On m’avait dit que le pays était connu pour son art et que beaucoup de visiteurs venaient de loin pour cette raison. Effectivement, cela ne laissait pas indifférent. Le premier étage présentait des œuvres modernes : de véritables chefs-d’œuvre.
+
 Le troisième étage, annoncé par un petit panneau de 10 × 5 cm indiquant qu’il contenait des scènes à caractère sexuel, faisait l’apologie du sado-masochisme du point de vue de l’artiste Anna-Stina Treumund. C’était une exposition très surprenante. Des jouets enfantins avaient été transformés en objets de domination. Un mobile de lit pour bébé comportait des fouets à la place des décorations habituelles.
 Le deuxième étage se concentrait sur l’art à l’époque du communisme. La critique émise par le musée sur cette période était très intéressante :
 Socialisme tardif
@@ -301,7 +314,7 @@ Abgeshen von diesem Vorfall hat mich in Tallinn überrascht, wie sich das Land v
 
 Ich besuchte das Estnische Kunstmuseum. Man sagte mir, das Land sei für seine Kunst bekannt und viele Besucher kämen von weit her deshalb. Tatsächlich lässt es einen nicht gleichgültig. Im ersten Stock wurden moderne Werke gezeigt: wahre Meisterwerke.
 
-Der dritte Stock, vor dem ein kleines Schild von 10 × 5 cm warnte, dass er sexuelle Szenen enthalte, war eine Hommage an den Sadomasochismus aus der Sicht der Künstlerin Anna-Stina Treumung. Es war eine sehr überraschende Ausstellung. Kinderspielzeug war in Dominationsobjekte verwandelt worden.
+Der dritte Stock, vor dem ein kleines Schild von 10 × 5 cm warnte, dass er sexuelle Szenen enthalte, war eine Hommage an den Sadomasochismus aus der Sicht der Künstlerin Anna-Stina Treumund. Es war eine sehr überraschende Ausstellung. Kinderspielzeug war in Dominationsobjekte verwandelt worden.
 
 Der zweite Stock konzentrierte sich auf Kunst aus der Zeit des Kommunismus. Die Kritik des Museums an dieser Periode war sehr interessant:
 
@@ -365,6 +378,8 @@ Das fasst den Kommunismus gut zusammen und erklärt, warum dieses System nicht f
         videoId: "L-X3rY9L0x8",
         audio_fr: "audio/riga_fr.mp3",
         audio_de: "audio/riga_de.mp3",
+        summary: "Un voyage dans le temps dans une ville qui mêle nostalgie soviétique et causes sociales modernes.",
+        summary_de: "Eine Zeitreise in eine Stadt, die sowjetische Nostalgie mit modernen sozialen Anliegen verbindet.",
         text: `Alors, pour le coup, la Lettonie ressemblait davantage au communisme d’avant. C’était un retour total dans une autre ère. Les vieux tramways, les marchés désuets et les déchets qui jonchaient les rues appartenaient à une autre époque. Cependant, les gens étaient bien de notre époque. Les causes sociales étaient défendues dans les rues sans que cela (en apparence) pose un problème. Je me baladais et vis une rue où les bâtiments étaient ornés de drapeaux LGBTQ+.
 C’était la première ville où je m’autorisais du repos. La dame à l’accueil de mon hostel me l’avait conseillé, donc je n’osais pas vraiment la contredire. C’était aussi la première fois que je m’attardais sur les gens qui faisaient la même chose que moi : « voyager », à la différence que je ne me considérais pas comme eux.
 Les gens étaient de bon conseil à Riga. Ils m’avaient conseillé d’aller à Ludo, une chaîne de restaurants traditionnels baltiques. Je ne vous raconte pas à quel point le repas était bon. Les gens y étaient d’une gentillesse débordante. Le Maroc, lui, est chaud. Je sais que le froid revient souvent dans mes textes, mais il signifiait beaucoup de choses : la solitude, la température, l’atmosphère, etc. En même temps, cela ne voulait rien dire. Pourquoi faisait-il froid ici et pas là ? Mon pays commençait à me manquer.`,
@@ -414,6 +429,8 @@ Les gens étaient de bon conseil à Riga. Ils m’avaient conseillé d’aller �
         videoId: "0YmS_V_Xf6M",
         audio_fr: "audio/varsovie_fr.mp3",
         audio_de: "audio/varsovie_de.mp3",
+        summary: "Une immersion culturelle entre le musée national et l'héritage romantique de Chopin.",
+        summary_de: "Ein kulturelles Eintauchen zwischen dem Nationalmuseum und Chopins romantischem Erbe.",
         text: `Après une longue nuit dans ce car polonais, je me sentais assommé à l’arrivée. C’était vraiment violent. Un froid que je n’avais jamais ressenti me paralysa. Je trouvai refuge à la gare routière pendant quelques heures, jusqu’à ce que le jour se lève et que je comprenne comment prendre le bus. Toujours les mêmes soucis, pour finir.
 Arrivé au musée national de Varsovie, je ne comprenais pas toutes les informations, et surtout la plus importante : la gratuité du musée le mardi. Je me rendis au guichet pour demander un ticket, et le jeune caissier, sans me regarder et en rigolant avec sa collègue, tapota avec insolence la pancarte indiquant que l’entrée était gratuite, écrite en polonais. Ayant trop d’ego, je lui dis que je voulais voir l’exposition temporaire, qui était payante. Je ne savais pas ce que c’était, mais le prix, si : 30 zł, l’équivalent de 7 CHF, partis dans un caprice d’ego.
 Finalement, cela en valait vraiment la peine. La collection permanente était intéressante, mais sans plus. L’exposition temporaire, elle, était magique. C’était exactement ce que je cherchais. Merci à mon ego.
@@ -463,6 +480,8 @@ Am Abend kehrte ich zum Bahnhof Warszawa Centralna zurück, um den Chopin-Zug Ri
         videoId: "jH_G6u-xW4M",
         audio_fr: "audio/prague_fr.mp3",
         audio_de: "audio/prague_de.mp3",
+        summary: "Une fin de voyage amère face à la misère cachée derrière la beauté touristique de la ville.",
+        summary_de: "Ein bitteres Ende der Reise angesichts des Elends, das sich hinter der touristischen Schönheit der Stadt verbirgt.",
         text: `Prague était une belle ville, vraiment. Enfin, je pense que ce que j’avais surtout aimé, c’était sa ressemblance avec la Suisse : c’était comme retrouver mon chez-moi. Prague est aussi une ville qui a connu l’influence du Kremlin et qui a été profondément marquée par cette histoire.
 En me baladant dans les rues, je voyais un véritable marécage de touristes. Dans tout ce vacarme, on voyait des sans-abris supplier les passants de leur donner ne serait-ce qu’une pièce. On aurait pu croire que les touristes, vu l’argent qu’ils avaient déjà dépensé pour venir, donneraient au moins une pièce avant de repartir. Détrompez-vous.
 Ce soir-là, je partis pour la Suisse avec un goût amer en bouche. Comment pouvait-on être à ce point aveugle à la misère ?`,
@@ -517,6 +536,8 @@ An jenem Abend reiste ich mit einem bitteren Beigeschmack im Mund in die Schweiz
         country_de: "Mazin",
         transport: "none",
         theme: "author",
+        summary: "Passionné d'informatique et d'histoire.",
+        summary_de: "Leidenschaft für Informatik und Geschichte.",
         text: "Je m'appelle Mazin, et ce voyage est le reflet de ma quête d'identité entre l'Orient et l'Occident.\n\nPassionné d'informatique et d'histoire, j'ai voulu documenter ces moments de vie à travers une interface qui rappelle mes premiers pas sur un ordinateur.",
         text_de: "Mein Name ist Mazin, und diese Reise spiegelt meine Suche nach Identität zwischen Orient und Okzident wider.\n\nAus Leidenschaft für Informatik und Geschichte wollte ich diese Lebensmomente durch eine Benutzeroberfläche dokumentieren, die an meine ersten Schritte am Computer erinnert.",
         images: []
@@ -529,48 +550,22 @@ An jenem Abend reiste ich mit einem bitteren Beigeschmack im Mund in die Schweiz
         country_de: "Dokumentation",
         transport: "fin",
         theme: "project",
+        summary: "Une SPA narrative simulant un système rétro.",
+        summary_de: "Eine narrative SPA, die ein Retrosystem simuliert.",
         text: "Ce site est une SPA narrative utilisant des technologies web modernes pour simuler un système rétro.\n\nChaque pays dispose d'un univers visuel propre, codé en CSS pour refléter l'âme du voyage.",
         text_de: "Diese Website ist eine narrative SPA, die moderne Webtechnologien nutzt, um ein Retrosystem zu simulieren.\n\nJedes Land verfügt über ein eigenes visuelles Universum, das in CSS kodiert ist, um die Seele der Reise widerzuspiegeln.",
         images: []
     }
 ];
 
-const poems = [
-    {
-        title: "Demain, dès l'aube...",
-        title_de: "Morgen, bei Tagesanbruch...",
-        author: "Victor Hugo",
-        text: "Demain, dès l'aube, à l'heure où blanchit la campagne,\nJe partirai. Vois-tu, je sais que tu m'attends.\nJ'irai par la forêt, j'irai par la montagne.\nJe ne puis demeurer loin de toi plus longtemps.",
-        text_de: "Morgen, bei Tagesanbruch, wenn die Felder hell werden,\nwerde ich aufbrechen. Siehst du, ich weiß, dass du auf mich wartest.\nIch werde durch den Wald gehen, ich werde über die Berge gehen.\nIch kann nicht länger fern von dir bleiben."
-    },
-    {
-        title: "Le Pont Mirabeau",
-        title_de: "Die Mirabeau-Brücke",
-        author: "Guillaume Apollinaire",
-        text: "Sous le pont Mirabeau coule la Seine\nEt nos amours\nFaut-il qu'il m'en souvienne\nLa joie venait toujours après la peine",
-        text_de: "Unter der Mirabeau-Brücke fließt die Seine\nUnd unsere Lieben\nMuss ich mich daran erinnern\nDie Freude kam immer nach dem Leid"
-    },
-    {
-        title: "Sensation",
-        title_de: "Sensation",
-        author: "Arthur Rimbaud",
-        text: "Par les soirs bleus d'été, j'irai dans les sentiers,\nPicoté par les blés, fouler l'herbe menue :\nRêveur, j'en sentirai la fraîcheur à mes pieds.\nJe laisserai le vent baigner ma tête nue.",
-        text_de: "An blauen Sommerabenden werde ich über die Pfade gehen,\nvon Ähren gestochen, das feine Gras zertreten:\nTräumend werde ich seine Frische an meinen Füßen spüren.\nIch werde den Wind meinen nackten Kopf baden lassen."
-    },
-    {
-        title: "Le Dormeur du val",
-        title_de: "Der Schläfer im Tal",
-        author: "Arthur Rimbaud",
-        text: "C'est un trou de verdure où chante une rivière,\nAccrochant follement aux herbes des haillons\nD'argent ; où le soleil, de la montagne fière,\nLuit : c'est un petit val qui mousse de rayons.",
-        text_de: "Es ist eine grüne Mulde, wo ein Fluss singt,\nder wahnsinnig an den Gräsern silberne Fetzen\naufhängt; wo die Sonne vom stolzen Berg\nleuchtet: es ist ein kleines Tal, das von Strahlen schäumt."
-    },
-    {
-        title: "Correspondances",
-        title_de: "Entsprechungen",
-        author: "Charles Baudelaire",
-        text: "La Nature est un temple où de vivants piliers\nLaissent parfois sortir de confuses paroles ;\nL'homme y passe à travers des forêts de symboles\nQui l'observent avec des regards familiers.",
-        text_de: "Die Natur ist ein Tempel, in dem lebende Säulen\nmanchmal wirre Worte entweichen lassen;\nder Mensch geht dort durch Wälder von Symbolen,\ndie ihn mit vertrauten Blicken beobachten."
-    }
+const audios = [
+    { title: "Audio 1", file: "audio/file1.mp3" },
+    { title: "Audio 2", file: "audio/file2.mp3" },
+    { title: "Audio 3", file: "audio/file3.mp3" },
+    { title: "Audio 4", file: "audio/file4.mp3" },
+    { title: "Audio 5", file: "audio/file5.mp3" },
+    { title: "Audio 6", file: "audio/file6.mp3" },
+    { title: "Audio 7", file: "audio/file7.mp3" }
 ];
 
 const uiStrings = {
@@ -586,7 +581,7 @@ const uiStrings = {
         payment_card: "Carte de Crédit Imaginaire",
         payment_gold: "Or de Leprechaun",
         payment_cacao: "Fèves de Cacao",
-        payment_note: "Note: Aucun remboursement possible après le départ du ferry.",
+        payment_note: "Note: Aucun remboursement possible après le départ de l'avion.",
         payment_success: "Paiement accepté ! Vous pouvez maintenant continuer votre voyage vers la Finlande.",
         access_denied: "Accès Refusé",
         access_denied_msg: "Vous devez régler vos achats IKEA avant de quitter la Suède !",
@@ -595,10 +590,12 @@ const uiStrings = {
         pay: "PAYER",
         archives: "Mes Archives",
         video_final: "Vidéo Final",
-        poems: "Poèmes",
+        audios: "Audios",
         language: "Langue",
         add_to_cart: "Ajouter au panier",
-        read_aloud: "Lire"
+        read_aloud: "Résumé",
+        full_text: "Texte complet",
+        skip_interlude: "Passer l'interlude"
     },
     de: {
         login_title: "Erinnerungszugangssystem",
@@ -612,7 +609,7 @@ const uiStrings = {
         payment_card: "Imaginäre Kreditkarte",
         payment_gold: "Leprechaun-Gold",
         payment_cacao: "Kakaobohnen",
-        payment_note: "Hinweis: Keine Rückerstattung nach Abfahrt der Fähre möglich.",
+        payment_note: "Hinweis: Keine Rückerstattung nach Abflug des Flugzeugs möglich.",
         payment_success: "Zahlung akzeptiert! Sie können nun Ihre Reise nach Finnland fortsetzen.",
         access_denied: "Zugriff verweigert",
         access_denied_msg: "Sie müssen Ihre IKEA-Einkäufe bezahlen, bevor Sie Schweden verlassen!",
@@ -621,9 +618,11 @@ const uiStrings = {
         pay: "BEZAHLEN",
         archives: "Meine Archive",
         video_final: "Finales Video",
-        poems: "Gedichte",
+        audios: "Audios",
         language: "Sprache",
         add_to_cart: "In den Warenkorb",
-        read_aloud: "Vorlesen"
+        read_aloud: "Zusammenfassung",
+        full_text: "Vollständiger Text",
+        skip_interlude: "Interlude überspringen"
     }
 };
