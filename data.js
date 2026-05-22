@@ -540,7 +540,13 @@ An jenem Abend reiste ich mit einem bitteren Beigeschmack im Mund in die Schweiz
         summary_de: "Leidenschaft für Informatik und Geschichte.",
         text: "Je m'appelle Mazin, et ce voyage est le reflet de ma quête d'identité entre l'Orient et l'Occident.\n\nPassionné d'informatique et d'histoire, j'ai voulu documenter ces moments de vie à travers une interface qui rappelle mes premiers pas sur un ordinateur.",
         text_de: "Mein Name ist Mazin, und diese Reise spiegelt meine Suche nach Identität zwischen Orient und Okzident wider.\n\nAus Leidenschaft für Informatik und Geschichte wollte ich diese Lebensmomente durch eine Benutzeroberfläche dokumentieren, die an meine ersten Schritte am Computer erinnert.",
-        images: []
+        images: [
+            "images/mazin/image1.jpg",
+            "images/mazin/image2.jpg",
+            "images/mazin/image3.jpg",
+            "images/mazin/image4.jpg",
+            "images/mazin/image5.jpg"
+        ]
     },
     {
         id: "project",
