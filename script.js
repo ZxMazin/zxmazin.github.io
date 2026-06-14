@@ -1,8 +1,3 @@
-// MOBILE BLOCK
-if (window.innerWidth < 768) {
-    document.getElementById('mobile-block').classList.remove('hidden');
-}
-
 // STATE
 let currentLang = 'fr';
 let currentStep = 0;
@@ -117,8 +112,9 @@ loginBtn.style.setProperty('--last-x', '0px');
 loginBtn.style.setProperty('--last-y', '0px');
 
 function teleportBtn(btn) {
-    const limitX = 120; // Bound to 380px container
-    const limitY = 90;  // Bound to 300px container
+    const parent = btn.parentElement;
+    const limitX = (parent.clientWidth - btn.offsetWidth) / 2;
+    const limitY = (parent.clientHeight - btn.offsetHeight) / 2;
     let newX, newY, tooClose;
     let attempts = 0;
 
@@ -180,14 +176,14 @@ function spawnDecoy() {
     decoys.push(decoy);
 }
 
-document.addEventListener('mousemove', (e) => {
+function handleLoginEvasion(clientX, clientY) {
     if (loginScreen.classList.contains('hidden')) return;
 
     const rect = loginBtn.getBoundingClientRect();
     const btnX = rect.left + rect.width / 2;
     const btnY = rect.top + rect.height / 2;
 
-    const dist = Math.sqrt(Math.pow(e.clientX - btnX, 2) + Math.pow(e.clientY - btnY, 2));
+    const dist = Math.sqrt(Math.pow(clientX - btnX, 2) + Math.pow(clientY - btnY, 2));
 
     if (dist < 100 && loginMoves < MAX_LOGIN_MOVES && passField.value.length > 0 && !loginFleeing) {
         loginFleeing = true;
@@ -229,7 +225,14 @@ document.addEventListener('mousemove', (e) => {
         decoys.forEach(d => d.remove());
         decoys = [];
     }
-});
+}
+
+document.addEventListener('mousemove', (e) => handleLoginEvasion(e.clientX, e.clientY));
+document.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 0) {
+        handleLoginEvasion(e.touches[0].clientX, e.touches[0].clientY);
+    }
+}, { passive: true });
 
 loginBtn.addEventListener('click', () => {
     if (loginMoves < MAX_LOGIN_MOVES && passField.value.length > 0) {
@@ -777,27 +780,50 @@ function getNeighbors(idx) {
 let draggedWin = null;
 let offset = { x: 0, y: 0 };
 
-document.addEventListener('mousedown', (e) => {
+function getEventPos(e) {
+    if (e.touches && e.touches.length > 0) {
+        return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+    return { x: e.clientX, y: e.clientY };
+}
+
+function startDrag(e) {
     if (e.target.classList.contains('win98-title') || e.target.parentElement.classList.contains('win98-title')) {
         draggedWin = e.target.closest('.win98-window');
         const rect = draggedWin.getBoundingClientRect();
-        offset.x = e.clientX - rect.left;
-        offset.y = e.clientY - rect.top;
+        const pos = getEventPos(e);
+        offset.x = pos.x - rect.left;
+        offset.y = pos.y - rect.top;
         draggedWin.style.zIndex = 1000;
+        if (e.type === 'touchstart') {
+            // No preventDefault here to allow clicking close button etc,
+            // but we might need it for smooth drag.
+        }
     }
-});
+}
 
-document.addEventListener('mousemove', (e) => {
+function doDrag(e) {
     if (draggedWin) {
-        draggedWin.style.left = (e.clientX - offset.x) + 'px';
-        draggedWin.style.top = (e.clientY - offset.y) + 'px';
+        const pos = getEventPos(e);
+        draggedWin.style.left = (pos.x - offset.x) + 'px';
+        draggedWin.style.top = (pos.y - offset.y) + 'px';
+        if (e.type === 'touchmove') e.preventDefault();
     }
-});
+}
 
-document.addEventListener('mouseup', () => {
+function endDrag() {
     if (draggedWin) draggedWin.style.zIndex = 500;
     draggedWin = null;
-});
+}
+
+document.addEventListener('mousedown', startDrag);
+document.addEventListener('touchstart', startDrag, { passive: false });
+
+document.addEventListener('mousemove', doDrag);
+document.addEventListener('touchmove', doDrag, { passive: false });
+
+document.addEventListener('mouseup', endDrag);
+document.addEventListener('touchend', endDrag);
 
 function openFolder(cityId) {
     const data = journeyData.find(d => d.id === cityId);

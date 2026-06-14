@@ -1,23 +1,6 @@
 /* RESET & BASE */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-#mobile-block {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: #000;
-    color: #fff;
-    z-index: 99999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-}
-.mobile-message {
-    border: 3px double #fff;
-    padding: 30px;
-}
 body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, monospace; overflow: hidden; background: #000; color: #fff; }
 
 .screen {
@@ -39,8 +22,10 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
     color: #000;
     padding: 20px;
     border: 3px outset #fff;
-    width: 380px;
-    height: 300px;
+    width: 90%;
+    max-width: 380px;
+    min-height: 300px;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -129,7 +114,7 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 /* BOOT & LOADING */
 #boot-screen { background: #000; color: #0f0; justify-content: flex-start; align-items: flex-start; padding: 40px; flex-direction: column; }
 #loading-screen { background: #000080; flex-direction: column; }
-#square-loader { display: flex; gap: 5px; margin: 20px 0; background: #fff; padding: 5px; border: 2px solid #000; width: 400px; height: 40px; }
+#square-loader { display: flex; gap: 5px; margin: 20px 0; background: #fff; padding: 5px; border: 2px solid #000; width: 90%; max-width: 400px; height: 40px; }
 .loader-square { width: 15px; height: 100%; background: #000080; }
 
 /* JOURNEY ENGINE */
@@ -438,4 +423,40 @@ body, html { height: 100%; width: 100%; font-family: "Courier New", Courier, mon
 }
 #media-progress-bar {
     transition: width 0.1s linear;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    #journey-content {
+        flex-direction: column;
+    }
+    #dialogue-container {
+        height: 45vh;
+        flex: none;
+        padding: 20px;
+        border-right: none;
+        border-bottom: 2px solid #ccc;
+    }
+    #visual-container {
+        flex: 1;
+    }
+    #scrolling-wrapper {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        padding: 10px;
+    }
+    .win98-window {
+        width: 95%;
+        left: 2.5%;
+        top: 10px;
+        height: 80vh;
+        max-height: 90vh;
+    }
+    .interlude-overlay iframe {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+    .transition-container::before {
+        font-size: 5rem;
+    }
 }
