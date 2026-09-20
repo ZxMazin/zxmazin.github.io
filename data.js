@@ -532,20 +532,20 @@ An jenem Abend reiste ich mit einem bitteren Beigeschmack im Mund in die Schweiz
         id: "about",
         city: "À propos de l'auteur",
         city_de: "Über den Autor",
-        country: "Mazin",
-        country_de: "Mazin",
+        country: "Censuré",
+        country_de: "Censuré",
         transport: "none",
         theme: "author",
         summary: "Passionné d'informatique et d'histoire.",
         summary_de: "Leidenschaft für Informatik und Geschichte.",
-        text: "Je m'appelle Mazin, et ce voyage est le reflet de ma quête d'identité entre l'Orient et l'Occident.\n\nPassionné d'informatique et d'histoire, j'ai voulu documenter ces moments de vie à travers une interface qui rappelle mes premiers pas sur un ordinateur.",
-        text_de: "Mein Name ist Mazin, und diese Reise spiegelt meine Suche nach Identität zwischen Orient und Okzident wider.\n\nAus Leidenschaft für Informatik und Geschichte wollte ich diese Lebensmomente durch eine Benutzeroberfläche dokumentieren, die an meine ersten Schritte am Computer erinnert.",
+        text: "Je m'appelle CENSUREE, et ce voyage est le reflet de ma quête d'identité entre l'Orient et l'Occident.\n\nPassionné d'informatique et d'histoire, j'ai voulu documenter ces moments de vie à travers une interface qui rappelle mes premiers pas sur un ordinateur.",
+        text_de: "Mein Name ist CENSUREE, und diese Reise spiegelt meine Suche nach Identität zwischen Orient und Okzident wider.\n\nAus Leidenschaft für Informatik und Geschichte wollte ich diese Lebensmomente durch eine Benutzeroberfläche dokumentieren, die an meine ersten Schritte am Computer erinnert.",
         images: [
-            "images/mazin/image1.jpg",
-            "images/mazin/image2.jpg",
-            "images/mazin/image3.jpg",
-            "images/mazin/image4.jpg",
-            "images/mazin/image5.jpg"
+            "images/mazin/image1X.jpg",
+            "images/mazin/image2X.jpg",
+            "images/mazin/image3X.jpg",
+            "images/mazin/image4X.jpg",
+            "images/mazin/image5X.jpg"
         ]
     },
     {
